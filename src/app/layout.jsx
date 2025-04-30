@@ -6,9 +6,6 @@ export const metadata = {
 }
 
 export default function RootLayout({ children }) {
-  if (false) {
-    console.log('hello')
-  }
   return (
     <html lang="en">
       <body>{children}</body>
