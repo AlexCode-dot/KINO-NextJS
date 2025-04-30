@@ -3,13 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "prepare": "husky install",
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "build-css": "sass src/styles/main.scss public/dist/styles.css",
     "watch-css": "sass --watch src/styles/main.scss:public/dist/styles.css"
-    
   },
   "dependencies": {
     "next": "15.3.1",
@@ -20,6 +20,12 @@
     "@eslint/eslintrc": "^3",
     "eslint": "^9",
     "eslint-config-next": "15.3.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.5.1",
+    "prettier": "^3.5.3",
     "sass": "^1.87.0"
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx,css,scss,md,json,yml,yaml}": "prettier --write"
   }
 }
