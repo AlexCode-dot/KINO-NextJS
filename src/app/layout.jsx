@@ -1,5 +1,5 @@
 import '../../public/dist/styles.css'
-import Nav__menu from '../components/Nav__menu.jsx'
+import NavMenu from '../components/NavMenu.jsx'
 
 export const metadata = {
   title: 'Create Next App',
@@ -21,7 +21,7 @@ export default function RootLayout({ children }) {
             <div className="header__logo">
               <h1 className="header__logo-title">Kvikkjokk Kino</h1>
             </div>
-            <Nav__menu />
+            <NavMenu />
           </header>
 
           <main className="contentContainer">{children}</main>
