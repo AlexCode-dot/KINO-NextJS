@@ -1,0 +1,33 @@
+.header__nav {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  color: #ffff;
+  background-color: #012840;
+  z-index: 20;
+}
+.header__nav-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+
+  li {
+    list-style: none;
+    padding: 7px;
+    background-color: #03658c;
+    border-radius: 5px;
+    user-select: none;
+    &:hover {
+      background-color: #52b3d9;
+      color: black;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+  }
+}
+
+li.menu-active {
+  background-color: #52b3d9;
+  color: black;
+}
