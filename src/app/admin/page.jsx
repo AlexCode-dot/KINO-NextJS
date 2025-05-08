@@ -14,10 +14,14 @@ export default function AdminPage() {
     modal,
     closeModal,
     performDelete,
-    error,
-    setError,
     handleAddScreening,
     handleAddMovie,
+    movieError,
+    setMovieError,
+    screeningError,
+    setScreeningError,
+    deleteError,
+    setDeleteError,
   } = useAdminData()
 
   const onSubmitMovie = async (formData) => {
@@ -37,7 +41,15 @@ export default function AdminPage() {
       <div className="admin-page__container">
         <h1 className="admin-page__title">Adminpanel</h1>
 
-        <AdminForm onSubmitMovie={onSubmitMovie} onSubmitScreening={onSubmitScreening} movies={movies} />
+        <AdminForm
+          onSubmitMovie={onSubmitMovie}
+          onSubmitScreening={onSubmitScreening}
+          movies={movies}
+          movieError={movieError}
+          setMovieError={setMovieError}
+          screeningError={screeningError}
+          setScreeningError={setScreeningError}
+        />
 
         <section className="admin-page__section">
           <h2 className="admin-page__section-title">Alla filmer</h2>
@@ -47,10 +59,10 @@ export default function AdminPage() {
             onDeleteMovie={confirmDeleteMovie}
             onDeleteScreening={confirmDeleteScreening}
           />
-          {error && (
+          {deleteError && (
             <div className="admin-page__error">
-              {error}
-              <button onClick={() => setError(null)} className="admin-page__error-close">
+              {deleteError}
+              <button onClick={() => setDeleteError(null)} className="admin-page__error-close">
                 ✖
               </button>
             </div>

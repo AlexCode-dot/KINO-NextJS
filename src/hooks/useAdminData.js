@@ -7,7 +7,10 @@ export function useAdminData() {
   const [movies, setMovies] = useState([])
   const [screenings, setScreenings] = useState([])
   const [modal, setModal] = useState(null)
-  const [error, setError] = useState(null)
+
+  const [movieError, setMovieError] = useState(null)
+  const [screeningError, setScreeningError] = useState(null)
+  const [deleteError, setDeleteError] = useState(null)
 
   useEffect(() => {
     loadMovies()
@@ -18,8 +21,9 @@ export function useAdminData() {
     try {
       const data = await fetchMovies()
       setMovies(data)
+      setMovieError(null)
     } catch {
-      setError('Kunde inte ladda filmer.')
+      setMovieError('Kunde inte ladda filmer.')
     }
   }
 
@@ -27,8 +31,9 @@ export function useAdminData() {
     try {
       const data = await fetchScreenings()
       setScreenings(data)
+      setScreeningError(null)
     } catch {
-      setError('Kunde inte ladda visningar.')
+      setScreeningError('Kunde inte ladda visningar.')
     }
   }
 
@@ -38,21 +43,21 @@ export function useAdminData() {
 
   const handleAddScreening = async (formData) => {
     try {
-      setError(null)
+      setScreeningError(null)
       const newScreening = await addScreening(formData)
       setScreenings((prev) => [...prev, newScreening])
     } catch (err) {
-      setError(err.message)
+      setScreeningError(err.message)
     }
   }
 
   const handleAddMovie = async (formData) => {
     try {
-      setError(null)
+      setMovieError(null)
       const newMovie = await addMovie(formData)
       setMovies((prev) => [...prev, newMovie])
     } catch (err) {
-      setError(err.message)
+      setMovieError(err.message)
     }
   }
 
@@ -63,15 +68,16 @@ export function useAdminData() {
     try {
       if (type === 'movie') {
         await deleteMovie(id)
-        setMovies((movie) => movie.filter((movie) => movie._id !== id))
-        setScreenings((screening) => screening.filter((screening) => screening.movie !== id))
+        setMovies((prev) => prev.filter((movie) => movie._id !== id))
+        setScreenings((prev) => prev.filter((screening) => screening.movie !== id))
       } else {
         await deleteScreening(id)
-        setScreenings((screening) => screening.filter((screening) => screening._id !== id))
+        setScreenings((prev) => prev.filter((screening) => screening._id !== id))
       }
+      setDeleteError(null)
     } catch (err) {
       const labelText = type === 'movie' ? 'filmen' : 'visningen'
-      setError(`Kunde inte ta bort ${labelText} "${label}" – försök igen senare.`)
+      setDeleteError(`Kunde inte ta bort ${labelText} "${label}" – försök igen senare.`)
     } finally {
       closeModal()
     }
@@ -85,9 +91,13 @@ export function useAdminData() {
     modal,
     closeModal,
     performDelete,
-    error,
-    setError,
     handleAddScreening,
     handleAddMovie,
+    movieError,
+    setMovieError,
+    screeningError,
+    setScreeningError,
+    deleteError,
+    setDeleteError,
   }
 }

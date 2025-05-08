@@ -2,7 +2,15 @@
 
 import { useRef } from 'react'
 
-export default function AdminForm({ onSubmitMovie, onSubmitScreening, movies }) {
+export default function AdminForm({
+  onSubmitMovie,
+  onSubmitScreening,
+  movies,
+  movieError,
+  setMovieError,
+  screeningError,
+  setScreeningError,
+}) {
   const movieFormRef = useRef(null)
   const screeningFormRef = useRef(null)
 
@@ -30,6 +38,14 @@ export default function AdminForm({ onSubmitMovie, onSubmitScreening, movies }) 
             Importera
           </button>
         </form>
+        {movieError && (
+          <div className="admin-page__error">
+            {movieError}
+            <button onClick={() => setMovieError(null)} className="admin-page__error-close">
+              ✖
+            </button>
+          </div>
+        )}
       </section>
 
       <section className="admin-page__section">
@@ -48,6 +64,14 @@ export default function AdminForm({ onSubmitMovie, onSubmitScreening, movies }) 
             Lägg till
           </button>
         </form>
+        {screeningError && (
+          <div className="admin-page__error">
+            {screeningError}
+            <button onClick={() => setScreeningError(null)} className="admin-page__error-close">
+              ✖
+            </button>
+          </div>
+        )}
       </section>
     </>
   )
