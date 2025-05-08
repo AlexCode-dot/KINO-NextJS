@@ -1,6 +1,9 @@
 @use 'footer.scss';
 @use 'header.scss';
 @use 'Nav__menu.scss';
+@use './admin/adminPage.scss';
+@use './admin/adminList.scss';
+@use './admin/confirmModal.scss';
 
 body {
   background-image: url('../../public/img/app_background.webp');
@@ -24,7 +27,4 @@ body {
   background-color: white;
   min-width: 800px;
   min-height: 400px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }

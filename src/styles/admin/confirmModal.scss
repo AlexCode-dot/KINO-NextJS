@@ -1,0 +1,61 @@
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  font-family: 'Helvetica Neue', sans-serif;
+  text-align: center;
+
+  p {
+    font-size: 1.1rem;
+    color: #1b3a57;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.modal__actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.modal__button {
+  flex: 1;
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+  border: none;
+
+  &--confirm {
+    background: #c62828;
+    color: white;
+
+    &:hover {
+      background: #b71c1c;
+    }
+  }
+
+  &--cancel {
+    background: #ccc;
+    color: #333;
+
+    &:hover {
+      background: #bbb;
+    }
+  }
+}
