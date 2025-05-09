@@ -22,7 +22,6 @@
     }
     a {
       text-decoration: none;
-      color: inherit;
     }
   }
 }
@@ -30,4 +29,39 @@
 li.menu-active {
   background-color: #52b3d9;
   color: black;
+}
+
+@media screen and (max-width: 800px) {
+  .header__nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+  }
+
+  .header__nav-list {
+    height: 100px;
+    width: 90%;
+    gap: 10px;
+    padding: 0px;
+    background-color: #012840;
+    align-items: center;
+
+    & li {
+      color: white;
+      border-color: black;
+    }
+  }
+
+  .header__nav-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    width: 200px;
+    height: 50px;
+  }
 }

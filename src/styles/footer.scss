@@ -3,10 +3,9 @@
   flex-direction: row;
   justify-content: space-around;
   height: 250px;
-  padding: 20px;
   color: #ffffff;
   background-color: #012840;
-  min-width: 760px;
+  min-width: 200px;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
 
@@ -20,9 +19,13 @@
   h6 {
     font-size: 16px;
   }
-  @media (max-width: 600px) {
+  @media (max-width: 800px) {
     flex-direction: column;
     height: auto;
+    width: 100%;
+    max-width: 100%;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
   }
 
   &__social {
@@ -135,7 +138,7 @@
   }
 
   &__find-Us {
-    padding: 5px 5px 5px 5px;
+    padding: 5px 5px 5px 15px;
   }
 
   &__find-Us-streetname {
@@ -151,6 +154,6 @@
   }
 
   &__partners {
-    padding: 5px 5px 5px 5px;
+    padding: 5px 5px 5px 15px;
   }
 }
