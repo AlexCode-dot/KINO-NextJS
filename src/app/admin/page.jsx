@@ -2,8 +2,9 @@
 
 import { useAdminData } from '@/hooks/useAdminData'
 import AdminList from '@/components/admin/AdminList'
-import ConfirmModal from '@/components/admin/ConfirmModal'
+import ConfirmModal from '@/components/ConfirmModal'
 import AdminForm from '@/components/admin/AdminForm'
+import ErrorMessage from '@/components/ErrorMessage'
 
 export default function AdminPage() {
   const {
@@ -59,14 +60,7 @@ export default function AdminPage() {
             onDeleteMovie={confirmDeleteMovie}
             onDeleteScreening={confirmDeleteScreening}
           />
-          {deleteError && (
-            <div className="admin-page__error">
-              {deleteError}
-              <button onClick={() => setDeleteError(null)} className="admin-page__error-close">
-                ✖
-              </button>
-            </div>
-          )}
+          <ErrorMessage message={deleteError} onClose={() => setDeleteError(null)} />
         </section>
       </div>
 

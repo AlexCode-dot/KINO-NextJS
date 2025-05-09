@@ -1,11 +1,10 @@
 import { NextResponse } from 'next/server'
 import connectDB from '@/lib/db/connectDB'
-import Movie from '@/lib/db/models/Movie'
-import { createMovieFromOmdbTitle } from '@/lib/db/movieDbService'
+import { getAllMovies, createMovieFromOmdbTitle, findMovieByTitle } from '@/lib/db/movieDbService'
 
 export async function GET() {
   await connectDB()
-  const movies = await Movie.find().select('title year genre posterUrl runtime').lean()
+  const movies = await getAllMovies()
   return NextResponse.json(movies)
 }
 
@@ -24,7 +23,7 @@ export async function POST(req) {
 
     await connectDB()
 
-    const existing = await Movie.findOne({ title: new RegExp(`^${title}$`, 'i') })
+    const existing = await findMovieByTitle(title)
     if (existing) {
       return NextResponse.json({ error: 'Filmen finns redan.' }, { status: 400 })
     }

@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import connectDB from '@/lib/db/connectDB'
-import Screening from '@/lib/db/models/Screening'
+import { deleteScreeningById } from '@/lib/db/screeningDbService'
 
 export async function DELETE(req, context) {
   const { id } = await context.params
@@ -11,7 +11,7 @@ export async function DELETE(req, context) {
 
   try {
     await connectDB()
-    const deletedScreening = await Screening.findByIdAndDelete(id)
+    const deletedScreening = await deleteScreeningById(id)
     return NextResponse.json({ success: true, deletedScreening })
   } catch (err) {
     return NextResponse.json({ error: err.message }, { status: 500 })

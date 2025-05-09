@@ -1,6 +1,7 @@
 'use client'
 
 import { useRef } from 'react'
+import ErrorMessage from '@/components/ErrorMessage'
 
 export default function AdminForm({
   onSubmitMovie,
@@ -38,14 +39,7 @@ export default function AdminForm({
             Importera
           </button>
         </form>
-        {movieError && (
-          <div className="admin-page__error">
-            {movieError}
-            <button onClick={() => setMovieError(null)} className="admin-page__error-close">
-              ✖
-            </button>
-          </div>
-        )}
+        <ErrorMessage message={movieError} onClose={() => setMovieError(null)} />
       </section>
 
       <section className="admin-page__section">
@@ -64,14 +58,7 @@ export default function AdminForm({
             Lägg till
           </button>
         </form>
-        {screeningError && (
-          <div className="admin-page__error">
-            {screeningError}
-            <button onClick={() => setScreeningError(null)} className="admin-page__error-close">
-              ✖
-            </button>
-          </div>
-        )}
+        <ErrorMessage message={screeningError} onClose={() => setScreeningError(null)} />
       </section>
     </>
   )

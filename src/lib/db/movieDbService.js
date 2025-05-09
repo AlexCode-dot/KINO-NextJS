@@ -1,5 +1,20 @@
 import Movie from '@/lib/db/models/Movie'
+import Screening from '@/lib/db/models/Screening'
 import { fetchMovieFromOmdb } from '@/lib/services/fetchOmdb'
+
+export async function getAllMovies() {
+  return await Movie.find().select('title year genre posterUrl runtime').lean()
+}
+
+export async function findMovieByTitle(title) {
+  return await Movie.findOne({ title: new RegExp(`^${title}$`, 'i') })
+}
+
+export async function deleteMovieAndScreenings(id) {
+  const deletedMovie = await Movie.findByIdAndDelete(id)
+  await Screening.deleteMany({ movie: id })
+  return deletedMovie
+}
 
 export async function createMovieFromOmdbTitle(title) {
   if (!title) throw new Error('Title is required')
