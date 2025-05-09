@@ -1,4 +1,5 @@
-import '../../public/dist/styles.css'
+// import '../../public/dist/styles.css'
+import '@/styles/main.scss'
 import NavMenu from '../components/NavMenu.jsx'
 
 export const metadata = {
