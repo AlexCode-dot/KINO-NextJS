@@ -1,6 +1,7 @@
 @use 'footer.scss';
 @use 'header.scss';
 @use 'Nav__menu.scss';
+@use 'MovieCard.scss';
 
 body {
   background-image: url('../../public/img/app_background.webp');
@@ -27,4 +28,5 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }

@@ -12,7 +12,7 @@ const mockData = [
     Poster: 'https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg',
   },
   {
-    Title: 'The Matrix',
+    Title: 'The Matrix Revolution',
     Year: '1999',
     imdbID: 'tt0133093',
     Type: 'movie',
@@ -62,7 +62,7 @@ export default function MovieCard() {
               <div>
                 {item.Poster && <img src={item.Poster} alt={`${item.Title} poster`} className="moviecard__poster" />}
               </div>
-              <div>{item.Title}</div>
+              <p>{item.Title}</p>
             </div>
           </li>
         ))}
