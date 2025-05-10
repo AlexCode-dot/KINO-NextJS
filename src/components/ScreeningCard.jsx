@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 
 const mockScreeningData = [
   {
+    id: 384,
     Title: 'The Muppets',
     Room: 'Stora salongen',
     Date: '2025-05-14',
@@ -11,6 +12,7 @@ const mockScreeningData = [
     imdbID: 'tt1204342',
   },
   {
+    id: 385,
     Title: 'Fire Walk With Me',
     Room: 'Stora salongen',
     Date: '2025-05-14',
@@ -18,6 +20,7 @@ const mockScreeningData = [
     imdbID: 'tt0105665',
   },
   {
+    id: 386,
     Title: 'Min granne Totoro',
     Room: 'Stora salongen',
     Date: '2025-05-14',
@@ -25,6 +28,7 @@ const mockScreeningData = [
     imdbID: 'tt0096283',
   },
   {
+    id: 387,
     Title: 'Forrest Gump',
     Room: 'Stora salongen',
     Date: '2025-05-14',
@@ -32,6 +36,7 @@ const mockScreeningData = [
     imdbID: 'tt0109830',
   },
   {
+    id: 389,
     Title: 'Encanto',
     Room: 'Stora salongen',
     Date: '2025-05-14',
@@ -39,20 +44,7 @@ const mockScreeningData = [
     imdbID: 'tt2953050',
   },
   {
-    Title: 'Min granne Totoro',
-    Room: 'Stora salongen',
-    Date: '2025-05-14',
-    Time: '17:00:00',
-    imdbID: 'tt0096283',
-  },
-  {
-    Title: 'Min granne Totoro',
-    Room: 'Stora salongen',
-    Date: '2025-05-14',
-    Time: '19:00:00',
-    imdbID: 'tt0096283',
-  },
-  {
+    id: 392,
     Title: 'Training Day',
     Room: 'Stora salongen',
     Date: '2025-05-14',
@@ -60,20 +52,7 @@ const mockScreeningData = [
     imdbID: 'tt0139654',
   },
   {
-    Title: 'Forrest Gump',
-    Room: 'Stora salongen',
-    Date: '2025-05-14',
-    Time: '17:00:00',
-    imdbID: 'tt0109830',
-  },
-  {
-    Title: 'Encanto',
-    Room: 'Stora salongen',
-    Date: '2025-05-14',
-    Time: '21:00:00',
-    imdbID: 'tt2953050',
-  },
-  {
+    id: 395,
     Title: 'The Shawshank Redemption',
     Room: 'Stora salongen',
     Date: '2025-05-14',
@@ -81,25 +60,68 @@ const mockScreeningData = [
     imdbID: 'tt0111161',
   },
   {
-    Title: 'Forrest Gump',
-    Room: 'Stora salongen',
-    Date: '2025-10-14',
-    Time: '21:00:00',
-    imdbID: 'tt0109830',
-  },
-  {
+    id: 397,
     Title: 'Isle of Dogs',
     Room: 'Stora salongen',
-    Date: '2025-10-14',
+    Date: '2025-05-14',
     Time: '12:00:00',
     imdbID: 'tt5104604',
   },
   {
+    id: 388,
+    Title: 'Forrest Gump',
+    Room: 'Stora salongen',
+    Date: '2025-05-14',
+    Time: '19:00:00',
+    imdbID: 'tt0109830',
+  },
+  {
+    id: 401,
+    Title: 'The Shawshank Redemption',
+    Room: 'Stora salongen',
+    Date: '2025-05-14',
+    Time: '21:00:00',
+    imdbID: 'tt0111161',
+  },
+  {
+    id: 399,
+    Title: 'Isle of Dogs',
+    Room: 'Stora salongen',
+    Date: '2025-05-14',
+    Time: '17:00:00',
+    imdbID: 'tt5104604',
+  },
+  {
+    id: 398,
     Title: 'The Muppets',
     Room: 'Stora salongen',
-    Date: '2025-10-14',
+    Date: '2025-05-14',
     Time: '19:00:00',
     imdbID: 'tt1204342',
+  },
+  {
+    id: 390,
+    Title: 'Min granne Totoro',
+    Room: 'Stora salongen',
+    Date: '2025-05-14',
+    Time: '17:00:00',
+    imdbID: 'tt0096283',
+  },
+  {
+    id: 404,
+    Title: 'Encanto',
+    Room: 'Stora salongen',
+    Date: '2025-05-14',
+    Time: '21:00:00',
+    imdbID: 'tt2953050',
+  },
+  {
+    id: 408,
+    Title: 'Forrest Gump',
+    Room: 'Stora salongen',
+    Date: '2025-05-14',
+    Time: '12:00:00',
+    imdbID: 'tt0109830',
   },
 ]
 
@@ -135,7 +157,7 @@ export default function ScreeningCards() {
     <div>
       <ul className="screeningcard__list">
         {filteredScreenings.map((item, index) => (
-          <li key={item.imdbID}>
+          <li key={item.id}>
             <div className="screeningcard__container">
               <p>{item.Title}</p>
               <p>{item.Room}</p>
