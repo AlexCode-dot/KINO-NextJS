@@ -32,13 +32,6 @@ const mockScreeningData = [
     imdbID: 'tt0109830',
   },
   {
-    Title: 'Forrest Gump',
-    Room: 'Stora salongen',
-    Date: '2025-05-14',
-    Time: '19:00:00',
-    imdbID: 'tt0109830',
-  },
-  {
     Title: 'Encanto',
     Room: 'Stora salongen',
     Date: '2025-05-14',
@@ -90,21 +83,21 @@ const mockScreeningData = [
   {
     Title: 'Forrest Gump',
     Room: 'Stora salongen',
-    Date: '2025-05-14',
+    Date: '2025-10-14',
     Time: '21:00:00',
     imdbID: 'tt0109830',
   },
   {
     Title: 'Isle of Dogs',
     Room: 'Stora salongen',
-    Date: '2025-05-14',
+    Date: '2025-10-14',
     Time: '12:00:00',
     imdbID: 'tt5104604',
   },
   {
     Title: 'The Muppets',
     Room: 'Stora salongen',
-    Date: '2025-05-14',
+    Date: '2025-10-14',
     Time: '19:00:00',
     imdbID: 'tt1204342',
   },
@@ -126,10 +119,22 @@ export default function ScreeningCards() {
   if (isLoading) return <div>Loading...</div>
   if (error) return <div>Error: {error}</div>
 
+  const today = new Date('2025-05-10')
+  const fiveDaysFromNow = new Date(today)
+  fiveDaysFromNow.setDate(today.getDate() + 5)
+
+  const filteredScreenings = data
+    .filter((item) => {
+      const screeningDate = new Date(item.Date)
+      return screeningDate >= today && screeningDate <= fiveDaysFromNow
+    })
+    .sort((a, b) => new Date(a.Date) - new Date(b.Date))
+    .slice(0, 10)
+
   return (
     <div>
       <ul className="screeningcard__list">
-        {data.map((item, index) => (
+        {filteredScreenings.map((item, index) => (
           <li key={item.imdbID}>
             <div className="screeningcard__container">
               <p>{item.Title}</p>
