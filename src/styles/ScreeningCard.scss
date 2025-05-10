@@ -1,0 +1,28 @@
+.screeningcard__outerdiv {
+  display: flex;
+  margin: 0;
+  width: 50rem;
+  height: 20rem;
+}
+
+.screeningcard__list {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  overflow-x: scroll;
+  background-color: #d9d9d9;
+  border-radius: 10px;
+  padding-right: 2rem;
+
+  li {
+    margin-top: 1.8rem;
+    max-height: 80%;
+    border-radius: 10px;
+    min-width: 12rem;
+    background-color: #012840;
+    color: #ffffff;
+    font-size: larger;
+    padding-left: 2rem;
+    font-weight: 600;
+  }
+}

@@ -9,9 +9,7 @@ export default function Home() {
         <MovieCard />
       </div>
       <h1 className="screeningcard__header">Visningar för de fem kommande dagarna</h1>
-      <div>
-        <ScreeningCards />
-      </div>
+      <ScreeningCards />
     </>
   )
 }

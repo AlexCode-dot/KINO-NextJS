@@ -2,6 +2,7 @@
 @use 'header.scss';
 @use 'Nav__menu.scss';
 @use 'MovieCard.scss';
+@use 'ScreeningCard';
 
 body {
   background-image: url('../../public/img/app_background.webp');

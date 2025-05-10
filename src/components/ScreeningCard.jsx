@@ -154,15 +154,15 @@ export default function ScreeningCards() {
     .slice(0, 10)
 
   return (
-    <div>
+    <div className="screeningcard__outerdiv">
       <ul className="screeningcard__list">
         {filteredScreenings.map((item, index) => (
           <li key={item.id}>
             <div className="screeningcard__container">
               <p>{item.Title}</p>
               <p>{item.Room}</p>
-              <p>{item.Time}</p>
               <p>{item.Date}</p>
+              <p>{item.Time}</p>
             </div>
           </li>
         ))}
