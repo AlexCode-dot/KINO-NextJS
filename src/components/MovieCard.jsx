@@ -33,6 +33,40 @@ const mockData = [
     imdbID: 'tt0068646',
     Type: 'movie',
     Poster:
-      'https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNjk1NjU0ODA@._V1_SX300.jpg',
+      'https://m.media-amazon.com/images/M/MV5BNGEwYjgwOGQtYjg5ZS00Njc1LTk2ZGEtM2QwZWQ2NjdhZTE5XkEyXkFqcGc@._V1_SX300.jpg',
   },
 ]
+
+export default function MovieCard() {
+  const [data, setData] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState(null)
+
+  //Mock API-delay
+  useEffect(() => {
+    setTimeout(() => {
+      setData(mockData)
+      setIsLoading(false)
+    }, 1000)
+  }, [])
+
+  if (isLoading) return <div>Loading...</div>
+  if (error) return <div>Error: {error}</div>
+
+  return (
+    <div>
+      <ul className="moviecard__list">
+        {data.map((item, index) => (
+          <li key={item.imdbID}>
+            <div className="moviecard__container">
+              <div>
+                {item.Poster && <img src={item.Poster} alt={`${item.Title} poster`} className="moviecard__poster" />}
+              </div>
+              <div>{item.Title}</div>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
