@@ -50,6 +50,15 @@
     }
   }
 
+  &--confirm-green {
+    background: #1f6721;
+    color: white;
+
+    &:hover {
+      background: #288d2c;
+    }
+  }
+
   &--cancel {
     background: #ccc;
     color: #333;

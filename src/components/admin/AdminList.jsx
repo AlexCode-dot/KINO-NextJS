@@ -29,22 +29,29 @@ export default function AdminList({ movies, screenings, onDeleteMovie, onDeleteS
             {expanded && (
               <ul className="admin-list__screenings">
                 {screeningsForMovie.length > 0 ? (
-                  screeningsForMovie.map((screening) => (
-                    <li key={screening._id} className="admin-list__screening">
-                      <span className="admin-list__screening-info">
-                        {formatTime(screening.date)} – {formatTime(screening.endTime)} ({formatDate(screening.date)})
-                        (Salong {screening.room})
-                      </span>
-                      <button
-                        onClick={() =>
-                          onDeleteScreening(screening._id, `${formatDateTime(screening.date)} – ${screening.room}`)
-                        }
-                        className="admin-list__delete-screening"
+                  screeningsForMovie.map((screening) => {
+                    const isExpired = screening.status === 'expired'
+                    return (
+                      <li
+                        key={screening._id}
+                        className={`admin-list__screening ${isExpired ? 'admin-list__screening--expired' : 'admin-list__screening--active'}`}
                       >
-                        Ta bort
-                      </button>
-                    </li>
-                  ))
+                        <span className="admin-list__screening-info">
+                          {formatTime(screening.date)} – {formatTime(screening.endTime)} ({formatDate(screening.date)})
+                          (Salong {screening.room})
+                          {isExpired && <em className="admin-list__screening-expired-label"> (Utgången)</em>}
+                        </span>
+                        <button
+                          onClick={() =>
+                            onDeleteScreening(screening._id, `${formatDateTime(screening.date)} – ${screening.room}`)
+                          }
+                          className="admin-list__delete-screening"
+                        >
+                          Ta bort
+                        </button>
+                      </li>
+                    )
+                  })
                 ) : (
                   <li className="admin-list__screening-empty">Inga visningar</li>
                 )}

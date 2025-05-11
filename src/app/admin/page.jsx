@@ -5,6 +5,7 @@ import AdminList from '@/components/admin/AdminList'
 import ConfirmModal from '@/components/ConfirmModal'
 import AdminForm from '@/components/admin/AdminForm'
 import ErrorMessage from '@/components/ErrorMessage'
+import SuccessModal from '@/components/SuccessModal'
 
 export default function AdminPage() {
   const {
@@ -23,6 +24,8 @@ export default function AdminPage() {
     setScreeningError,
     deleteError,
     setDeleteError,
+    successMessage,
+    setSuccessMessage,
   } = useAdminData()
 
   const onSubmitMovie = async (formData) => {
@@ -63,6 +66,8 @@ export default function AdminPage() {
           <ErrorMessage message={deleteError} onClose={() => setDeleteError(null)} />
         </section>
       </div>
+
+      {successMessage && <SuccessModal message={successMessage} onClose={() => setSuccessMessage(null)} />}
 
       {modal && (
         <ConfirmModal

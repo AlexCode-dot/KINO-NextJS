@@ -7,7 +7,7 @@ export function useAdminData() {
   const [movies, setMovies] = useState([])
   const [screenings, setScreenings] = useState([])
   const [modal, setModal] = useState(null)
-
+  const [successMessage, setSuccessMessage] = useState(null)
   const [movieError, setMovieError] = useState(null)
   const [screeningError, setScreeningError] = useState(null)
   const [deleteError, setDeleteError] = useState(null)
@@ -46,6 +46,8 @@ export function useAdminData() {
       setScreeningError(null)
       const newScreening = await addScreening(formData)
       setScreenings((prev) => [...prev, newScreening])
+      const matchedMovie = movies.find((movie) => movie._id === newScreening.movie)
+      setSuccessMessage(`Visning för "${matchedMovie.title}"har lagts till!`)
     } catch (err) {
       setScreeningError(err.message)
     }
@@ -56,6 +58,7 @@ export function useAdminData() {
       setMovieError(null)
       const newMovie = await addMovie(formData)
       setMovies((prev) => [...prev, newMovie])
+      setSuccessMessage(`Filmen "${newMovie.title}" har lagts till!`)
     } catch (err) {
       setMovieError(err.message)
     }
@@ -99,5 +102,7 @@ export function useAdminData() {
     setScreeningError,
     deleteError,
     setDeleteError,
+    successMessage,
+    setSuccessMessage,
   }
 }

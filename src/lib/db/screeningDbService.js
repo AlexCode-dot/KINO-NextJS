@@ -2,11 +2,17 @@ import Screening from '@/lib/db/models/Screening'
 import Movie from '@/lib/db/models/Movie'
 
 export async function getAllScreeningsWithMovieInfo() {
+  await markExpiredScreenings()
+
   return await Screening.find().populate('movie', 'title runtime').lean()
 }
 
 export async function deleteScreeningById(id) {
   return await Screening.findByIdAndDelete(id)
+}
+
+export async function markExpiredScreenings() {
+  await Screening.updateMany({ endTime: { $lt: new Date() }, status: 'active' }, { $set: { status: 'expired' } })
 }
 
 export async function createScreening({ movieId, date, room }) {
