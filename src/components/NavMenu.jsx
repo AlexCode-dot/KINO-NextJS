@@ -37,6 +37,7 @@ export default function NavMenu() {
     setAdminClass('header__nav-item menu-active')
     setHomeClass('header__nav-item')
     setMoviesClass('header__nav-item')
+    setAboutClass('header__nav-item')
     router.push('/admin')
   }
 
