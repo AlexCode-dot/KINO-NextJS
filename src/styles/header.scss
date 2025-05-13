@@ -6,7 +6,6 @@
   color: #ffff;
   background-color: #03658c;
   padding: 0px 20px 0px 20px;
-  min-width: 840px;
   align-self: center;
   align-content: center;
   display: flex;
@@ -29,12 +28,44 @@
 .logo__background {
   position: absolute;
   z-index: 1;
-  top: -80;
-  left: 250;
+  top: -80px;
+  left: 250px;
   img {
     width: 60%;
     height: 60%;
     object-fit: cover;
   }
   pointer-events: none;
+}
+
+@media screen and (max-width: 800px) {
+  .header {
+    width: auto;
+    font-size: 15px;
+    justify-content: center;
+    align-items: center;
+  }
+  .header__logo {
+    display: flex;
+    justify-content: center;
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    font-size: 20px;
+  }
+
+  .logo__background {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    height: auto;
+    & img {
+      width: 100%;
+      height: auto;
+    }
+  }
 }

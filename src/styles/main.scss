@@ -28,3 +28,20 @@ body {
   justify-content: center;
   align-items: center;
 }
+
+@media screen and (max-width: 800px) {
+  body {
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: auto;
+    background-image: none;
+  }
+
+  .pageContainer,
+  .contentContainer {
+    min-width: auto;
+    width: 100%;
+  }
+}
