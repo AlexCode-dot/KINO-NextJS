@@ -32,3 +32,25 @@
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
   }
 }
+
+@media screen and (max-width: 800px) {
+  .screeningcard__outerdiv {
+    flex-direction: column;
+
+    width: 80%;
+  }
+
+  .screeningcard__list {
+    flex-direction: column;
+    padding-right: 2rem;
+
+    li {
+      margin-left: -0.5rem;
+      padding-left: 1rem;
+    }
+  }
+
+  .screeningcard__header {
+    text-align: center;
+  }
+}
