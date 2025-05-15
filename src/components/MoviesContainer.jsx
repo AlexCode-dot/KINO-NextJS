@@ -1,5 +1,7 @@
 'use client'
 
+import { useState } from 'react'
+
 export const mockData = [
   {
     Title: 'Batman Begins',
@@ -193,11 +195,19 @@ export const mockData = [
   },
 ]
 
-export default function Movies() {
+export default function MoviesContainer() {
+  const [visibleCount, setVisibleCount] = useState(8)
+
+  const loadMoreMovies = () => {
+    setVisibleCount((prevCount) => prevCount + 8)
+  }
+
+  const visibleMovies = mockData.slice(0, visibleCount)
+
   return (
     <div>
       <ul className="moviecard__list">
-        {mockData.map((movie) => (
+        {visibleMovies.map((movie) => (
           <li key={movie.imdbID}>
             <div className="moviecard__container">
               <div>
@@ -208,6 +218,14 @@ export default function Movies() {
           </li>
         ))}
       </ul>
+
+      {visibleCount < mockData.length && (
+        <div className="button-div">
+          <button onClick={loadMoreMovies} className="load-more-button">
+            Ladda fler filmer...
+          </button>
+        </div>
+      )}
     </div>
   )
 }
