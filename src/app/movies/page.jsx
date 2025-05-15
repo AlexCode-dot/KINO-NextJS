@@ -1,3 +1,9 @@
+import MoviesContainer from '@/components/MoviesContainer'
+
 export default function Movies() {
-  return <h1>Movies</h1>
+  return (
+    <>
+      <MoviesContainer />
+    </>
+  )
 }
