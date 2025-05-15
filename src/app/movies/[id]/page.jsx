@@ -8,10 +8,33 @@ const mockData = [
     Title: 'Inception',
     Poster: 'https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg',
     imdbID: 'tt1375666',
-    Plot: 'En tjuv som stjäl minnen…',
+    Plot: 'plot-text',
     imdbRating: '8.8',
   },
-  //Add more movies..?
+  {
+    Title: 'The Matrix Revolution',
+    Poster:
+      'https://m.media-amazon.com/images/M/MV5BNzQzOTk3OTAtNDQ0Zi00ZTVkLWI0MTEtMDllZjNkYzNjNTc4L2ltYWdlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg',
+    imdbID: 'tt0133093',
+    Plot: 'plot-text',
+    imdbRating: '8.8',
+  },
+  {
+    Title: 'Breaking Bad',
+    Poster:
+      'https://m.media-amazon.com/images/M/MV5BYmQ4YWMxYjUtNjZmYi00MDQ1LWFjMjMtNjA5ZDdiYjdiODU5XkEyXkFqcGdeQXVyMTMzNDExODE5._V1_SX300.jpg',
+    imdbID: 'tt0903747',
+    Plot: 'plot-text',
+    imdbRating: '8.8',
+  },
+  {
+    Title: 'The Godfather',
+    Poster:
+      'https://m.media-amazon.com/images/M/MV5BNGEwYjgwOGQtYjg5ZS00Njc1LTk2ZGEtM2QwZWQ2NjdhZTE5XkEyXkFqcGc@._V1_SX300.jpg',
+    imdbID: 'tt0068646',
+    Plot: 'plot-text',
+    imdbRating: '8.8',
+  },
 ]
 
 export default function MovieDetailPage({ params }) {

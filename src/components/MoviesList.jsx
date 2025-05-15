@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link' //Next.js <Link> for intern navigation
 
-//Using the same array as MovieCard.jsx
+//Using the same array as MovieCard.jsx, but only the first movie renders in page.jsx until I figure out what the correct endpoints are
 const mockData = [
   {
     Title: 'Inception',

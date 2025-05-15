@@ -6,15 +6,18 @@ import styles from '../styles/MovieDetailCard.module.scss'
 
 //Mocked data, replace with review props
 const mockReviews = [
-  { id: 1, name: 'Alice', avatar: '/avatars/avatar.jpg', text: 'Kanonbra film, asfet hemsida för bokning' },
+  { id: 1, name: 'Besökare', avatar: '/avatars/avatar.webp', text: 'Recension-text' },
+
   {
     id: 2,
-    name: 'Bengt',
-    avatar: '/avatars/man.jpg',
-    text: 'Frugan min, Gunilla ville titt på Dikapprio.... jo det va väl OK film',
+    name: 'Besökare',
+    avatar: '/avatars/avatar.webp',
+    text: 'Recension-text',
   },
-  { id: 3, name: 'Izza', avatar: '/avatars/cry.jpg', text: 'Filmen var bra, men renarna åt upp mina popcorn' },
-  { id: 4, name: 'Sven', avatar: '/avatars/ren.jpg', text: 'Filmen sög, men snacksen var goda' },
+
+  { id: 3, name: 'Besökare', avatar: '/avatars/avatar.webp', text: 'Recension-text' },
+
+  { id: 4, name: 'Besökare', avatar: '/avatars/avatar.webp', text: 'Recension-text' },
 ]
 
 export default function MovieDetailCard({ title, posterUrl, rating, description, screenings, reviews = mockReviews }) {
