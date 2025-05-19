@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import SearchField from './SearchField'
+import Link from 'next/link'
 
 export const mockData = [
   {
@@ -212,7 +213,7 @@ export default function MoviesContainer() {
         <ul className="moviecard__list">
           {visibleMovies.map((movie) => (
             <li key={movie.imdbID}>
-              <a href="#">
+              <Link key={movie.Title} href={'/movies'}>
                 <div className="moviecard__container">
                   <div>
                     {movie.Poster && (
@@ -221,7 +222,7 @@ export default function MoviesContainer() {
                   </div>
                   <p>{movie.Title}</p>
                 </div>
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
