@@ -213,7 +213,7 @@ export default function MoviesContainer() {
         <ul className="moviecard__list">
           {visibleMovies.map((movie) => (
             <li key={movie.imdbID}>
-              <Link key={movie.imdbID} href={'/movies/id/page.js'}>
+              <Link key={movie.imdbID} href={'/movies'}>
                 <div className="moviecard__container">
                   <div>
                     {movie.Poster && (
