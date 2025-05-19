@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import SearchField from './SearchField'
 
 export const mockData = [
   {
@@ -205,27 +206,34 @@ export default function MoviesContainer() {
   const visibleMovies = mockData.slice(0, visibleCount)
 
   return (
-    <div>
-      <ul className="moviecard__list">
-        {visibleMovies.map((movie) => (
-          <li key={movie.imdbID}>
-            <div className="moviecard__container">
-              <div>
-                {movie.Poster && <img src={movie.Poster} alt={`${movie.Title} poster`} className="moviecard__poster" />}
-              </div>
-              <p>{movie.Title}</p>
-            </div>
-          </li>
-        ))}
-      </ul>
+    <>
+      <SearchField />
+      <div>
+        <ul className="moviecard__list">
+          {visibleMovies.map((movie) => (
+            <li key={movie.imdbID}>
+              <a href="#">
+                <div className="moviecard__container">
+                  <div>
+                    {movie.Poster && (
+                      <img src={movie.Poster} alt={`${movie.Title} poster`} className="moviecard__poster" />
+                    )}
+                  </div>
+                  <p>{movie.Title}</p>
+                </div>
+              </a>
+            </li>
+          ))}
+        </ul>
 
-      {visibleCount < mockData.length && (
-        <div className="button-div">
-          <button onClick={loadMoreMovies} className="load-more-button">
-            Ladda fler filmer...
-          </button>
-        </div>
-      )}
-    </div>
+        {visibleCount < mockData.length && (
+          <div className="button-div">
+            <button onClick={loadMoreMovies} className="load-more-button">
+              Ladda fler filmer...
+            </button>
+          </div>
+        )}
+      </div>
+    </>
   )
 }

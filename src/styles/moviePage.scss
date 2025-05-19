@@ -13,3 +13,37 @@
   font-size: 1rem;
   font-weight: bold;
 }
+
+.searchfield-container {
+  margin-bottom: 25px;
+
+  input {
+    width: 250px;
+    height: 35px;
+    padding-left: 10px;
+    font-size: 1rem;
+    border: 2px solid #bbb;
+    background-color: #fff;
+    color: #444;
+    border-radius: 18px;
+  }
+
+  h2 {
+    color: #333;
+    font-size: 1rem;
+    text-align: center;
+    margin: 30px 0 10px 0;
+  }
+}
+
+.moviecard__list {
+  list-style: none;
+
+  a {
+    text-decoration: none;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
