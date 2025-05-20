@@ -6,12 +6,14 @@ export default function NavMenu() {
   const [homeClass, setHomeClass] = useState('header__nav-item')
   const [moviesClass, setMoviesClass] = useState('header__nav-item')
   const [aboutClass, setAboutClass] = useState('header__nav-item')
+  const [adminClass, setAdminClass] = useState('header__nav-item')
   const router = useRouter()
 
   const handleHomeClick = () => {
     setHomeClass('header__nav-item menu-active')
     setMoviesClass('header__nav-item')
     setAboutClass('header__nav-item')
+    setAdminClass('header__nav-item')
     router.push('/')
   }
 
@@ -19,6 +21,7 @@ export default function NavMenu() {
     setMoviesClass('header__nav-item menu-active')
     setHomeClass('header__nav-item')
     setAboutClass('header__nav-item')
+    setAdminClass('header__nav-item')
     router.push('/movies')
   }
 
@@ -26,7 +29,16 @@ export default function NavMenu() {
     setAboutClass('header__nav-item menu-active')
     setHomeClass('header__nav-item')
     setMoviesClass('header__nav-item')
+    setAdminClass('header__nav-item')
     router.push('/about')
+  }
+
+  const handleAdminClick = () => {
+    setAdminClass('header__nav-item menu-active')
+    setHomeClass('header__nav-item')
+    setMoviesClass('header__nav-item')
+    setAboutClass('header__nav-item')
+    router.push('/admin')
   }
 
   return (
@@ -56,6 +68,16 @@ export default function NavMenu() {
         >
           <a>OM OSS</a>
         </li>
+        {process.env.NODE_ENV === 'development' && (
+          <li
+            className={adminClass}
+            onClick={() => {
+              handleAdminClick()
+            }}
+          >
+            <a>ADMIN</a>
+          </li>
+        )}
       </ul>
     </nav>
   )
