@@ -43,10 +43,11 @@ export default function NavMenu() {
   }
 
   const handleLoginClick = () => {
-    setAboutClass('header__nav-item menu-active')
     setHomeClass('header__nav-item')
     setMoviesClass('header__nav-item')
+    setAboutClass('header__nav-item')
     setAdminClass('header__nav-item')
+    setLoginClass('header__nav-item menu-active')
     router.push('/login')
   }
 
