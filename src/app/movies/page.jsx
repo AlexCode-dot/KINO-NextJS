@@ -1,3 +1,4 @@
+'use client'
 import MoviesContainer from '@/components/MoviesContainer'
 
 export default function Movies() {
@@ -5,5 +6,6 @@ export default function Movies() {
     <>
       <MoviesContainer />
     </>
+main
   )
 }
