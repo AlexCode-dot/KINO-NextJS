@@ -100,7 +100,7 @@ export default function AdminPanel() {
         <ConfirmModal
           message={
             modal.type === 'movie'
-              ? `Vill du ta bort filmen "${modal.label}" och alla tillhörande visningar??`
+              ? `Vill du ta bort filmen "${modal.label}" och alla tillhörande visningar?`
               : modal.type === 'screening'
                 ? `Vill du ta bort visningen: "${modal.label}"?`
                 : `Vill du ta bort salongen "${modal.label}" och alla tillhörande visningar?`
