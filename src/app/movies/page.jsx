@@ -6,6 +6,5 @@ export default function Movies() {
     <>
       <MoviesContainer />
     </>
-main
   )
 }
