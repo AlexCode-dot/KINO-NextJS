@@ -44,7 +44,7 @@ li.menu-active {
 
   .header__nav-list {
     height: 100px;
-    width: 90%;
+    width: 95%;
     gap: 10px;
     padding: 0px;
     background-color: #012840;
@@ -54,7 +54,6 @@ li.menu-active {
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 100%;
       color: white;
       border-color: black;
     }
@@ -65,7 +64,6 @@ li.menu-active {
     justify-content: center;
     align-items: center;
     color: black;
-    width: 200px;
     height: 50px;
 
     & a {
