@@ -94,7 +94,7 @@ export default function NavMenu() {
             handleLoginClick()
           }}
         >
-          <a>Login</a>
+          <a>LOGIN</a>
         </li>
       </ul>
     </nav>

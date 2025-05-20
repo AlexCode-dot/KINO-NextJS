@@ -51,6 +51,10 @@ li.menu-active {
     align-items: center;
 
     & li {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
       color: white;
       border-color: black;
     }
@@ -63,5 +67,13 @@ li.menu-active {
     color: black;
     width: 200px;
     height: 50px;
+
+    & a {
+      padding: 5px;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      width: 100%;
+    }
   }
 }
