@@ -7,6 +7,15 @@
   background: #03658c;
   min-height: 70vh;
 
+  &__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+
   &__form {
     display: flex;
     flex-direction: column;
@@ -18,6 +27,7 @@
   }
 
   &__section {
+    width: 50%;
     margin: 0 2.5rem 0 2.5rem;
     padding: 1.5rem;
     background: #fff;
@@ -30,6 +40,14 @@
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
+  }
+
+  &__form_name {
+    color: #295377;
+  }
+
+  &__form_password {
+    color: #295377;
   }
 
   &__username {
@@ -61,6 +79,12 @@
 
     &:hover {
       background: #1b3a57;
+    }
+  }
+
+  @media screen and (max-width: 800px) {
+    &__section {
+      width: 70%;
     }
   }
 }
