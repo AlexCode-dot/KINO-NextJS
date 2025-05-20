@@ -1,0 +1,29 @@
+.admin-page {
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  &__input {
+    padding: 0.6rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+  }
+
+  &__button {
+    padding: 0.7rem;
+    background: #295377;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s ease-in-out;
+
+    &:hover {
+      background: #1b3a57;
+    }
+  }
+}

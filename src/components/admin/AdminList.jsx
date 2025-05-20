@@ -38,12 +38,15 @@ export default function AdminList({ movies, screenings, onDeleteMovie, onDeleteS
                       >
                         <span className="admin-list__screening-info">
                           {formatTime(screening.date)} – {formatTime(screening.endTime)} ({formatDate(screening.date)})
-                          (Salong {screening.room})
+                          (Salong {screening.room?.name || screening.room})
                           {isExpired && <em className="admin-list__screening-expired-label"> (Utgången)</em>}
                         </span>
                         <button
                           onClick={() =>
-                            onDeleteScreening(screening._id, `${formatDateTime(screening.date)} – ${screening.room}`)
+                            onDeleteScreening(
+                              screening._id,
+                              `${formatDateTime(screening.date)} – ${screening.room?.name || screening.room}`
+                            )
                           }
                           className="admin-list__delete-screening"
                         >
