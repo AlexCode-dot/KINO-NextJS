@@ -4,7 +4,7 @@ import Movie from '@/lib/db/models/Movie'
 export async function getAllScreeningsWithMovieInfo() {
   await markExpiredScreenings()
 
-  return await Screening.find().populate('movie', 'title runtime').lean()
+  return await Screening.find().populate('movie', 'title runtime').populate('room', 'name').lean()
 }
 
 export async function deleteScreeningById(id) {
@@ -49,5 +49,6 @@ export async function createScreening({ movieId, date, room }) {
   })
 
   await screening.save()
-  return screening
+
+  return await Screening.findById(screening._id).populate('room', 'name').populate('movie', 'title runtime')
 }
