@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
-import { fetchMovies, addMovie } from '@/lib/services/movieApiService'
-import { fetchScreenings, addScreening } from '@/lib/services/screeningApiService'
-import { deleteMovie, deleteScreening } from '@/lib/services/adminApiService'
+import { fetchMovies, addMovie, deleteMovie } from '@/lib/services/movieApiService'
+import { fetchScreenings, addScreening, deleteScreening } from '@/lib/services/screeningApiService'
 import { fetchRooms, addRoom, deleteRoom } from '@/lib/services/roomApiService'
 
 export function useAdminData() {
