@@ -23,3 +23,8 @@ export async function addScreening(formData) {
 
   return data
 }
+
+export async function deleteScreening(id) {
+  const res = await fetch(`/api/screenings/${id}`, { method: 'DELETE' })
+  if (!res.ok) throw new Error('Kunde inte ta bort visningen.')
+}

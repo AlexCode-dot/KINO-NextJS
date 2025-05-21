@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import AdminRoomForm from '@/components/admin/AdminRoomForm'
 import AdminScreeningForm from '@/components/admin/AdminScreeningForm'
 import AdminMovieForm from '@/components/admin/AdminMovieForm'
 import AdminList from '@/components/admin/AdminList'
@@ -9,6 +10,7 @@ import ConfirmModal from '@/components/ConfirmModal'
 import SuccessModal from '@/components/SuccessModal'
 import { useAdminData } from '@/hooks/useAdminData'
 import AdminTabNav from '@/components/admin/AdminTabNav'
+import AdminRoomList from '@/components/admin/AdminRoomList'
 
 export default function AdminPanel() {
   const [activeTab, setActiveTab] = useState('list')
@@ -32,6 +34,10 @@ export default function AdminPanel() {
     setDeleteError,
     successMessage,
     setSuccessMessage,
+    handleAddRoom,
+    roomError,
+    setRoomError,
+    confirmDeleteRoom,
   } = useAdminData()
 
   return (
@@ -52,6 +58,11 @@ export default function AdminPanel() {
                 onDeleteScreening={confirmDeleteScreening}
               />
               <ErrorMessage message={deleteError} onClose={() => setDeleteError(null)} />
+            </section>
+
+            <section className="admin-page__section">
+              <AdminRoomList rooms={rooms} onDeleteRoom={confirmDeleteRoom} />
+              <ErrorMessage message={roomError} onClose={() => setRoomError(null)} />
             </section>
           </>
         )}
@@ -89,6 +100,19 @@ export default function AdminPanel() {
                 onDeleteScreening={confirmDeleteScreening}
               />
               <ErrorMessage message={deleteError} onClose={() => setDeleteError(null)} />
+            </section>
+          </>
+        )}
+
+        {activeTab === 'room' && (
+          <>
+            <section className="admin-page__section">
+              <AdminRoomForm onSubmitRoom={handleAddRoom} />
+            </section>
+
+            <section className="admin-page__section">
+              <AdminRoomList rooms={rooms} onDeleteRoom={confirmDeleteRoom} />
+              <ErrorMessage message={roomError} onClose={() => setRoomError(null)} />
             </section>
           </>
         )}
