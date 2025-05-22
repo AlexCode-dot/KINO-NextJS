@@ -16,6 +16,12 @@
   border-radius: 10px;
 }
 
+.mainContainer__customerDetails input {
+  border-radius: 8px;
+  outline: none;
+  border: 2px solid #012840;
+}
+
 .mainContainer__ticketSelector {
   display: flex;
   flex-direction: column;
