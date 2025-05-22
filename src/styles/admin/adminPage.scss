@@ -1,25 +1,21 @@
 .admin-page {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem 0.1rem;
-  box-sizing: border-box;
+  font-family: 'Helvetica Neue', sans-serif;
   background: #03658c;
   min-height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
 
   &__container {
     max-width: 800px;
-    margin: 0px auto;
-    box-sizing: border-box;
-    padding: 30px 10px 15px;
+    margin: 0 auto;
+    padding: 50px 10px 15px;
   }
 
   &__title {
     text-align: center;
     font-size: 2.5rem;
-    margin-bottom: 2rem;
     color: white;
-    margin-top: 0px;
+    margin: 0 0 2rem;
   }
 
   &__section {
@@ -31,37 +27,10 @@
   }
 
   &__section-title {
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-    color: #295377;
-  }
-
-  &__form {
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-  }
-
-  &__input {
-    padding: 0.6rem;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    font-size: 1rem;
-  }
-
-  &__button {
-    padding: 0.7rem;
-    background: #295377;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
+    font-size: 1.3rem;
     font-weight: bold;
-    transition: background 0.2s ease-in-out;
-
-    &:hover {
-      background: #1b3a57;
-    }
+    color: #295377;
+    margin-bottom: 1rem;
   }
 
   &__locked {
