@@ -8,6 +8,8 @@
 @use 'moviePage.scss';
 @use 'loginPage.scss';
 @use 'BookingMovieInfo.scss';
+@use 'bookingPage.scss';
+@use 'TicketDeliveryInfo.scss';
 
 body {
   background-image: url('../../public/img/app_background.webp');
