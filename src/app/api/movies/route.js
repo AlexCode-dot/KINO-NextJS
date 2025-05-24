@@ -1,12 +1,10 @@
 import { NextResponse } from 'next/server'
 import connectDB from '@/lib/db/connectDB'
-import { getAllMovies, createMovieFromOmdbTitle, findMovieByTitle, getTopRatedMovies } from '@/lib/db/movieDbService'
+import { getAllMovies, createMovieFromOmdbTitle, findMovieByTitle } from '@/lib/db/movieDbService'
 
-export async function GET(req) {
+export async function GET() {
   await connectDB()
-  const { searchParams } = new URL(req.url)
-  const type = searchParams.get('type')
-  const movies = type === 'top-rated' ? await getTopRatedMovies() : await getAllMovies()
+  const movies = await getAllMovies()
   return NextResponse.json(movies)
 }
 
