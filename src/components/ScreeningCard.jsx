@@ -1,16 +1,6 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-/*
-  {
-    id: 408,
-    Title: 'Forrest Gump',
-    Room: 'Stora salongen',
-    Date: '2025-05-14',
-    Time: '12:00:00',
-    imdbID: 'tt0109830',
-  },
-*/
 
 export default function ScreeningCards() {
   const [data, setData] = useState([])
@@ -35,7 +25,7 @@ export default function ScreeningCards() {
   return (
     <div className="screeningcard__outerdiv">
       <ul className="screeningcard__list">
-        {filteredScreenings.map((item) => (
+        {data.map((item) => (
           <li key={item._id}>
             <div className="screeningcard__container">
               <p>{item.movie?.title}</p>
