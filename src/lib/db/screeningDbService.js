@@ -7,6 +7,10 @@ export async function getAllScreeningsWithMovieInfo() {
   return await Screening.find().populate('movie', 'title runtime').lean()
 }
 
+export async function getUpcomingScreenings() {
+  return await Screening.find().populate('movie', 'title date room').lean()
+}
+
 export async function deleteScreeningById(id) {
   return await Screening.findByIdAndDelete(id)
 }
