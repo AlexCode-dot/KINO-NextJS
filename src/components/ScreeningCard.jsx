@@ -32,18 +32,6 @@ export default function ScreeningCards() {
     fetchUpcomingScreenings()
   }, [])
 
-  const today = new Date()
-  const fiveDaysFromNow = new Date(today)
-  fiveDaysFromNow.setDate(today.getDate() + 5)
-
-  const filteredScreenings = data
-    .filter((item) => {
-      const screeningDate = new Date(item.date)
-      return screeningDate >= today && screeningDate <= fiveDaysFromNow
-    })
-    .sort((a, b) => new Date(a.date) - new Date(b.date))
-    .slice(0, 10)
-
   return (
     <div className="screeningcard__outerdiv">
       <ul className="screeningcard__list">
