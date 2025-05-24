@@ -8,7 +8,7 @@ export default function MovieCard() {
   useEffect(() => {
     async function fetchTopRatedMovies() {
       try {
-        const res = await fetch('/api/movies?type=top-rated', {
+        const res = await fetch('/api/movies/top-rated', {
           cache: 'no-store',
         })
         if (!res.ok) throw new Error('Kunde inte hämta de högst rankade filmerna')
