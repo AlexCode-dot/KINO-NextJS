@@ -60,18 +60,19 @@
     li {
       list-style: none;
       margin: 0.5rem;
+      min-width: 18rem;
     }
   }
 
   .moviecard__poster {
     width: 18rem;
-    height: 26rem;
+    height: 24rem;
     object-fit: cover;
     border-radius: 10px;
   }
 
   .moviecard__container {
-    min-height: 30rem;
+    min-height: 28.5rem;
     max-height: 300px;
     width: 100%;
     text-align: center;
