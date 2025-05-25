@@ -7,6 +7,20 @@ export async function getAllScreeningsWithMovieInfo() {
   return await Screening.find().populate('movie', 'title runtime').lean()
 }
 
+export async function getUpcomingScreenings() {
+  const today = new Date()
+  const fiveDaysFromNow = new Date(today)
+  fiveDaysFromNow.setDate(today.getDate() + 5)
+
+  return await Screening.find({
+    date: { $gte: today, $lte: fiveDaysFromNow },
+  })
+    .populate('movie', 'title')
+    .sort({ date: 1 })
+    .limit(10)
+    .lean()
+}
+
 export async function deleteScreeningById(id) {
   return await Screening.findByIdAndDelete(id)
 }
