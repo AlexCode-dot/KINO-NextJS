@@ -4,7 +4,7 @@ const ScreeningSchema = new mongoose.Schema({
   movie: { type: mongoose.Schema.Types.ObjectId, ref: 'Movie', required: true },
   date: { type: Date, required: true },
   endTime: { type: Date, required: true },
-  room: { type: String, required: true },
+  room: { type: mongoose.Schema.Types.ObjectId, ref: 'Room', required: true },
   status: {
     type: String,
     enum: ['active', 'expired'],
