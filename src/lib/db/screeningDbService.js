@@ -1,5 +1,6 @@
 import Screening from '@/lib/db/models/Screening'
 import Movie from '@/lib/db/models/Movie'
+import _Room from '@/lib/db/models/Room'
 
 export async function getAllScreeningsWithMovieInfo() {
   await markExpiredScreenings()
@@ -16,6 +17,7 @@ export async function getUpcomingScreenings() {
     date: { $gte: today, $lte: fiveDaysFromNow },
   })
     .populate('movie', 'title')
+    .populate('room', 'name')
     .sort({ date: 1 })
     .limit(10)
     .lean()
