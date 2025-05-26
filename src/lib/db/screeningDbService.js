@@ -25,6 +25,10 @@ export async function deleteScreeningById(id) {
   return await Screening.findByIdAndDelete(id)
 }
 
+export async function getScreeningById(id) {
+  return await Screening.findById(id)
+}
+
 export async function markExpiredScreenings() {
   await Screening.updateMany({ endTime: { $lt: new Date() }, status: 'active' }, { $set: { status: 'expired' } })
 }
