@@ -7,6 +7,10 @@ export async function getAllRooms() {
   return Room.find().lean()
 }
 
+export async function getRoomById(id) {
+  return await Room.findById(id)
+}
+
 export async function createRoom({ name, rows, wheelchairSeats }) {
   await connectDB()
 
