@@ -23,3 +23,8 @@ export async function addMovie(formData) {
 
   return data
 }
+
+export async function deleteMovie(id) {
+  const res = await fetch(`/api/movies/${id}`, { method: 'DELETE' })
+  if (!res.ok) throw new Error('Kunde inte ta bort filmen.')
+}
