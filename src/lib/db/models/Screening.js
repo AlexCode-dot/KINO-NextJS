@@ -1,5 +1,10 @@
 import mongoose from 'mongoose'
 
+const bookedSeatSchema = new mongoose.Schema({
+  row: { type: Number, required: true },
+  seat: { type: Number, required: true },
+})
+
 const ScreeningSchema = new mongoose.Schema({
   movie: { type: mongoose.Schema.Types.ObjectId, ref: 'Movie', required: true },
   date: { type: Date, required: true },
@@ -10,6 +15,7 @@ const ScreeningSchema = new mongoose.Schema({
     enum: ['active', 'expired'],
     default: 'active',
   },
+  bookedSeats: [bookedSeatSchema],
 })
 
 ScreeningSchema.index({ date: 1, room: 1 }, { unique: true })
