@@ -28,14 +28,16 @@ export default function MovieCard() {
       <ul className="moviecard__list">
         {data.map((item, index) => (
           <li key={item._id}>
-            <div className="moviecard__container">
-              <div>
-                {item.posterUrl && (
-                  <img src={item.posterUrl} alt={`${item.title} poster`} className="moviecard__poster" />
-                )}
+            <a href={`/movies/${item._id}`}>
+              <div className="moviecard__container">
+                <div>
+                  {item.posterUrl && (
+                    <img src={item.posterUrl} alt={`${item.title} poster`} className="moviecard__poster" />
+                  )}
+                </div>
+                <p>{item.title}</p>
               </div>
-              <p>{item.title}</p>
-            </div>
+            </a>
           </li>
         ))}
       </ul>

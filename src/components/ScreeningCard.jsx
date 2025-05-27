@@ -27,12 +27,14 @@ export default function ScreeningCards() {
       <ul className="screeningcard__list">
         {data.map((item) => (
           <li key={item._id}>
-            <div className="screeningcard__container">
-              <p>{item.movie?.title}</p>
-              <p>{item.room}</p>
-              <p>{new Date(item.date).toLocaleDateString('sv-SE')}</p>
-              <p>{new Date(item.date).toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' })}</p>
-            </div>
+            <a href={`/screenings/${item._id}`}>
+              <div className="screeningcard__container">
+                <p>{item.movie?.title}</p>
+                <p>{`Salong ${item.room.name}`}</p>
+                <p>{new Date(item.date).toLocaleDateString('sv-SE')}</p>
+                <p>{new Date(item.date).toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' })}</p>
+              </div>
+            </a>
           </li>
         ))}
       </ul>
