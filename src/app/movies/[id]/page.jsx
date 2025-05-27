@@ -1,25 +1,16 @@
 import MovieDetailCard from '@/components/MovieDetailCard'
 import { findMovieById } from '@/lib/db/movieDbService'
 import { getAllScreeningsWithMovieInfo } from '@/lib/db/screeningDbService'
+import { notFound } from 'next/navigation'
 
 export default async function MovieDetailPage({ params }) {
   const movieId = params.id
 
   const movie = await findMovieById(movieId)
 
-  //Fallback has inline styling because the view is so limited
+  //Fallback is next.js own 404
   if (!movie) {
-    return (
-      <div style={{ padding: '2rem', fontFamily: 'sans-serif' }}>
-        <h1>Filmen kunde inte hittas!</h1>
-        <p>
-          ID: <code>{movieId}</code>
-        </p>
-        <a href="/movies/debug" style={{ color: 'blue', textDecoration: 'underline' }}>
-          Tillbaka till debuglistan
-        </a>
-      </div>
-    )
+    return notFound()
   }
 
   //filter screenings for only one specific movie and group them by date
