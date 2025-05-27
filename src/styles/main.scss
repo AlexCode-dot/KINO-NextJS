@@ -1,12 +1,12 @@
 @use 'footer.scss';
 @use 'header.scss';
 @use 'Nav__menu.scss';
-@use './admin/adminPage.scss';
-@use './admin/adminList.scss';
+@use './admin/index.scss';
 @use './confirmModal.scss';
 @use 'MovieCard.scss';
 @use 'ScreeningCard.scss';
 @use 'moviePage.scss';
+@use 'loginPage.scss';
 
 body {
   background-image: url('../../public/img/app_background.webp');

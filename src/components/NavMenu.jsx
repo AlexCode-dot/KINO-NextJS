@@ -7,6 +7,7 @@ export default function NavMenu() {
   const [moviesClass, setMoviesClass] = useState('header__nav-item')
   const [aboutClass, setAboutClass] = useState('header__nav-item')
   const [adminClass, setAdminClass] = useState('header__nav-item')
+  const [loginClass, setLoginClass] = useState('header__nav-item')
   const router = useRouter()
 
   const handleHomeClick = () => {
@@ -39,6 +40,15 @@ export default function NavMenu() {
     setMoviesClass('header__nav-item')
     setAboutClass('header__nav-item')
     router.push('/admin')
+  }
+
+  const handleLoginClick = () => {
+    setHomeClass('header__nav-item')
+    setMoviesClass('header__nav-item')
+    setAboutClass('header__nav-item')
+    setAdminClass('header__nav-item')
+    setLoginClass('header__nav-item menu-active')
+    router.push('/login')
   }
 
   return (
@@ -78,6 +88,14 @@ export default function NavMenu() {
             <a>ADMIN</a>
           </li>
         )}
+        <li
+          className={loginClass}
+          onClick={() => {
+            handleLoginClick()
+          }}
+        >
+          <a>LOGIN</a>
+        </li>
       </ul>
     </nav>
   )
