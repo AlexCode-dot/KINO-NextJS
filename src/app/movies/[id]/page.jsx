@@ -1,3 +1,4 @@
+import mongoose from 'mongoose'
 import MovieDetailCard from '@/components/MovieDetailCard'
 import { findMovieById } from '@/lib/db/movieDbService'
 import { getAllScreeningsWithMovieInfo } from '@/lib/db/screeningDbService'
@@ -5,6 +6,11 @@ import { notFound } from 'next/navigation'
 
 export default async function MovieDetailPage({ params }) {
   const movieId = params.id
+
+  //Control id ID is valid before searching in the database
+  if (!mongoose.Types.ObjectId.isValid(movieId)) {
+    return notFound()
+  }
 
   const movie = await findMovieById(movieId)
 
