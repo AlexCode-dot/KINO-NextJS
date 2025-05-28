@@ -1,7 +1,7 @@
 @use 'footer.scss';
 @use 'header.scss';
 @use 'Nav__menu.scss';
-@use './admin/index.scss';
+@use './admin/AdminIndex.scss';
 @use './confirmModal.scss';
 @use 'MovieCard.scss';
 @use 'ScreeningCard.scss';
@@ -10,6 +10,7 @@
 @use 'BookingMovieInfo.scss';
 @use 'bookingPage.scss';
 @use 'TicketDeliveryInfo.scss';
+@use './booking/BookingIndex.scss';
 
 body {
   background-image: url('../../public/img/app_background.webp');
