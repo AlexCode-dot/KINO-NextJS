@@ -30,7 +30,7 @@ export default async function MovieDetailPage({ params }) {
       if (existing) {
         existing.times.push(time)
       } else {
-        acc.push({ room: curr.room, date, times: [time] })
+        acc.push({ room: curr.room.name, date, times: [time] })
       }
       return acc
     }, [])
