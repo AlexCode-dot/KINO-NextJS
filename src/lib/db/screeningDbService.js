@@ -1,10 +1,26 @@
 import Screening from '@/lib/db/models/Screening'
 import Movie from '@/lib/db/models/Movie'
+import _Room from '@/lib/db/models/Room'
 
 export async function getAllScreeningsWithMovieInfo() {
   await markExpiredScreenings()
 
-  return await Screening.find().populate('movie', 'title runtime').lean()
+  return await Screening.find().populate('movie', 'title runtime').populate('room', 'name').lean()
+}
+
+export async function getUpcomingScreenings() {
+  const today = new Date()
+  const fiveDaysFromNow = new Date(today)
+  fiveDaysFromNow.setDate(today.getDate() + 5)
+
+  return await Screening.find({
+    date: { $gte: today, $lte: fiveDaysFromNow },
+  })
+    .populate('movie', 'title')
+    .populate('room', 'name')
+    .sort({ date: 1 })
+    .limit(10)
+    .lean()
 }
 
 export async function deleteScreeningById(id) {
@@ -49,5 +65,6 @@ export async function createScreening({ movieId, date, room }) {
   })
 
   await screening.save()
-  return screening
+
+  return await Screening.findById(screening._id).populate('room', 'name').populate('movie', 'title runtime')
 }

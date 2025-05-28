@@ -8,6 +8,10 @@ export async function getAllMovies() {
   return await Movie.find().select('title year genre posterUrl runtime').lean()
 }
 
+export async function getTopRatedMovies() {
+  return await Movie.find().select('title posterUrl imdbRating').sort({ imdbRating: -1 }).limit(4).lean()
+}
+
 export async function findMovieByTitle(title) {
   return await Movie.findOne({ title: new RegExp(`^${title}$`, 'i') })
 }

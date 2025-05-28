@@ -1,0 +1,152 @@
+.seat-map-container {
+  background-color: #0277a3;
+  padding: 2rem;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: fit-content;
+  margin: 0 auto;
+
+  &__title {
+    color: white;
+    font-weight: bold;
+    font-size: 1.6rem;
+    margin: 0.5rem;
+    text-align: center;
+  }
+
+  &__footer {
+    background-color: #043b53;
+    color: white;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70%;
+    max-width: 200px;
+
+    &-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+
+    &-list {
+      font-weight: normal;
+      text-align: left;
+      width: 100%;
+
+      > div + div {
+        margin-top: 8px;
+      }
+    }
+  }
+
+  &__clear-button {
+    margin-top: 0.75rem;
+    background-color: #c62828;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 0.4rem 0.75rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: bold;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: #b71c1c;
+    }
+  }
+}
+
+.seat-map {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 2rem 1.5rem;
+  border-radius: 10px;
+  background-color: #043b53;
+  width: fit-content;
+  align-items: center;
+
+  &__screen-text {
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  &__screen-line {
+    width: 80%;
+    height: 6px;
+    background-color: #e0e0e0;
+    border-radius: 2px;
+    margin-bottom: 1rem;
+  }
+
+  &__row {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+  }
+
+  &__seat {
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-color: #ffffff;
+    cursor: pointer;
+    transition: 0.2s ease;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+
+    &.seat--booked {
+      background-color: #cccccc;
+      border-color: #cccccc;
+      color: black;
+      font-weight: bold;
+      font-size: 25px;
+      cursor: not-allowed;
+    }
+
+    &.seat--selected {
+      background-color: #022c3c;
+      border-color: white;
+      border-width: 1.5px;
+    }
+
+    &.seat--wheelchair {
+      background-color: #b3ddff;
+      border-color: #7ab5e3;
+      color: #043b53;
+      font-size: 18px;
+
+      &::after {
+        content: '♿';
+        font-size: 16px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      &.seat--selected {
+        background-color: #022c3c;
+        border-color: white;
+        border-width: 1.5px;
+      }
+    }
+  }
+}
