@@ -1,9 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import SearchField from './SearchField'
 import Link from 'next/link'
 
+/*
 export const mockData = [
   {
     Title: 'Batman Begins',
@@ -196,15 +197,31 @@ export const mockData = [
       'https://m.media-amazon.com/images/M/MV5BNzY3OWQ5NDktNWQ2OC00ZjdlLThkMmItMDhhNDk3NTFiZGU4XkEyXkFqcGc@._V1_SX300.jpg',
   },
 ]
+*/
 
 export default function MoviesContainer() {
+  const [movies, setMovies] = useState([])
   const [visibleCount, setVisibleCount] = useState(8)
+
+  useEffect(() => {
+    const fetchMovies = async () => {
+      try {
+        const res = await fetch('/api/movies')
+        const data = await res.json()
+        setMovies(data)
+      } catch (error) {
+        console.error('Kunde inte hämta filmer:', error)
+      }
+    }
+
+    fetchMovies()
+  }, [])
 
   const loadMoreMovies = () => {
     setVisibleCount((prevCount) => prevCount + 8)
   }
 
-  const visibleMovies = mockData.slice(0, visibleCount)
+  const visibleMovies = movies.slice(0, visibleCount)
 
   return (
     <>
@@ -216,18 +233,18 @@ export default function MoviesContainer() {
               <Link key={movie.imdbID} href={'/movies'}>
                 <div className="moviecard__container">
                   <div>
-                    {movie.Poster && (
-                      <img src={movie.Poster} alt={`${movie.Title} poster`} className="moviecard__poster" />
+                    {movie.posterUrl && (
+                      <img src={movie.posterUrl} alt={`${movie.title} poster`} className="moviecard__poster" />
                     )}
                   </div>
-                  <p>{movie.Title}</p>
+                  <p>{movie.title}</p>
                 </div>
               </Link>
             </li>
           ))}
         </ul>
 
-        {visibleCount < mockData.length && (
+        {visibleCount < movies.length && (
           <div className="button-div">
             <button onClick={loadMoreMovies} className="load-more-button">
               Ladda fler filmer...
