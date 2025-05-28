@@ -1,47 +1,27 @@
-export default function BookingMovieInfo() {
-  const mockData = {
-    Title: 'Teenage Mutant Ninja Turtles',
-    Year: '1990',
-    Rated: 'PG',
-    Released: '30 Mar 1990',
-    Runtime: '93 min',
-    Genre: 'Action, Adventure, Comedy',
-    Director: 'Steve Barron',
-    Writer: 'Kevin Eastman, Peter Laird, Bobby Herbeck',
-    Actors: 'Judith Hoag, Elias Koteas, Josh Pais',
-    Plot: 'Four teenage mutant ninja turtles emerge from the shadows to protect New York City from a gang of criminal ninjas.',
-    Language: 'English, French',
-    Country: 'Hong Kong, United States',
-    Awards: '3 wins & 3 nominations total',
-    Poster: 'https://m.media-amazon.com/images/M/MV5BNzg3NTQ4NDk5NV5BMl5BanBnXkFtZTgwNzMzNDg4NjE@._V1_SX300.jpg',
-    Ratings: [
-      { Source: 'Internet Movie Database', Value: '6.8/10' },
-      { Source: 'Rotten Tomatoes', Value: '43%' },
-      { Source: 'Metacritic', Value: '51/100' },
-    ],
-    imdbID: 'tt0100758',
-  }
-
+export default function BookingMovieInfo({ movie }) {
   return (
     <div className="booking__movieInfoWrapper">
       <div className="movieInfoWrapper__posterWrapper">
-        <img src={mockData.Poster}></img>
+        <img src={movie.posterUrl}></img>
       </div>
       <div className="movieInfoWrapper__movieInfo">
         <a>
-          <strong>Titel:</strong> {mockData.Title}
+          <strong>Titel:</strong> {movie.title}
         </a>
         <a>
-          <strong>Genre:</strong> {mockData.Genre}
+          <strong>Genre:</strong> {movie.genre}
         </a>
         <a>
-          <strong>Längd:</strong> {mockData.Runtime}
+          <strong>År:</strong> {movie.year}
         </a>
         <a>
-          <strong>IMDB betyg:</strong> {mockData.Ratings[0].Value}
+          <strong>Längd:</strong> {movie.runtime}
+        </a>
+        <a>
+          <strong>IMDB betyg:</strong> {movie.imdbRating}
         </a>
         <p>
-          <strong>Handling:</strong> {mockData.Plot}
+          <strong>Handling:</strong> {movie.plot}
         </p>
       </div>
     </div>

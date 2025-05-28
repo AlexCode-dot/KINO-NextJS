@@ -19,7 +19,7 @@ export async function DELETE(req, context) {
 }
 
 export async function GET(req, { params }) {
-  const { id } = params
+  const { id } = await params
   await connectDB()
   const movie = await findMovieById(id)
   return NextResponse.json(movie)

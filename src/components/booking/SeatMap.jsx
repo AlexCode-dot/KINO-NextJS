@@ -1,6 +1,6 @@
 import React from 'react'
 
-export function SeatMap({ screening, selectedSeats, onSelect }) {
+export default function SeatMap({ screening, selectedSeats, onSelect, nrOfTickets }) {
   const isSeatBooked = (rowNumber, seatNumber) =>
     screening.bookedSeats.some((seat) => seat.row === rowNumber && seat.seat === seatNumber)
 

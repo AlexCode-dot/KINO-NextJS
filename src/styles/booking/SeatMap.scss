@@ -8,6 +8,7 @@
   gap: 1rem;
   width: fit-content;
   margin: 0 auto;
+  margin-bottom: 20px;
 
   &__title {
     color: white;
@@ -148,5 +149,17 @@
         border-width: 1.5px;
       }
     }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .seat-map-container {
+    padding: 0;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .seat-map {
+    padding: 1rem 0.5rem;
   }
 }
