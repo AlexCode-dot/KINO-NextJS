@@ -1,5 +1,5 @@
 .seat-map-container {
-  background-color: #0277a3;
+  background-color: #03658c;
   padding: 2rem;
   border-radius: 12px;
   display: flex;
@@ -112,6 +112,9 @@
     align-items: center;
     justify-content: center;
     font-size: 16px;
+    &:hover {
+      background-color: rgb(83, 83, 83);
+    }
 
     &.seat--booked {
       background-color: #cccccc;
