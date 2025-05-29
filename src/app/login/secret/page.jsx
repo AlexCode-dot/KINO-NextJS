@@ -1,0 +1,19 @@
+import { cookies } from 'next/headers'
+
+export default function Secret() {
+  const allCookies = cookies()
+  const username = allCookies.get('Username')?.value ?? null
+
+  if (username) {
+    console.log(`User ${username} is logged in`)
+    return (
+      <div>
+        <h1>User {username} logged in!</h1>
+        <h1>Hello {username}!</h1>
+      </div>
+    )
+  } else {
+    console.log('User is not logged in')
+    return <h1>You are not logged in!</h1>
+  }
+}
