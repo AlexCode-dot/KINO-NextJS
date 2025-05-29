@@ -1,4 +1,5 @@
 import { cookies } from 'next/headers'
+import LogoutButton from '@/components/LogoutButton'
 
 export default async function Secret() {
   const allCookies = await cookies()
@@ -10,6 +11,7 @@ export default async function Secret() {
       <div>
         <h1>User {username} logged in!</h1>
         <h1>Hello {username}!</h1>
+        <LogoutButton />
       </div>
     )
   } else {
