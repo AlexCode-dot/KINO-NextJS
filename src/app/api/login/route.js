@@ -1,3 +1,5 @@
+import { NextResponse } from 'next/server'
+
 export async function POST(request) {
   const payload = await request.json()
 
@@ -7,14 +9,10 @@ export async function POST(request) {
 
   // Verify if username and password match login info
   if (payload.Username === 'admin' && payload.Password === 'password') {
-    return new Response(JSON.stringify({ message: 'Login successful' }), {
-      status: 200,
-      headers: { 'Content-Type': 'application/json' },
-    })
+    const response = NextResponse.json({ message: 'Login successful' }, { status: 200 })
+    response.cookies.set('Username', payload.Username, {})
+    return response
   } else {
-    return new Response(JSON.stringify({ error: 'Invalid credentials' }), {
-      status: 401,
-      headers: { 'Content-Type': 'application/json' },
-    })
+    return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 })
   }
 }
