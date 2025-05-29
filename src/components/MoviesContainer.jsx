@@ -35,7 +35,7 @@ export default function MoviesContainer() {
         <ul className="moviecard__list">
           {visibleMovies.map((movie) => (
             <li key={movie._id}>
-              <Link key={movie._id} href={'/movies'}>
+              <Link key={movie._id} href={'/movies/[id]'}>
                 <div className="moviecard__container">
                   <div>
                     {movie.posterUrl && (
