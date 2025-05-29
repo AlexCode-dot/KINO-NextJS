@@ -1,9 +1,11 @@
 'use client'
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 export default function Login() {
   const [Username, setUsername] = useState('')
   const [Password, setPassword] = useState('')
+  const router = useRouter()
 
   return (
     <main className="loginPage">
@@ -24,6 +26,7 @@ export default function Login() {
                   Password,
                 }),
               })
+              router.push('/login/secret')
               console.log(`Login form submitted ${Username} and ${Password}`)
             }}
           >
