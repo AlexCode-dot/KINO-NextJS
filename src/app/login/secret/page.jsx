@@ -1,7 +1,7 @@
 import { cookies } from 'next/headers'
 
-export default function Secret() {
-  const allCookies = cookies()
+export default async function Secret() {
+  const allCookies = await cookies()
   const username = allCookies.get('Username')?.value ?? null
 
   if (username) {
