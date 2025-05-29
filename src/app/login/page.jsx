@@ -14,9 +14,9 @@ export default function Login() {
         <section className="loginPage__section">
           <form
             className="loginPage__form"
-            onSubmit={(ev) => {
+            onSubmit={async (ev) => {
               ev.preventDefault()
-              const response = fetch('/api/login', {
+              const response = await fetch('/api/login', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
@@ -26,8 +26,11 @@ export default function Login() {
                   Password,
                 }),
               })
-              router.push('/login/secret')
-              console.log(`Login form submitted ${Username} and ${Password}`)
+              if (response.ok) {
+                router.push('/login/secret')
+              } else {
+                alert('Fel användarnamn eller lösenord')
+              }
             }}
           >
             <h3 className="loginPage__form_name">Username</h3>
