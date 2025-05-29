@@ -12,11 +12,16 @@ export default function SeatMap({ screening, selectedSeats, onSelect, nrOfTicket
 
     const isAlreadySelected = selectedSeats.some((seat) => seat.row === rowNumber && seat.seat === seatNumber)
 
-    const updatedSelection = isAlreadySelected
-      ? selectedSeats.filter((seat) => !(seat.row === rowNumber && seat.seat === seatNumber))
-      : [...selectedSeats, { row: rowNumber, seat: seatNumber }]
+    if (isAlreadySelected) {
+      const updatedSelection = selectedSeats.filter((seat) => !(seat.row === rowNumber && seat.seat === seatNumber))
+      onSelect?.(updatedSelection)
+      return
+    }
 
-    onSelect?.(updatedSelection)
+    if (selectedSeats.length < nrOfTickets) {
+      const updatedSelection = [...selectedSeats, { row: rowNumber, seat: seatNumber }]
+      onSelect?.(updatedSelection)
+    }
   }
 
   const groupedSeats = Object.entries(

@@ -1,4 +1,11 @@
-export default function TicketDeliveryInfo({ nrOfTickets, setNrOfTickets, customerName, customerEmail }) {
+export default function TicketDeliveryInfo({
+  nrOfTickets,
+  setNrOfTickets,
+  customerName,
+  setCustomerName,
+  customerEmail,
+  setCustomerEmail,
+}) {
   return (
     <div className="TicketDeliveryInfo__mainContainer">
       <div className="mainContainer__customerDetails">
@@ -6,9 +13,21 @@ export default function TicketDeliveryInfo({ nrOfTickets, setNrOfTickets, custom
           <strong>Biljettleverans</strong>
         </a>
         <a>Ange din e-postadress:</a>
-        <input placeholder="exempel@mail.com"></input>
+        <input
+          placeholder="exempel@mail.com"
+          value={customerEmail}
+          onChange={(e) => {
+            setCustomerEmail(e.target.value)
+          }}
+        ></input>
         <a>Ange ditt fullständiga namn:</a>
-        <input></input>
+        <input
+          placeholder="Förnamn Efternamn"
+          value={customerName}
+          onChange={(n) => {
+            setCustomerName(n.target.value)
+          }}
+        ></input>
       </div>
       <div className="mainContainer__ticketSelector">
         <a>
@@ -31,6 +50,12 @@ export default function TicketDeliveryInfo({ nrOfTickets, setNrOfTickets, custom
             }}
           ></img>
         </div>
+        <a>
+          <strong>Pris: 149kr/st</strong>
+        </a>
+        <a>
+          Summa: {nrOfTickets}st x 149kr = {nrOfTickets * 149}kr
+        </a>
       </div>
     </div>
   )

@@ -48,7 +48,9 @@ export default function bookingPageId({ params }) {
         nrOfTickets={nrOfTickets}
         setNrOfTickets={setNrOfTickets}
         customerName={customerName}
+        setCustomerName={setCustomerName}
         customerEmail={customerEmail}
+        setCustomerEmail={setCustomerEmail}
       />
       <SeatMap
         screening={screening}

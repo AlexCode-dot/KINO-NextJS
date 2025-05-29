@@ -16,10 +16,6 @@ export async function findMovieByTitle(title) {
   return await Movie.findOne({ title: new RegExp(`^${title}$`, 'i') })
 }
 
-export async function findMovieById(id) {
-  return await Movie.findById(id)
-}
-
 export async function deleteMovieAndScreenings(id) {
   const deletedMovie = await Movie.findByIdAndDelete(id)
   await Screening.deleteMany({ movie: id })
