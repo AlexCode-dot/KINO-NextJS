@@ -1,6 +1,7 @@
 // src/tests/admin/admin.test.js
 import { FormData } from 'formdata-node'
 import { expect, jest, test, describe, beforeEach, beforeAll } from '@jest/globals'
+import { findMovieById } from '@/lib/db/movieDbService'
 
 // Mock database and services
 jest.unstable_mockModule('@/lib/db/connectDB', () => ({
@@ -14,6 +15,7 @@ jest.unstable_mockModule('@/lib/db/movieDbService', () => ({
   findMovieByTitle: jest.fn(),
   getAllMovies: jest.fn(),
   deleteMovieAndScreenings: jest.fn(),
+  findMovieById: jest.fn(),
 }))
 
 let POST, GET, DELETE
