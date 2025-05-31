@@ -1,12 +1,13 @@
 import { NextResponse } from 'next/server'
 import connectDB from '@/lib/db/connectDB'
 import { deleteMovieAndScreenings, findMovieById } from '@/lib/db/movieDbService'
+import { requireAdminAccess } from '@/lib/auth/requireAdminAccess'
 
 export async function DELETE(req, context) {
   const { id } = await context.params
 
-  if (process.env.NODE_ENV !== 'development') {
-    return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+  if (requireAdminAccess()) {
+    return NextResponse.json({ error: 'Endast tillgängligt för administratörer' }, { status: 403 })
   }
 
   try {

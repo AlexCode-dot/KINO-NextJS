@@ -25,12 +25,21 @@ export default async function MovieDetailPage({ params }) {
     .filter((s) => s.movie._id.toString() === movieId)
     .reduce((acc, curr) => {
       const date = new Date(curr.date).toLocaleDateString('sv-SE')
-      const time = new Date(curr.date).toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' })
-      const existing = acc.find((e) => e.date === date)
+      const time = new Date(curr.date).toLocaleTimeString('sv-SE', {
+        hour: '2-digit',
+        minute: '2-digit',
+      })
+
+      const existing = acc.find((e) => e.date === date && e.room === curr.room.name)
+
       if (existing) {
-        existing.times.push(time)
+        existing.times.push({ time, id: curr._id.toString() })
       } else {
-        acc.push({ room: curr.room.name, date, times: [time] })
+        acc.push({
+          date,
+          room: curr.room.name,
+          times: [{ time, id: curr._id.toString() }],
+        })
       }
       return acc
     }, [])
