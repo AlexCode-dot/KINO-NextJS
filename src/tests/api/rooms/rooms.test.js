@@ -1,3 +1,4 @@
+import { getRoomById } from '@/lib/db/roomDbService'
 import { expect, jest, test, describe, beforeAll, beforeEach } from '@jest/globals'
 
 jest.unstable_mockModule('@/lib/db/connectDB', () => ({
@@ -10,6 +11,7 @@ jest.unstable_mockModule('@/lib/db/roomDbService', () => ({
   getAllRooms: jest.fn(),
   createRoom: jest.fn(),
   deleteRoomAndScreenings: jest.fn(),
+  getRoomById: jest.fn(),
 }))
 
 let GET, POST, DELETE
