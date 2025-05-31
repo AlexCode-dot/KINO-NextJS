@@ -84,7 +84,7 @@ describe('POST /api/movies (mocked)', () => {
     const data = await res.json()
 
     expect(res.status).toBe(403)
-    expect(data.error).toMatch(/forbidden/i)
+    expect(data.error).toMatch(/Endast tillgängligt för administratörer/i)
   })
 })
 
@@ -122,6 +122,6 @@ describe('DELETE /api/movies/[id] (mocked)', () => {
     const data = await res.json()
 
     expect(res.status).toBe(403)
-    expect(data.error).toMatch(/forbidden/i)
+    expect(data.error).toMatch(/Endast tillgängligt för administratörer/i)
   })
 })
