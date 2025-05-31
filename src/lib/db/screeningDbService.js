@@ -1,6 +1,7 @@
 import Screening from '@/lib/db/models/Screening'
 import Movie from '@/lib/db/models/Movie'
 import _Room from '@/lib/db/models/Room'
+import { deleteBookingsByScreeningId } from '@/lib/db/bookingDbService'
 
 export async function getAllScreeningsWithMovieInfo() {
   await markExpiredScreenings()
@@ -24,6 +25,7 @@ export async function getUpcomingScreenings() {
 }
 
 export async function deleteScreeningById(id) {
+  await deleteBookingsByScreeningId(id)
   return await Screening.findByIdAndDelete(id)
 }
 
