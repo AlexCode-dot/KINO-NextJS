@@ -124,10 +124,10 @@ export default function AdminPanel() {
         <ConfirmModal
           message={
             modal.type === 'movie'
-              ? `Vill du ta bort filmen "${modal.label}" och alla tillhörande visningar?`
+              ? `Vill du ta bort filmen "${modal.label}" samt alla tillhörande visningar och bokningar? Detta går inte att ångra.`
               : modal.type === 'screening'
-                ? `Vill du ta bort visningen: "${modal.label}"?`
-                : `Vill du ta bort salongen "${modal.label}" och alla tillhörande visningar?`
+                ? `Vill du ta bort visningen: "${modal.label}" samt alla tillhörande bokningar? Detta går inte att ångra.`
+                : `Vill du ta bort salongen "${modal.label}" samt tillhörande visningar och bokningar? Detta går inte att ångra.`
           }
           onConfirm={performDelete}
           onCancel={closeModal}

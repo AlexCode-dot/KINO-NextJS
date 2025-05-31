@@ -1,6 +1,7 @@
 import connectDB from '@/lib/db/connectDB'
 import Room from '@/lib/db/models/Room'
 import Screening from '@/lib/db/models/Screening'
+import { deleteBookingsByScreeningId } from '@/lib/db/bookingDbService'
 
 export async function getAllRooms() {
   await connectDB()
@@ -24,13 +25,18 @@ export async function createRoom({ name, rows, wheelchairSeats }) {
 }
 
 export async function deleteRoomAndScreenings(id) {
-  await connectDB()
-
   const deletedRoom = await Room.findByIdAndDelete(id)
   if (!deletedRoom) {
     throw new Error('Salongen kunde inte hittas')
   }
 
+  const screenings = await Screening.find({ room: id }).select('_id')
+
+  for (const screening of screenings) {
+    await deleteBookingsByScreeningId(screening._id)
+  }
+
   await Screening.deleteMany({ room: id })
+
   return deletedRoom
 }

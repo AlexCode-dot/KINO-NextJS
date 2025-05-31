@@ -2,6 +2,7 @@ import Movie from '@/lib/db/models/Movie'
 import Screening from '@/lib/db/models/Screening'
 import { fetchMovieFromOmdb } from '@/lib/services/fetchOmdb'
 import connectDB from './connectDB'
+import { deleteBookingsByScreeningId } from '@/lib/db/bookingDbService'
 
 export async function getAllMovies() {
   await connectDB()
@@ -18,7 +19,15 @@ export async function findMovieByTitle(title) {
 
 export async function deleteMovieAndScreenings(id) {
   const deletedMovie = await Movie.findByIdAndDelete(id)
+
+  const screenings = await Screening.find({ movie: id }).select('_id')
+
+  for (const screening of screenings) {
+    await deleteBookingsByScreeningId(screening._id)
+  }
+
   await Screening.deleteMany({ movie: id })
+
   return deletedMovie
 }
 
