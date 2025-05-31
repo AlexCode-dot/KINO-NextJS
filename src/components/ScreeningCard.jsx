@@ -29,7 +29,7 @@ export default function ScreeningCards() {
           <li key={item._id}>
             <a href={`/screenings/${item._id}`}>
               <div className="screeningcard__container">
-                <p>{item.movie?.title}</p>
+                <p className="screeningcard__title">{item.movie?.title}</p>
                 <p>{`Salong ${item.room.name}`}</p>
                 <p>{new Date(item.date).toLocaleDateString('sv-SE')}</p>
                 <p>{new Date(item.date).toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' })}</p>

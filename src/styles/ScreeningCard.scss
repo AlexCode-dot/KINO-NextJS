@@ -1,9 +1,18 @@
 .screeningcard__outerdiv {
   display: flex;
+  justify-content: center;
   margin: 0;
-  width: 50rem;
+  width: 47rem;
   height: 20rem;
   padding-bottom: 2rem;
+}
+
+.screeningcard__title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 10rem;
+  max-height: 5rem;
 }
 
 .screeningcard__list {
@@ -14,12 +23,14 @@
   background-color: #d9d9d9;
   border-radius: 10px;
   padding-right: 2rem;
+  width: 100%;
 
   li {
     margin-top: 1.8rem;
     max-height: 80%;
     border-radius: 10px;
     min-width: 12rem;
+    max-width: 12rem;
     background-color: #012840;
     color: #ffffff;
     font-size: larger;
@@ -29,6 +40,7 @@
     a {
       color: #ffffff;
       text-decoration: none;
+      text-overflow: ellipsis;
     }
   }
 
@@ -40,16 +52,20 @@
 
 @media screen and (max-width: 800px) {
   .screeningcard__outerdiv {
+    display: flex;
     flex-direction: column;
-
+    justify-content: center;
     height: 28rem;
     width: 80%;
+    margin: 0 auto;
+    align-items: center;
   }
 
   .screeningcard__list {
     flex-direction: column;
     padding-right: 2rem;
     padding-bottom: 2rem;
+    width: 13rem;
 
     li {
       margin-left: -0.5rem;
