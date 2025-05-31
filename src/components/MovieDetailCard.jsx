@@ -20,7 +20,15 @@ const mockReviews = [
   { id: 4, name: 'Besökare', avatar: '/avatars/avatar.webp', text: 'Recension-text' },
 ]
 
-export default function MovieDetailCard({ title, posterUrl, rating, description, screenings, reviews = mockReviews }) {
+export default function MovieDetailCard({
+  title,
+  posterUrl,
+  rating,
+  description,
+  translatedDescription,
+  screenings,
+  reviews = mockReviews,
+}) {
   return (
     <section className={styles.movieDetailCard}>
       {/*Tillb-btn*/}
@@ -38,7 +46,7 @@ export default function MovieDetailCard({ title, posterUrl, rating, description,
         <div className={styles.info}>
           <h1 className={styles.title}>{title}</h1>
           <p className={styles.rating}>⭐ {rating.toFixed(1)} / 10</p>
-          <p className={styles.description}>{description}</p>
+          <p className={styles.description}>{translatedDescription}</p>
 
           {/*Booking tickets*/}
           <div className={styles.booking}>
@@ -79,6 +87,7 @@ MovieDetailCard.propTypes = {
   posterUrl: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired,
   description: PropTypes.string.isRequired,
+  translatedDescription: PropTypes.string.isRequired,
   screenings: PropTypes.arrayOf(
     PropTypes.shape({
       date: PropTypes.string.isRequired,
