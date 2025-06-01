@@ -7,6 +7,7 @@ import Link from 'next/link'
 export default function MoviesContainer() {
   const [movies, setMovies] = useState([])
   const [visibleCount, setVisibleCount] = useState(8)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -16,6 +17,8 @@ export default function MoviesContainer() {
         setMovies(data)
       } catch (error) {
         console.error('Kunde inte hämta filmer:', error)
+      } finally {
+        setLoading(false)
       }
     }
 
@@ -28,14 +31,21 @@ export default function MoviesContainer() {
 
   const visibleMovies = movies.slice(0, visibleCount)
 
+  if (loading) {
+    return <p className="loading-message">Laddar filmer...</p>
+  }
+
+  if (!loading && movies.length === 0) {
+    return <p className="no-movies-found-message">Inga filmer kunde hittas!</p>
+  }
   return (
     <>
-      <SearchField />
+      {movies.length > 0 && <SearchField />}
       <div>
         <ul className="moviecard__list">
           {visibleMovies.map((movie) => (
             <li key={movie._id}>
-              <Link key={movie._id} href={'/movies/[id]'}>
+              <Link href={`/movies/${movie._id}`}>
                 <div className="moviecard__container">
                   <div>
                     {movie.posterUrl && (
