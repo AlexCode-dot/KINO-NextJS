@@ -1,0 +1,67 @@
+.TicketDeliveryInfo__mainContainer {
+  display: flex;
+  flex-direction: row;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  gap: 10px;
+}
+
+.mainContainer__customerDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: #03658c;
+  padding: 20px;
+  color: white;
+  border-radius: 10px;
+}
+
+.mainContainer__customerDetails input {
+  border-radius: 8px;
+  height: 1.2rem;
+  outline: none;
+  border: 2px solid #012840;
+  padding-left: 0.5rem;
+}
+
+.mainContainer__ticketSelector {
+  display: flex;
+  flex-direction: column;
+  background-color: #03658c;
+  color: white;
+  padding: 20px;
+  gap: 20px;
+  align-items: center;
+  border-radius: 10px;
+  min-width: 230px;
+}
+
+.ticketSelector__nrOfTickets {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+}
+
+.mainContainer__ticketSelector img {
+  width: 30px;
+  transition: transform 0.1s ease;
+  &:hover {
+    transform: scale(1.2);
+  }
+  &:active {
+    transform: scale(0.85);
+  }
+}
+
+.mainContainer__ticketSelector span {
+  display: flex;
+  align-items: center;
+}
+
+@media screen and (max-width: 800px) {
+  .mainContainer__ticketSelector img {
+    &:active {
+      transform: scale(1.2);
+    }
+  }
+}

@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import connectDB from '@/lib/db/connectDB'
-import { deleteMovieAndScreenings } from '@/lib/db/movieDbService'
+import { deleteMovieAndScreenings, findMovieById } from '@/lib/db/movieDbService'
 
 export async function DELETE(req, context) {
   const { id } = await context.params
@@ -16,4 +16,11 @@ export async function DELETE(req, context) {
   } catch (err) {
     return NextResponse.json({ error: err.message }, { status: 500 })
   }
+}
+
+export async function GET(req, { params }) {
+  const { id } = await params
+  await connectDB()
+  const movie = await findMovieById(id)
+  return NextResponse.json(movie)
 }

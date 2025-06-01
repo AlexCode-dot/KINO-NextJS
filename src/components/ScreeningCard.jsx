@@ -27,7 +27,7 @@ export default function ScreeningCards() {
       <ul className="screeningcard__list">
         {data.map((item) => (
           <li key={item._id}>
-            <a href={`/screenings/${item._id}`}>
+            <a href={`/booking/${item._id}`}>
               <div className="screeningcard__container">
                 <p>{item.movie?.title}</p>
                 <p>{`Salong ${item.room.name}`}</p>

@@ -1,5 +1,5 @@
 .seat-map-container {
-  background-color: #0277a3;
+  background-color: #03658c;
   padding: 2rem;
   border-radius: 12px;
   display: flex;
@@ -8,6 +8,7 @@
   gap: 1rem;
   width: fit-content;
   margin: 0 auto;
+  margin-bottom: 20px;
 
   &__title {
     color: white;
@@ -111,6 +112,9 @@
     align-items: center;
     justify-content: center;
     font-size: 16px;
+    &:hover {
+      background-color: rgb(83, 83, 83);
+    }
 
     &.seat--booked {
       background-color: #cccccc;
@@ -148,5 +152,17 @@
         border-width: 1.5px;
       }
     }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .seat-map-container {
+    padding: 0;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .seat-map {
+    padding: 1rem 0.5rem;
   }
 }

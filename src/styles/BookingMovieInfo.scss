@@ -1,0 +1,25 @@
+.booking__movieInfoWrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.movieInfoWrapper__posterWrapper {
+  margin-left: 10px;
+  width: 20%;
+}
+
+.movieInfoWrapper__posterWrapper img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.movieInfoWrapper__movieInfo {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+  width: 70%;
+  gap: 10px;
+  margin-top: 10px;
+}
