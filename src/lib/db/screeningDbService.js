@@ -74,3 +74,21 @@ export async function createScreening({ movieId, date, room }) {
 
   return await Screening.findById(screening._id).populate('room', 'name').populate('movie', 'title runtime')
 }
+
+export async function getScreeningWithDetails(id) {
+  const screening = await Screening.findById(id)
+    .populate('room', 'name rows wheelchairSeats')
+    .populate('movie', 'title runtime')
+    .lean()
+
+  if (!screening) return null
+
+  if (Array.isArray(screening.bookedSeats)) {
+    screening.bookedSeats.sort((a, b) => {
+      if (a.row !== b.row) return a.row - b.row
+      return a.seat - b.seat
+    })
+  }
+
+  return screening
+}
