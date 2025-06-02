@@ -1,7 +1,5 @@
-// src/tests/admin/admin.test.js
 import { FormData } from 'formdata-node'
 import { expect, jest, test, describe, beforeEach, beforeAll } from '@jest/globals'
-import { findMovieById } from '@/lib/db/movieDbService'
 
 // Mock database and services
 jest.unstable_mockModule('@/lib/db/connectDB', () => ({
