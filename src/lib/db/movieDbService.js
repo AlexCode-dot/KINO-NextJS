@@ -60,3 +60,14 @@ export async function findMoviesByTitle(query) {
     title: { $regex: safeQuery, $options: 'i' },
   }).lean() //Lean improves performance, returns JS objects instead of mongoose documents.
 }
+
+//Export of our functions
+export {
+  getAllMovies,
+  getTopRatedMovies,
+  findMovieByTitle,
+  deleteMovieAndScreenings,
+  findMovieById,
+  createMovieFromOmdbTitle,
+  findMoviesByTitle,
+}
