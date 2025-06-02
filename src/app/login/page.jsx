@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 export default function Login() {
   const [Username, setUsername] = useState('')
   const [Password, setPassword] = useState('')
+  const [Error, setError] = useState('')
   const router = useRouter()
 
   return (
@@ -27,12 +28,19 @@ export default function Login() {
                 }),
               })
               if (response.ok) {
-                router.push('/login/secret')
+                router.push('/login/account')
               } else {
-                alert('Fel användarnamn eller lösenord')
+                setError(true)
               }
             }}
           >
+            {Error && <h1 className="loginPage__error_text">Fel användarnamn eller lösenord</h1>}
+            <div>
+              <p>Inget konto?</p>
+              <div className="loginPage__register">
+                <a href="/register">Registrera här</a>
+              </div>
+            </div>
             <h3 className="loginPage__form_name">Username</h3>
             <input
               className="loginPage__username"
