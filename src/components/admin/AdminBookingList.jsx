@@ -3,6 +3,9 @@
 import { formatDateTime } from '@/lib/utils/formatDateTime'
 
 export default function AdminBookingList({ bookings, onShow, onDelete }) {
+  if (bookings.length === 0) {
+    return <p className="admin-bookings__no-results">Inga bokningar hittades.</p>
+  }
   return (
     <ul className="admin-bookings__list">
       {bookings.map((booking) => (

@@ -6,6 +6,7 @@ import AdminBookingList from './AdminBookingList'
 import AdminBookingModal from './AdminBookingModal'
 import ConfirmModal from '@/components/ConfirmModal'
 import SuccessModal from '@/components/SuccessModal'
+import ErrorMessage from '@/components/ErrorMessage'
 
 export default function AdminBookingPanel() {
   const {
@@ -42,6 +43,8 @@ export default function AdminBookingPanel() {
         roomOptions={roomOptions}
         resetFilters={resetFilters}
       />
+
+      {errorMessage && <ErrorMessage message={errorMessage} onClose={() => setErrorMessage('')} />}
 
       <AdminBookingList bookings={filtered} onShow={showSeatMap} onDelete={confirmDeleteBooking} />
 

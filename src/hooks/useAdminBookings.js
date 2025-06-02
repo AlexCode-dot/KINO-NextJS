@@ -24,12 +24,17 @@ export function useAdminBookings() {
 
   useEffect(() => {
     const load = async () => {
-      const data = await fetchBookings()
-      setBookings(data)
-      setFiltered(data)
-      setMovieOptions([...new Set(data.map((booking) => booking.movieTitle))].sort())
-      setRoomOptions([...new Set(data.map((booking) => booking.roomName))].sort())
+      try {
+        const data = await fetchBookings()
+        setBookings(data)
+        setFiltered(data)
+        setMovieOptions([...new Set(data.map((b) => b.movieTitle))].sort())
+        setRoomOptions([...new Set(data.map((b) => b.roomName))].sort())
+      } catch (err) {
+        setErrorMessage('Kunde inte hämta bokningar. Kontrollera servern eller din internetanslutning.')
+      }
     }
+
     load()
   }, [])
 
@@ -78,6 +83,11 @@ export function useAdminBookings() {
     const data = await fetchScreeningDetails(booking.screening)
     const screening = data.screening
 
+    if (!screening || !screening.room) {
+      setErrorMessage('Kunde inte hämta information om visningen.')
+      return
+    }
+
     if (!screening?.room) return
     setSelectedBooking({
       ...booking,
@@ -100,20 +110,30 @@ export function useAdminBookings() {
   }
 
   const handleSaveBooking = async () => {
-    const updated = await updateBookingSeats(selectedBooking._id, selectedBooking.seats)
+    if (!selectedBooking || selectedBooking.seats.length === 0) {
+      setErrorMessage('Du måste välja minst en plats.')
+      return
+    }
+    try {
+      const updated = await updateBookingSeats(selectedBooking._id, selectedBooking.seats)
 
-    const data = await fetchScreeningDetails(updated.screening)
-    const screening = data.screening
+      const data = await fetchScreeningDetails(updated.screening)
+      const screening = data.screening
 
-    setSelectedBooking({
-      ...updated,
-      room: screening.room,
-      bookedSeats: screening.bookedSeats,
-    })
+      setSelectedBooking({
+        ...updated,
+        room: screening.room,
+        bookedSeats: screening.bookedSeats,
+      })
 
-    setBookings((prev) => prev.map((booking) => (booking._id === updated._id ? updated : booking)))
-    setIsEditing(false)
-    setSuccessMessage('Bokningen har uppdaterats!')
+      setBookings((prev) => prev.map((booking) => (booking._id === updated._id ? updated : booking)))
+      setIsEditing(false)
+      setErrorMessage('')
+      setSuccessMessage('Bokningen har uppdaterats!')
+    } catch (err) {
+      console.error(err)
+      setErrorMessage('Kunde inte spara bokningen. Försök igen.')
+    }
   }
 
   return {
