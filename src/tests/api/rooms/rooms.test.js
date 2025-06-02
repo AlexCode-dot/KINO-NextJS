@@ -119,7 +119,7 @@ describe('POST /api/rooms', () => {
     const data = await res.json()
 
     expect(res.status).toBe(403)
-    expect(data.error).toMatch(/forbidden/i)
+    expect(data.error).toMatch(/Endast tillgängligt för administratörer/i)
   })
 })
 
@@ -151,6 +151,6 @@ describe('DELETE /api/rooms/[id]', () => {
     const data = await res.json()
 
     expect(res.status).toBe(403)
-    expect(data.error).toMatch(/forbidden/i)
+    expect(data.error).toMatch(/Endast tillgängligt för administratörer/i)
   })
 })
