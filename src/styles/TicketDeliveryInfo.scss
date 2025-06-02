@@ -24,6 +24,14 @@
   padding-left: 0.5rem;
 }
 
+input[type='email']:valid {
+  border-color: green;
+}
+
+input[type='email']:invalid:not(:placeholder-shown) {
+  border-color: red;
+}
+
 .mainContainer__ticketSelector {
   display: flex;
   flex-direction: column;
@@ -33,7 +41,7 @@
   gap: 20px;
   align-items: center;
   border-radius: 10px;
-  min-width: 230px;
+  text-align: center;
 }
 
 .ticketSelector__nrOfTickets {

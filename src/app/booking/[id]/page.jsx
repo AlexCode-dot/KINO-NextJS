@@ -12,6 +12,7 @@ export default function bookingPageId({ params }) {
   const [nrOfTickets, setNrOfTickets] = useState(0)
   const [customerName, setCustomerName] = useState('')
   const [customerEmail, setCustomerEmail] = useState('')
+  const [emailCorrectFormat, setEmailCorrectFormat] = useState(null)
   const [selectedSeats, setSelectedSeats] = useState([])
 
   useEffect(() => {
@@ -43,7 +44,7 @@ export default function bookingPageId({ params }) {
   return (
     <div className="booking__pageContainer">
       <h1>Biljettbokning</h1>
-      <BookingMovieInfo movie={movie} />
+      <BookingMovieInfo movie={movie} screening={screening} />
       <TicketDeliveryInfo
         nrOfTickets={nrOfTickets}
         setNrOfTickets={setNrOfTickets}
@@ -51,6 +52,8 @@ export default function bookingPageId({ params }) {
         setCustomerName={setCustomerName}
         customerEmail={customerEmail}
         setCustomerEmail={setCustomerEmail}
+        emailCorrectFormat={emailCorrectFormat}
+        SetEmailCorrectFormat={setEmailCorrectFormat}
       />
       <SeatMap
         screening={screening}
@@ -58,6 +61,8 @@ export default function bookingPageId({ params }) {
         onSelect={setSelectedSeats}
         nrOfTickets={nrOfTickets}
       />
+
+      <button className="booking__bookBtn">Boka</button>
     </div>
   )
 }
