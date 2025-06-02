@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
 export default function NavMenu() {
@@ -8,7 +8,22 @@ export default function NavMenu() {
   const [aboutClass, setAboutClass] = useState('header__nav-item')
   const [adminClass, setAdminClass] = useState('header__nav-item')
   const [loginClass, setLoginClass] = useState('header__nav-item')
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
   const router = useRouter()
+
+  // Checks if user is logged in by checking cookies
+  useEffect(() => {
+    const cookies = document.cookie.split(';').map((c) => c.trim())
+    const usernameCookie = cookies.find((c) => c.startsWith('Username='))
+    setIsLoggedIn(!!usernameCookie && usernameCookie.split('=')[1])
+    console.log(isLoggedIn ? 'User is logged in' : 'User is not logged in')
+  }, [])
+
+  const updateLoginStatus = () => {
+    const cookies = document.cookie.split(';').map((c) => c.trim())
+    const usernameCookie = cookies.find((c) => c.startsWith('Username='))
+    setIsLoggedIn(!!usernameCookie && usernameCookie.split('=')[1])
+  }
 
   const handleHomeClick = () => {
     setHomeClass('header__nav-item menu-active')
@@ -91,10 +106,16 @@ export default function NavMenu() {
         <li
           className={loginClass}
           onClick={() => {
-            handleLoginClick()
+            if (isLoggedIn) {
+              router.push('/login/account')
+              updateLoginStatus()
+            } else {
+              handleLoginClick()
+              updateLoginStatus()
+            }
           }}
         >
-          <a>LOGIN</a>
+          <a>{isLoggedIn ? 'KONTO' : 'LOGIN'}</a>
         </li>
       </ul>
     </nav>
