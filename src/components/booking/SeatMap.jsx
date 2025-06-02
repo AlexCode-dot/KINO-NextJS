@@ -18,9 +18,9 @@ export default function SeatMap({ screening, selectedSeats, onSelect, nrOfTicket
       return
     }
 
-    if (selectedSeats.length < nrOfTickets) {
-      const updatedSelection = [...selectedSeats, { row: rowNumber, seat: seatNumber }]
-      onSelect?.(updatedSelection)
+    if (!nrOfTickets || selectedSeats.length < nrOfTickets) {
+      const updated = [...selectedSeats, { row: rowNumber, seat: seatNumber }]
+      onSelect?.(updated)
     }
   }
 
