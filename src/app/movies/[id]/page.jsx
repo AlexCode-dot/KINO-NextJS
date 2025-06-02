@@ -3,9 +3,10 @@ import MovieDetailCard from '@/components/MovieDetailCard'
 import { findMovieById } from '@/lib/db/movieDbService'
 import { getAllScreeningsWithMovieInfo } from '@/lib/db/screeningDbService'
 import { notFound } from 'next/navigation'
+import { translatePlot } from '@/lib/services/translateApiService'
 
 export default async function MovieDetailPage({ params }) {
-  const movieId = params.id
+  const { id: movieId } = await params
 
   //Control id ID is valid before searching in the database
   if (!mongoose.Types.ObjectId.isValid(movieId)) {
@@ -18,6 +19,10 @@ export default async function MovieDetailPage({ params }) {
   if (!movie) {
     return notFound()
   }
+
+  let translatedPlot = movie.plot
+    ? await translatePlot(movie.plot).catch(() => 'Översättning misslyckades.')
+    : 'Ursäkta, ingen filmbeskrivning finns tillgänglig just nu.'
 
   //filter screenings for only one specific movie and group them by date
   const allScreenings = await getAllScreeningsWithMovieInfo()
@@ -42,6 +47,7 @@ export default async function MovieDetailPage({ params }) {
       posterUrl={movie.posterUrl}
       rating={parseFloat(movie.imdbRating) || 0}
       description={movie.plot || 'Ursäkta, Ingen filmbeskrivning finns tillgänglig just nu.'}
+      translatedDescription={translatedPlot}
       screenings={screenings}
     />
   )
