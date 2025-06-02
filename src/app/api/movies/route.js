@@ -1,13 +1,26 @@
 import { NextResponse } from 'next/server'
 import connectDB from '@/lib/db/connectDB'
-import { getAllMovies, createMovieFromOmdbTitle, findMovieByTitle } from '@/lib/db/movieDbService'
+import { getAllMovies, createMovieFromOmdbTitle, findMovieByTitle, findMoviesByTitle } from '@/lib/db/movieDbService'
 
-export async function GET() {
+export async function GET(req) {
   await connectDB()
-  const movies = await getAllMovies()
-  return NextResponse.json(movies)
-}
 
+  //Backend search logic
+  const { searchParams } = new URL(req.url)
+  const query = searchParams.get('q')
+
+  try {
+    if (query) {
+      const result = await findMoviesByTitle(query)
+      return NextResponse.json(result)
+    }
+
+    const movies = await getAllMovies()
+    return NextResponse.json(movies)
+  } catch (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 })
+  }
+}
 export async function POST(req) {
   if (process.env.NODE_ENV !== 'development') {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
