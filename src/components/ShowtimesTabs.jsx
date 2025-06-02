@@ -28,7 +28,7 @@ export default function ShowtimesTabs({ screenings }) {
           .filter((s) => s.date === activeDate)
           .map(({ room, times }) => (
             <div key={room + activeDate} className={styles.roomCard}>
-              <div className={styles.roomName}>{room}</div>
+              <div className={styles.roomName}>Salong {room}</div>
               <div className={styles.times}>
                 {times.map(({ time, id }) => (
                   <Link key={id} href={`/booking/${id}`}>
