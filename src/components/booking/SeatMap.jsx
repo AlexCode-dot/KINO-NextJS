@@ -10,6 +10,10 @@ export default function SeatMap({ screening, selectedSeats, onSelect, nrOfTicket
   const toggleSeatSelection = (rowNumber, seatNumber) => {
     if (isSeatBooked(rowNumber, seatNumber)) return
 
+    if (typeof nrOfTickets === 'number' && nrOfTickets === 0) {
+      return
+    }
+
     const isAlreadySelected = selectedSeats.some((seat) => seat.row === rowNumber && seat.seat === seatNumber)
 
     if (isAlreadySelected) {
@@ -18,10 +22,12 @@ export default function SeatMap({ screening, selectedSeats, onSelect, nrOfTicket
       return
     }
 
-    if (!nrOfTickets || selectedSeats.length < nrOfTickets) {
-      const updated = [...selectedSeats, { row: rowNumber, seat: seatNumber }]
-      onSelect?.(updated)
+    if (typeof nrOfTickets === 'number' && nrOfTickets > 0 && selectedSeats.length >= nrOfTickets) {
+      return
     }
+
+    const updated = [...selectedSeats, { row: rowNumber, seat: seatNumber }]
+    onSelect?.(updated)
   }
 
   const groupedSeats = Object.entries(
