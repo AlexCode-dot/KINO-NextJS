@@ -1,4 +1,7 @@
 export default function BookingMovieInfo({ movie }) {
+  if (!movie || typeof movie !== 'object') {
+    return <div className="booking__movieInfoWrapper">Filminformation saknas</div>
+  }
   return (
     <div className="booking__movieInfoWrapper">
       <div className="movieInfoWrapper__posterWrapper">

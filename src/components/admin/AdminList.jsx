@@ -45,7 +45,7 @@ export default function AdminList({ movies, screenings, onDeleteMovie, onDeleteS
                           onClick={() =>
                             onDeleteScreening(
                               screening._id,
-                              `${formatDateTime(screening.date)} – ${screening.room?.name || screening.room}`
+                              `${formatDateTime(screening.date)} – Salong ${screening.room?.name || screening.room}`
                             )
                           }
                           className="admin-list__delete-screening"

@@ -1,5 +1,5 @@
 @use 'sass:color';
-@import './ShowtimesTabs.module.scss';
+@use './ShowtimesTabs.module.scss' as *;
 
 .movieDetailCard {
   ul,

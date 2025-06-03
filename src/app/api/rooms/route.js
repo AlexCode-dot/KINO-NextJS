@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { getAllRooms, createRoom } from '@/lib/db/roomDbService'
+import { requireAdminAccess } from '@/lib/auth/requireAdminAccess'
 
 export async function GET() {
   try {
@@ -11,10 +12,9 @@ export async function GET() {
 }
 
 export async function POST(req) {
-  if (process.env.NODE_ENV !== 'development') {
-    return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+  if (requireAdminAccess()) {
+    return NextResponse.json({ error: 'Endast tillgängligt för administratörer' }, { status: 403 })
   }
-
   try {
     const body = await req.json()
     const { name, rows, wheelchairSeats } = body

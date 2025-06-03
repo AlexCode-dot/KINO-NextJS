@@ -1,17 +1,19 @@
-'use client' //Client component to show and change date/time
+'use client'
 
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
+import Link from 'next/link'
 import styles from '../styles/ShowtimesTabs.module.scss'
 
 export default function ShowtimesTabs({ screenings }) {
-  const [activeDate, setActiveDate] = useState(screenings[0]?.date)
+  const dates = [...new Set(screenings.map((s) => s.date))]
+  const [activeDate, setActiveDate] = useState(dates[0])
 
   return (
     <div className={styles.tabs}>
-      {/*Date-btns*/}
+      {/* Date buttons */}
       <ul className={styles.tabList}>
-        {screenings.map(({ date }) => (
+        {dates.map((date) => (
           <li key={date}>
             <button className={activeDate === date ? styles.active : ''} onClick={() => setActiveDate(date)}>
               {date}
@@ -20,18 +22,18 @@ export default function ShowtimesTabs({ screenings }) {
         ))}
       </ul>
 
-      {/*Room & time for chosen date*/}
+      {/* Room sections for selected date */}
       <div className={styles.roomList}>
         {screenings
           .filter((s) => s.date === activeDate)
           .map(({ room, times }) => (
-            <div key={room} className={styles.roomCard}>
+            <div key={room + activeDate} className={styles.roomCard}>
               <div className={styles.roomName}>Salong {room}</div>
               <div className={styles.times}>
-                {times.map((time) => (
-                  <button key={time} className={styles.timeButton}>
-                    {time}
-                  </button>
+                {times.map(({ time, id }) => (
+                  <Link key={id} href={`/booking/${id}`}>
+                    <button className={styles.timeButton}>{time}</button>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -44,9 +46,14 @@ export default function ShowtimesTabs({ screenings }) {
 ShowtimesTabs.propTypes = {
   screenings: PropTypes.arrayOf(
     PropTypes.shape({
-      room: PropTypes.string.isRequired,
       date: PropTypes.string.isRequired,
-      times: PropTypes.arrayOf(PropTypes.string).isRequired,
+      room: PropTypes.string.isRequired,
+      times: PropTypes.arrayOf(
+        PropTypes.shape({
+          time: PropTypes.string.isRequired,
+          id: PropTypes.string.isRequired,
+        })
+      ).isRequired,
     })
   ).isRequired,
 }
