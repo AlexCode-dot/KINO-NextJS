@@ -87,11 +87,6 @@ export default function About() {
           </ul>
         </section>
       ))}
-      <div className={styles.buttonContainer}>
-        <Link href="/">
-          <button className={`${styles.backButton} ${styles.active}`}>← Till Startsidan</button>
-        </Link>
-      </div>
     </main>
   )
 }
