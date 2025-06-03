@@ -4,6 +4,7 @@ import { use, useState, useEffect } from 'react'
 import BookingMovieInfo from '../../../components/BookingMovieInfo'
 import TicketDeliveryInfo from '../../../components/TicketDeliveryInfo'
 import SeatMap from '../../../components/booking/SeatMap'
+import BookingBookBtn from '../../../components/BookingBookBtn'
 
 export default function bookingPageId({ params }) {
   const unwrappedParams = use(params)
@@ -61,8 +62,14 @@ export default function bookingPageId({ params }) {
         onSelect={setSelectedSeats}
         nrOfTickets={nrOfTickets}
       />
-
-      <button className="booking__bookBtn">Boka</button>
+      <BookingBookBtn
+        movie={movie}
+        screening={screening}
+        customerName={customerName}
+        customerEmail={customerEmail}
+        selectedSeats={selectedSeats}
+        emailCorrectFormat={emailCorrectFormat}
+      />
     </div>
   )
 }
