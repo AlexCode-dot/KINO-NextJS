@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server'
 import connectDB from '@/lib/db/connectDB'
 import { getAllMovies, createMovieFromOmdbTitle, findMovieByTitle, findMoviesByTitle } from '@/lib/db/movieDbService'
+import { requireAdminAccess } from '@/lib/auth/requireAdminAccess'
+
 
 export async function GET(req) {
   await connectDB()
@@ -22,8 +24,8 @@ export async function GET(req) {
   }
 }
 export async function POST(req) {
-  if (process.env.NODE_ENV !== 'development') {
-    return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+  if (requireAdminAccess()) {
+    return NextResponse.json({ error: 'Endast tillgängligt för administratörer' }, { status: 403 })
   }
 
   try {

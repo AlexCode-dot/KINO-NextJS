@@ -15,17 +15,17 @@
     button {
       flex-shrink: 0;
       padding: 0.5rem 1rem;
-      background: #52b3d9;
+      background: #03658c;
       border: none;
       border-radius: 4px;
-      color: #012840;
+      color: #fff;
       font-weight: bold;
       cursor: pointer;
       white-space: nowrap;
 
       &.active {
-        background: #03658c;
-        color: #fff;
+        background: #52b3d9;
+        color: #012840;
       }
 
       &:hover {
