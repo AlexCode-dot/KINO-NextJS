@@ -1,3 +1,47 @@
+# Deployment (Vercel)
+
+## The app is live at: [https://kino-nextjs.vercel.app](https://kino-nextjs.vercel.app)
+
+## This fullstack Next.js application is deployed entirely in the cloud using Vercel, with a database hosted on MongoDB Atlas.
+
+### Stack
+
+- Frontend: Next.js (React-based framework)
+
+- Backend: Next.js API routes
+
+- Database: MongoDB Atlas
+
+- Hosting: Vercel
+
+### Deployment Steps
+
+1. The GitHub repository was connected directly to Vercel.
+
+2. Environment variables (such as MONGODB_URI, OMDB_API_KEY, etc.) were configured in the Vercel dashboard.
+
+3. Vercel automatically installs dependencies, builds the app using npm run build, and deploys it using the default Next.js configuration.
+
+4. MongoDB Atlas is used to persist all data, including users, movies, rooms, screenings, bookings, and reviews.
+
+### Continuous Deployment
+
+Every push to the main branch automatically triggers a new build and deployment through Vercel.
+
+There is also a preview deployment for every PR to main. To get access to the preview deployment you need following:
+
+- Must have a Vercel account
+
+- Must be added as a team member to your Vercel project
+
+- Must be logged in to Vercel when opening the preview link
+
+### Result
+
+The entire app (frontend, backend, and database) is now fully cloud-based and can be used directly through the browser with no local setup required.
+
+---
+
 # Branch Protection Rules for "main"
 
 ## Rules in Place
