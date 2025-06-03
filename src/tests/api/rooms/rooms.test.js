@@ -1,4 +1,3 @@
-import { getRoomById } from '@/lib/db/roomDbService'
 import { expect, jest, test, describe, beforeAll, beforeEach } from '@jest/globals'
 
 jest.unstable_mockModule('@/lib/db/connectDB', () => ({
