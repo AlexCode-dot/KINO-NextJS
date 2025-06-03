@@ -53,7 +53,7 @@ export default function bookingPageId({ params }) {
         customerEmail={customerEmail}
         setCustomerEmail={setCustomerEmail}
         emailCorrectFormat={emailCorrectFormat}
-        SetEmailCorrectFormat={setEmailCorrectFormat}
+        setEmailCorrectFormat={setEmailCorrectFormat}
       />
       <SeatMap
         screening={screening}
