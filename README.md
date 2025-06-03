@@ -1,6 +1,9 @@
 # Deployment (Vercel)
 
-## The app is live at: [https://kino-nextjs.vercel.app](https://kino-nextjs.vercel.app)
+## Live Deployment
+
+The application is live and accessible at:  
+[https://kino-next-js.vercel.app](https://kino-next-js.vercel.app)
 
 ## This fullstack Next.js application is deployed entirely in the cloud using Vercel, with a database hosted on MongoDB Atlas.
 
