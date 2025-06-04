@@ -3,20 +3,27 @@
   justify-content: center;
   margin: 0;
   width: 47rem;
-  height: 20rem;
+  height: 19rem;
   padding-bottom: 2rem;
 }
 
+.screeningcard__container {
+  width: 16rem;
+}
+
 .screeningcard__title {
+  text-align: center;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 10rem;
-  max-height: 5rem;
+  background-color: #1f4163;
+  font-size: 1.2rem;
+  padding: 0rem 1rem;
 }
 
 .screeningcard__list {
   display: flex;
+  text-align: center;
   gap: 2rem;
   list-style: none;
   overflow-x: scroll;
@@ -24,17 +31,16 @@
   border-radius: 10px;
   padding-right: 2rem;
   width: 100%;
+  outline: 2px solid #bbb;
 
   li {
+    outline: 1px solid #fff;
+    box-shadow: 0px 0px 4px 0px #333;
     margin-top: 1.8rem;
-    max-height: 80%;
+    height: 200px;
     border-radius: 10px;
-    min-width: 12rem;
-    max-width: 12rem;
-    background-color: #012840;
+    background-color: #1f4163;
     color: #ffffff;
-    font-size: larger;
-    padding-left: 2rem;
     font-weight: 600;
 
     a {
@@ -48,6 +54,24 @@
     transform: translateY(-10px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
   }
+}
+
+.screeningcard__room,
+.screeningcard__date,
+.screeningcard__time {
+  background-color: #03658c;
+  margin: 2px 2px;
+  padding: 0.77rem;
+  height: 20px;
+}
+
+.screeningcard__time {
+  border-radius: 0px 0px 10px 10px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.screeningcard__date {
+  font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 @media screen and (max-width: 800px) {
@@ -67,13 +91,8 @@
     padding-bottom: 2rem;
     width: 13rem;
 
-    li {
-      margin-left: -0.5rem;
-      padding-left: 1rem;
+    .screeningcard__container {
+      width: 100%;
     }
-  }
-
-  .screeningcard__header {
-    text-align: center;
   }
 }
