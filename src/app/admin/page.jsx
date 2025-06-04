@@ -1,6 +1,5 @@
 'use client'
-
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import AdminRoomForm from '@/components/admin/AdminRoomForm'
 import AdminScreeningForm from '@/components/admin/AdminScreeningForm'
 import AdminMovieForm from '@/components/admin/AdminMovieForm'
@@ -11,9 +10,19 @@ import SuccessModal from '@/components/SuccessModal'
 import { useAdminData } from '@/hooks/useAdminData'
 import AdminTabNav from '@/components/admin/AdminTabNav'
 import AdminRoomList from '@/components/admin/AdminRoomList'
+import AdminCreateUser from '@/components/admin/AdminCreateUser'
 
 export default function AdminPanel() {
+  const [isAdmin, setIsAdmin] = useState(false)
+  const [checked, setChecked] = useState(false)
   const [activeTab, setActiveTab] = useState('list')
+
+  useEffect(() => {
+    const cookies = document.cookie.split(';').map((c) => c.trim())
+    const adminCookie = cookies.find((c) => c.startsWith('Admin='))
+    setIsAdmin(adminCookie && adminCookie.split('=')[1] === 'true')
+    setChecked(true)
+  }, [])
 
   const {
     movies,
@@ -39,6 +48,14 @@ export default function AdminPanel() {
     setRoomError,
     confirmDeleteRoom,
   } = useAdminData()
+
+  if (!checked) {
+    return <div>Laddar...</div>
+  }
+
+  if (!isAdmin) {
+    return <h1>Du är inte admin!</h1>
+  }
 
   return (
     <main className="admin-page">
@@ -113,6 +130,13 @@ export default function AdminPanel() {
             <section className="admin-page__section">
               <AdminRoomList rooms={rooms} onDeleteRoom={confirmDeleteRoom} />
               <ErrorMessage message={roomError} onClose={() => setRoomError(null)} />
+            </section>
+          </>
+        )}
+        {activeTab === 'user1' && (
+          <>
+            <section className="admin-page__section">
+              <AdminCreateUser />
             </section>
           </>
         )}
