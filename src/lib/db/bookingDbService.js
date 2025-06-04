@@ -16,3 +16,7 @@ export async function createBooking({ screening, movieTitle, roomName, screening
 
   return await newBooking.save()
 }
+
+export async function getBookingById(id) {
+  return await Booking.findById(id)
+}

@@ -1,6 +1,6 @@
 import connectDB from '@/lib/db/connectDB'
 import { NextResponse } from 'next/server'
-import { createBooking } from '@/lib/db/bookingDbService'
+import { createBooking, getBookingById } from '@/lib/db/bookingDbService'
 
 export async function POST(request) {
   try {
