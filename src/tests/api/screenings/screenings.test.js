@@ -1,7 +1,6 @@
 // src/tests/screenings/screenings.test.js
 import { FormData } from 'formdata-node'
 import { expect, jest, test, describe, beforeEach, beforeAll } from '@jest/globals'
-import { getScreeningById } from '@/lib/db/screeningDbService'
 
 // Mock database and services
 jest.unstable_mockModule('@/lib/db/connectDB', () => ({
@@ -15,6 +14,7 @@ jest.unstable_mockModule('@/lib/db/screeningDbService', () => ({
   createScreening: jest.fn(),
   deleteScreeningById: jest.fn(),
   getScreeningById: jest.fn(),
+  updateBookedSeats: jest.fn(),
 }))
 
 let POST, GET, DELETE
