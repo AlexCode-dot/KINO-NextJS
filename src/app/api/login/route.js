@@ -13,10 +13,13 @@ export async function POST(request) {
   let login = await findUserByUsername(payload.Username)
 
   console.log(`${login.Username} found in the database`)
+  console.log(`Is ${payload.Username} an admin? ${login.Admin}`)
+
   if (login.Username === payload.Username && login.Password === payload.Password) {
     console.log(`User ${payload.Username} found in the database`)
     const response = NextResponse.json({ message: 'Login successful' }, { status: 200 })
     response.cookies.set('Username', payload.Username, {})
+    response.cookies.set('Admin', login.Admin ? 'true' : 'false', {})
     return response
   } else {
     console.log(`Login failed for username: ${payload.Username}`)
