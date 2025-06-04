@@ -39,6 +39,7 @@ export default function AdminPanel() {
     roomError,
     setRoomError,
     confirmDeleteRoom,
+    loading,
   } = useAdminData()
 
   return (
@@ -57,12 +58,14 @@ export default function AdminPanel() {
                 screenings={screenings}
                 onDeleteMovie={confirmDeleteMovie}
                 onDeleteScreening={confirmDeleteScreening}
+                loading={loading}
               />
               <ErrorMessage message={deleteError} onClose={() => setDeleteError(null)} />
             </section>
 
             <section className="admin-page__section">
-              <AdminRoomList rooms={rooms} onDeleteRoom={confirmDeleteRoom} />
+              <h3 className="admin-room__list-title">Alla salonger</h3>
+              <AdminRoomList rooms={rooms} onDeleteRoom={confirmDeleteRoom} loading={loading} />
               <ErrorMessage message={roomError} onClose={() => setRoomError(null)} />
             </section>
           </>
@@ -119,6 +122,7 @@ export default function AdminPanel() {
             </section>
 
             <section className="admin-page__section">
+              <h3 className="admin-room__list-title">Alla salonger</h3>
               <AdminRoomList rooms={rooms} onDeleteRoom={confirmDeleteRoom} />
               <ErrorMessage message={roomError} onClose={() => setRoomError(null)} />
             </section>

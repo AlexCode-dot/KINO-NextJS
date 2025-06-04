@@ -14,6 +14,7 @@ jest.unstable_mockModule('@/lib/db/movieDbService', () => ({
   getAllMovies: jest.fn(),
   deleteMovieAndScreenings: jest.fn(),
   findMovieById: jest.fn(),
+  findMoviesByTitle: jest.fn(),
 }))
 
 let POST, GET, DELETE
@@ -91,7 +92,8 @@ describe('GET /api/movies (mocked)', () => {
     const mockMovies = [{ _id: '1', title: 'Interstellar' }]
     movieService.getAllMovies.mockResolvedValue(mockMovies)
 
-    const res = await GET()
+    const req = { url: 'http://localhost/api/movies' }
+    const res = await GET(req)
     const data = await res.json()
 
     expect(res.status).toBe(200)

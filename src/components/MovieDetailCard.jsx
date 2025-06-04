@@ -51,7 +51,11 @@ export default function MovieDetailCard({
           {/*Booking tickets*/}
           <div className={styles.booking}>
             <div className={styles['booking-header']}>Boka biljetter</div>
-            <ShowtimesTabs screenings={screenings} />
+            {screenings.length > 0 ? (
+              <ShowtimesTabs screenings={screenings} />
+            ) : (
+              <p className={styles.noScreenings}>Inga kommande visningar tillgängliga just nu.</p>
+            )}
           </div>
         </div>
       </div>

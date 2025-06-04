@@ -9,6 +9,12 @@ export async function getAllScreeningsWithMovieInfo() {
   return await Screening.find().populate('movie', 'title runtime').populate('room', 'name').lean()
 }
 
+export async function getActiveScreeningsWithMovieInfo() {
+  await markExpiredScreenings()
+
+  return await Screening.find({ status: 'active' }).populate('movie', 'title runtime').populate('room', 'name').lean()
+}
+
 export async function getUpcomingScreenings() {
   const today = new Date()
   const fiveDaysFromNow = new Date(today)
