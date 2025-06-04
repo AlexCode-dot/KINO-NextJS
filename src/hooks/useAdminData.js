@@ -13,11 +13,12 @@ export function useAdminData() {
   const [deleteError, setDeleteError] = useState(null)
   const [rooms, setRooms] = useState([])
   const [roomError, setRoomError] = useState(null)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    loadMovies()
-    loadScreenings()
-    loadRooms()
+    Promise.all([loadMovies(), loadScreenings(), loadRooms()]).finally(() => {
+      setLoading(false)
+    })
   }, [])
 
   const loadMovies = async () => {
@@ -140,5 +141,6 @@ export function useAdminData() {
     roomError,
     setRoomError,
     confirmDeleteRoom,
+    loading,
   }
 }

@@ -3,8 +3,16 @@
 import { useAdminList } from '@/hooks/useAdminList'
 import { formatTime, formatDate, formatDateTime } from '@/lib/utils/formatDateTime'
 
-export default function AdminList({ movies, screenings, onDeleteMovie, onDeleteScreening }) {
+export default function AdminList({ movies, screenings, onDeleteMovie, onDeleteScreening, loading }) {
   const { isExpanded, toggle } = useAdminList()
+
+  if (loading) {
+    return <p className="admin-page__loading">Laddar filmer...</p>
+  }
+
+  if (movies.length === 0) {
+    return <p className="admin-page__empty">Inga filmer tillgängliga</p>
+  }
 
   return (
     <ul className="admin-list">
@@ -34,7 +42,9 @@ export default function AdminList({ movies, screenings, onDeleteMovie, onDeleteS
                     return (
                       <li
                         key={screening._id}
-                        className={`admin-list__screening ${isExpired ? 'admin-list__screening--expired' : 'admin-list__screening--active'}`}
+                        className={`admin-list__screening ${
+                          isExpired ? 'admin-list__screening--expired' : 'admin-list__screening--active'
+                        }`}
                       >
                         <span className="admin-list__screening-info">
                           {formatTime(screening.date)} – {formatTime(screening.endTime)} ({formatDate(screening.date)})
