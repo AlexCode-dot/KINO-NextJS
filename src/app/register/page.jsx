@@ -32,17 +32,23 @@ export default function Register() {
     >
       {Error && <h1 className="loginPage__error_text">Användaren finns redan</h1>}
       <h1>Registrera konto</h1>
-      <h3 className="loginPage__form_name">Username</h3>
+      <h3 className="loginPage__form_name">Användarnamn</h3>
       <input
         className="loginPage__username"
+        placeholder="Användarnamn"
         type="text"
+        autoComplete="username"
+        required
         value={Username}
         onChange={(ev) => setUsername(ev.target.value)}
       />
-      <h3 className="loginPage__form_password">Password</h3>
+      <h3 className="loginPage__form_password">Lösenord</h3>
       <input
         className="loginPage__password"
+        placeholder="Lösenord"
         type="password"
+        autoComplete="current-password"
+        required
         value={Password}
         onChange={(ev) => setPassword(ev.target.value)}
       />
