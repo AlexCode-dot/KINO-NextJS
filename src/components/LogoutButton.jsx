@@ -6,8 +6,13 @@ export default function LogoutButton() {
 
   async function handleLogout() {
     await fetch('/api/logout', { method: 'POST' })
+    window.dispatchEvent(new Event('loginStatusChanged'))
     router.push('/login')
   }
 
-  return <button onClick={handleLogout}>Logout</button>
+  return (
+    <button className="loginPage__button" onClick={handleLogout}>
+      Logout
+    </button>
+  )
 }
