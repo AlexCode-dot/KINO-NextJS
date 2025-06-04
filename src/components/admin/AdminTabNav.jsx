@@ -18,6 +18,9 @@ export default function AdminTabNav({ activeTab, setActiveTab }) {
       <button onClick={() => setActiveTab('room')} className={activeTab === 'room' ? 'active' : ''}>
         Skapa salong
       </button>
+      <button onClick={() => setActiveTab('user1')} className={activeTab === 'user1' ? 'active' : ''}>
+        Hantera användare
+      </button>
     </nav>
   )
 }
