@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
 
 export default function NavMenu() {
   const [homeClass, setHomeClass] = useState('header__nav-item')
@@ -9,21 +9,23 @@ export default function NavMenu() {
   const [adminClass, setAdminClass] = useState('header__nav-item')
   const [loginClass, setLoginClass] = useState('header__nav-item')
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [Admin, setAdmin] = useState(false)
   const router = useRouter()
+  const pathname = usePathname()
 
   // Checks if user is logged in by checking cookies
   useEffect(() => {
-    const cookies = document.cookie.split(';').map((c) => c.trim())
-    const usernameCookie = cookies.find((c) => c.startsWith('Username='))
-    setIsLoggedIn(!!usernameCookie && usernameCookie.split('=')[1])
-    console.log(isLoggedIn ? 'User is logged in' : 'User is not logged in')
+    const checkLogin = () => {
+      const cookies = document.cookie.split(';').map((c) => c.trim())
+      const usernameCookie = cookies.find((c) => c.startsWith('Username='))
+      setIsLoggedIn(!!usernameCookie && usernameCookie.split('=')[1])
+      const adminCookie = cookies.find((c) => c.startsWith('Admin='))
+      setAdmin(adminCookie && adminCookie.split('=')[1] === 'true')
+    }
+    checkLogin()
+    window.addEventListener('loginStatusChanged', checkLogin)
+    return () => window.removeEventListener('loginStatusChanged', checkLogin)
   }, [])
-
-  const updateLoginStatus = () => {
-    const cookies = document.cookie.split(';').map((c) => c.trim())
-    const usernameCookie = cookies.find((c) => c.startsWith('Username='))
-    setIsLoggedIn(!!usernameCookie && usernameCookie.split('=')[1])
-  }
 
   const handleHomeClick = () => {
     setHomeClass('header__nav-item menu-active')
@@ -93,7 +95,7 @@ export default function NavMenu() {
         >
           <a>OM OSS</a>
         </li>
-        {process.env.NODE_ENV === 'development' && (
+        {(process.env.NODE_ENV === 'development' || Admin === true) && (
           <li
             className={adminClass}
             onClick={() => {
@@ -104,20 +106,31 @@ export default function NavMenu() {
           </li>
         )}
         <li
-          className={loginClass}
+          className={
+            isLoggedIn && pathname === '/login/account'
+              ? 'header__nav-item menu-active'
+              : !isLoggedIn && pathname === '/login'
+                ? 'header__nav-item menu-active'
+                : 'header__nav-item'
+          }
           onClick={() => {
             if (isLoggedIn) {
+              setHomeClass('header__nav-item')
+              setMoviesClass('header__nav-item')
+              setAboutClass('header__nav-item')
+              setAdminClass('header__nav-item')
+              setLoginClass('header__nav-item menu-active')
               router.push('/login/account')
-              updateLoginStatus()
             } else {
               handleLoginClick()
-              updateLoginStatus()
             }
           }}
         >
-          <a>{isLoggedIn ? 'KONTO' : 'LOGIN'}</a>
+          <a>{isLoggedIn ? 'KONTO' : 'LOGGA IN'}</a>
         </li>
       </ul>
+      {process.env.NODE_ENV === 'development' &&
+        console.log(`isLoggedIn:${isLoggedIn} NODE_ENV:${process.env.NODE_ENV} Admin:${Admin}`)}
     </nav>
   )
 }
