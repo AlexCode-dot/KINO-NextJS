@@ -56,3 +56,16 @@ export async function createMovieFromOmdbTitle(title) {
 
   return await movie.save()
 }
+
+//MongoDB searches all titles that contains the query, no matter if upper or lower case
+function escapeRegex(string) {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+}
+
+export async function findMoviesByTitle(query) {
+  await connectDB()
+  const safeQuery = escapeRegex(query)
+  return await Movie.find({
+    title: { $regex: safeQuery, $options: 'i' },
+  }).lean() //Lean improves performance, returns JS objects instead of mongoose documents.
+}

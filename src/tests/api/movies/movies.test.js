@@ -1,7 +1,7 @@
 // src/tests/admin/admin.test.js
 import { FormData } from 'formdata-node'
 import { expect, jest, test, describe, beforeEach, beforeAll } from '@jest/globals'
-import { findMovieById } from '@/lib/db/movieDbService'
+import { findMoviesByTitle } from '@/lib/db/movieDbService'
 
 // Mock database and services
 jest.unstable_mockModule('@/lib/db/connectDB', () => ({
@@ -16,6 +16,7 @@ jest.unstable_mockModule('@/lib/db/movieDbService', () => ({
   getAllMovies: jest.fn(),
   deleteMovieAndScreenings: jest.fn(),
   findMovieById: jest.fn(),
+  findMoviesByTitle: jest.fn(),
 }))
 
 let POST, GET, DELETE
@@ -93,7 +94,8 @@ describe('GET /api/movies (mocked)', () => {
     const mockMovies = [{ _id: '1', title: 'Interstellar' }]
     movieService.getAllMovies.mockResolvedValue(mockMovies)
 
-    const res = await GET()
+    const req = { url: 'http://localhost/api/movies' }
+    const res = await GET(req)
     const data = await res.json()
 
     expect(res.status).toBe(200)
