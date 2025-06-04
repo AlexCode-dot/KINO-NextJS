@@ -32,3 +32,9 @@
     opacity: 100;
   }
 }
+
+.seat-map-scroll-wrapper {
+  max-width: 100%;
+  overflow: auto;
+  overscroll-behavior: contain;
+}

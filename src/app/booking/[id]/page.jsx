@@ -57,12 +57,14 @@ export default function bookingPageId({ params }) {
         emailCorrectFormat={emailCorrectFormat}
         setEmailCorrectFormat={setEmailCorrectFormat}
       />
-      <SeatMap
-        screening={screening}
-        selectedSeats={selectedSeats}
-        onSelect={setSelectedSeats}
-        nrOfTickets={nrOfTickets}
-      />
+      <div className="seat-map-scroll-wrapper">
+        <SeatMap
+          screening={screening}
+          selectedSeats={selectedSeats}
+          onSelect={setSelectedSeats}
+          nrOfTickets={nrOfTickets}
+        />
+      </div>
       <h4 className={bookingInvalidClass}>Du måste välja lika många platser som valda biljetter</h4>
       <BookingBookBtn
         movie={movie}
