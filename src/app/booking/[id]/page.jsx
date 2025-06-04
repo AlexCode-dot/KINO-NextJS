@@ -1,10 +1,10 @@
 'use client'
 
 import { use, useState, useEffect } from 'react'
-import BookingMovieInfo from '../../../components/BookingMovieInfo'
-import TicketDeliveryInfo from '../../../components/TicketDeliveryInfo'
-import SeatMap from '../../../components/booking/SeatMap'
-import BookingBookBtn from '../../../components/BookingBookBtn'
+import BookingMovieInfo from '@/components/BookingMovieInfo'
+import TicketDeliveryInfo from '@/components/TicketDeliveryInfo'
+import SeatMap from '@/components/booking/SeatMap'
+import BookingBookBtn from '@/components/BookingBookBtn'
 
 export default function bookingPageId({ params }) {
   const unwrappedParams = use(params)
@@ -20,17 +20,17 @@ export default function bookingPageId({ params }) {
   useEffect(() => {
     async function fetchData() {
       try {
-        const screeningRes = await fetch(`../api/screenings/${unwrappedParams.id}`)
+        const screeningRes = await fetch(`/api/screenings/${unwrappedParams.id}`)
         const screeningData = await screeningRes.json()
 
-        const roomRes = await fetch(`../api/rooms/${screeningData.room}`)
+        const roomRes = await fetch(`/api/rooms/${screeningData.room}`)
         const roomData = await roomRes.json()
 
         screeningData.room = roomData
 
         setScreening(screeningData)
 
-        const movieRes = await fetch(`../api/movies/${screeningData.movie}`)
+        const movieRes = await fetch(`/api/movies/${screeningData.movie}`)
         const movieData = await movieRes.json()
         setMovie(movieData)
       } catch (error) {

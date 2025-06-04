@@ -11,6 +11,8 @@
 @use 'bookingPage.scss';
 @use 'TicketDeliveryInfo.scss';
 @use './booking/BookingIndex.scss';
+@use 'booking-confirmationPage.scss';
+@use 'ConfirmationDetails.scss';
 
 body {
   background-image: url('../../public/img/app_background.webp');
