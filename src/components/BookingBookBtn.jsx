@@ -40,6 +40,27 @@ export default function BookingBookBtn({
       console.error('Error', error)
     }
   }
+
+  async function updateBookedSeats() {
+    try {
+      const res = await fetch(`/api/screenings/${screening._id}`, {
+        method: 'PATCH',
+        headers: { 'Conten-Type': 'application/json' },
+        body: JSON.stringify({
+          bookedSeats: selectedSeats,
+        }),
+      })
+
+      if (!res.ok) {
+        const errorData = await res.json()
+        throw new Error(errorData.error || 'Failed to update booked seats')
+      }
+      const result = await res.json()
+    } catch (err) {
+      throw err
+    }
+  }
+
   return (
     <>
       <button
@@ -50,6 +71,7 @@ export default function BookingBookBtn({
             setBookingInvalidClass('booking_invalid active')
             return
           } else {
+            updateBookedSeats()
             handleBooking()
           }
         }}

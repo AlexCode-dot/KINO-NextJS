@@ -74,3 +74,11 @@ export async function createScreening({ movieId, date, room }) {
 
   return await Screening.findById(screening._id).populate('room', 'name').populate('movie', 'title runtime')
 }
+
+export async function updateBookedSeats(id, bookedSeats) {
+  if (!Array.isArray(bookedSeats)) {
+    throw new Error('bookedSeats must be an array')
+  }
+
+  return await Screening.findByIdAndUpdate(id, { $push: { bookedSeats: { $each: bookedSeats } } }, { new: true })
+}
