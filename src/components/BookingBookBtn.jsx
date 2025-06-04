@@ -5,9 +5,10 @@ export default function BookingBookBtn({
   movie,
   screening,
   customerName,
-  customerEmail,
+  nrOfTickets,
   selectedSeats,
   emailCorrectFormat,
+  setBookingInvalidClass,
 }) {
   const router = useRouter()
 
@@ -45,7 +46,12 @@ export default function BookingBookBtn({
         className="booking__bookBtn"
         disabled={!emailCorrectFormat}
         onClick={() => {
-          handleBooking()
+          if (selectedSeats.length < nrOfTickets) {
+            setBookingInvalidClass('booking_invalid active')
+            return
+          } else {
+            handleBooking()
+          }
         }}
       >
         Boka

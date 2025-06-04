@@ -15,6 +15,7 @@ export default function bookingPageId({ params }) {
   const [customerEmail, setCustomerEmail] = useState('')
   const [emailCorrectFormat, setEmailCorrectFormat] = useState(null)
   const [selectedSeats, setSelectedSeats] = useState([])
+  const [bookingInvalidClass, setBookingInvalidClass] = useState('booking_invalid')
 
   useEffect(() => {
     async function fetchData() {
@@ -62,13 +63,15 @@ export default function bookingPageId({ params }) {
         onSelect={setSelectedSeats}
         nrOfTickets={nrOfTickets}
       />
+      <h4 className={bookingInvalidClass}>Du måste välja lika många platser som valda biljetter</h4>
       <BookingBookBtn
         movie={movie}
         screening={screening}
         customerName={customerName}
-        customerEmail={customerEmail}
+        nrOfTickets={nrOfTickets}
         selectedSeats={selectedSeats}
         emailCorrectFormat={emailCorrectFormat}
+        setBookingInvalidClass={setBookingInvalidClass}
       />
     </div>
   )

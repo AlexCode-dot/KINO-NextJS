@@ -36,7 +36,8 @@ export default function BookingMovieInfo({ movie, screening }) {
           <strong>Handling:</strong> {movie.plot}
         </p>
         <p>
-          <strong>Tid för visning:</strong> {formatedDate} kl: {formatedTime}
+          <strong>Tid för visning:</strong> {formatedDate} kl: {formatedTime} <strong>Salong: </strong>
+          {screening.room.name}
         </p>
       </div>
     </div>

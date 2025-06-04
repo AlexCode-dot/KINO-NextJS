@@ -22,3 +22,13 @@
     border-color: #03658c;
   }
 }
+
+.booking_invalid {
+  color: red;
+  opacity: 0;
+  user-select: none;
+  transition: opacity 0.3s ease;
+  &.active {
+    opacity: 100;
+  }
+}
