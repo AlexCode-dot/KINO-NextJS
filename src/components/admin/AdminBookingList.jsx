@@ -2,10 +2,15 @@
 
 import { formatDateTime } from '@/lib/utils/formatDateTime'
 
-export default function AdminBookingList({ bookings, onShow, onDelete }) {
+export default function AdminBookingList({ bookings, onShow, onDelete, loading }) {
+  if (loading) {
+    return <p className="admin-page__loading">Laddar bokningar...</p>
+  }
+
   if (bookings.length === 0) {
     return <p className="admin-bookings__no-results">Inga bokningar hittades.</p>
   }
+
   return (
     <ul className="admin-bookings__list">
       {bookings.map((booking) => (

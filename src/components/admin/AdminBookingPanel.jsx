@@ -30,6 +30,7 @@ export default function AdminBookingPanel() {
     toggleEditMode,
     handleSaveBooking,
     setIsEditing,
+    loading,
   } = useAdminBookings()
 
   return (
@@ -46,7 +47,7 @@ export default function AdminBookingPanel() {
 
       {errorMessage && <ErrorMessage message={errorMessage} onClose={() => setErrorMessage('')} />}
 
-      <AdminBookingList bookings={filtered} onShow={showSeatMap} onDelete={confirmDeleteBooking} />
+      <AdminBookingList bookings={filtered} onShow={showSeatMap} onDelete={confirmDeleteBooking} loading={loading} />
 
       {selectedBooking && (
         <AdminBookingModal

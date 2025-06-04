@@ -10,6 +10,7 @@ export function useAdminBookings() {
   const [modal, setModal] = useState(null)
   const [successMessage, setSuccessMessage] = useState(null)
   const [errorMessage, setErrorMessage] = useState('')
+  const [loading, setLoading] = useState(true)
 
   const [filters, setFilters] = useState({
     search: '',
@@ -32,6 +33,8 @@ export function useAdminBookings() {
         setRoomOptions([...new Set(data.map((b) => b.roomName))].sort())
       } catch (err) {
         setErrorMessage('Kunde inte hämta bokningar. Kontrollera servern eller din internetanslutning.')
+      } finally {
+        setLoading(false)
       }
     }
 
@@ -157,5 +160,6 @@ export function useAdminBookings() {
     toggleEditMode,
     handleSaveBooking,
     setIsEditing,
+    loading,
   }
 }
