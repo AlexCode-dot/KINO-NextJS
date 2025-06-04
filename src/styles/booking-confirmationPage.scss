@@ -19,7 +19,8 @@
 }
 .confirmationDetails__seat-info {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .confirmationDetails__seats {
