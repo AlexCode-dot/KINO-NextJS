@@ -3,12 +3,19 @@
 import { useState } from 'react'
 import AdminRoomModal from './AdminRoomModal'
 
-export default function AdminRoomList({ rooms, onDeleteRoom }) {
+export default function AdminRoomList({ rooms, onDeleteRoom, loading }) {
   const [selectedRoom, setSelectedRoom] = useState(null)
+
+  if (loading) {
+    return <p className="admin-page__loading">Laddar salonger...</p>
+  }
+
+  if (rooms.length === 0) {
+    return <p className="admin-page__empty">Inga salonger tillgängliga</p>
+  }
 
   return (
     <div className="admin-room__list">
-      <h3 className="admin-room__list-title">Alla salonger</h3>
       <ul>
         {rooms.map((room) => (
           <li key={room._id} className="admin-room__item">

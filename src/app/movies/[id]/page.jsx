@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 import MovieDetailCard from '@/components/MovieDetailCard'
 import { findMovieById } from '@/lib/db/movieDbService'
-import { getAllScreeningsWithMovieInfo } from '@/lib/db/screeningDbService'
+import { getActiveScreeningsWithMovieInfo } from '@/lib/db/screeningDbService'
 import { notFound } from 'next/navigation'
 import { translatePlot } from '@/lib/services/translateApiService'
 
@@ -25,7 +25,7 @@ export default async function MovieDetailPage({ params }) {
     : 'Ursäkta, ingen filmbeskrivning finns tillgänglig just nu.'
 
   //filter screenings for only one specific movie and group them by date
-  const allScreenings = await getAllScreeningsWithMovieInfo()
+  const allScreenings = await getActiveScreeningsWithMovieInfo()
   const screenings = allScreenings
     .filter((s) => s.movie._id.toString() === movieId)
     .reduce((acc, curr) => {
