@@ -11,6 +11,7 @@ import SuccessModal from '@/components/SuccessModal'
 import { useAdminData } from '@/hooks/useAdminData'
 import AdminTabNav from '@/components/admin/AdminTabNav'
 import AdminRoomList from '@/components/admin/AdminRoomList'
+import AdminBookingPanel from '@/components/admin/AdminBookingPanel'
 
 export default function AdminPanel() {
   const [activeTab, setActiveTab] = useState('list')
@@ -69,6 +70,13 @@ export default function AdminPanel() {
             </section>
           </>
         )}
+
+        {activeTab === 'bookings' && (
+          <section className="admin-page__section">
+            <AdminBookingPanel />
+          </section>
+        )}
+
         {activeTab === 'import' && (
           <>
             <AdminMovieForm onSubmitMovie={handleAddMovie} movieError={movieError} setMovieError={setMovieError} />

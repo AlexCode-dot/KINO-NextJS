@@ -6,6 +6,9 @@ export default function AdminTabNav({ activeTab, setActiveTab }) {
       <button onClick={() => setActiveTab('list')} className={activeTab === 'list' ? 'active' : ''}>
         Översikt
       </button>
+      <button onClick={() => setActiveTab('bookings')} className={activeTab === 'bookings' ? 'active' : ''}>
+        Hantera bokningar
+      </button>
       <button onClick={() => setActiveTab('import')} className={activeTab === 'import' ? 'active' : ''}>
         Importera film
       </button>

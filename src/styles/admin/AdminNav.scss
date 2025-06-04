@@ -1,23 +1,24 @@
 .admin-panel__nav {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   gap: 1rem;
   margin-bottom: 2rem;
   flex-wrap: wrap;
 
   button {
-    flex: 1 1 160px;
-    text-align: center;
+    flex: 1;
+    min-width: 120px;
+    max-width: 180px;
+    padding: 0.7rem 1rem;
     background-color: #ffffff;
     color: #1f4163;
     border: 2px solid #1f4163;
-    padding: 0.7rem 1rem;
     border-radius: 6px;
     font-weight: bold;
     font-size: 0.9rem;
     cursor: pointer;
+    text-align: center;
     transition: all 0.2s ease-in-out;
-    min-width: 160px;
 
     &:hover {
       background-color: #1f4163;
