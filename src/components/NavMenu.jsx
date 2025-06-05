@@ -19,9 +19,6 @@ export default function NavMenu() {
     const checkLogin = () => {
       const cookies = document.cookie.split(';').map((c) => c.trim())
       const jwtCookie = cookies.find((c) => c.startsWith('JWT='))
-      console.log('Checking login status...')
-      console.log('Cookies:', cookies)
-      console.log('JWT Cookie:', jwtCookie)
       if (jwtCookie) {
         const token = jwtCookie.split('=')[1]
         try {

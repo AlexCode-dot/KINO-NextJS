@@ -23,18 +23,14 @@ export default function AdminPanel() {
     const cookies = document.cookie.split(';').map((c) => c.trim())
     const jwtCookie = cookies.find((c) => c.startsWith('JWT='))
     if (jwtCookie) {
-      console.log('JWT cookie found:', jwtCookie)
       const token = jwtCookie.split('=')[1]
       try {
-        console.log('JWT token found:', token)
         const decoded = jwtDecode(token)
         setIsAdmin(decoded.admin)
       } catch (e) {
-        console.error('Invalid JWT token:', e)
         setIsAdmin(false)
       }
     } else {
-      console.log('JWT cookie not found')
       setIsAdmin(false)
     }
     setChecked(true)

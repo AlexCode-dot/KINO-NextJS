@@ -112,7 +112,6 @@ export default function AdminCreate() {
 
         {Array.isArray(users) &&
           users.map((user) => (
-            // <section className='admin-list__movie'>
             <h1 className="admin-list__movie-title" key={user._id || user.Username}>
               {user.Username} {user.Admin === true || user.Admin === 'true' ? '(Admin)' : ''}
               <button className="admin-list__delete-button" onClick={() => handleToggleAdmin(user.Username)}>
@@ -122,7 +121,6 @@ export default function AdminCreate() {
                 Ta bort
               </button>
             </h1>
-            // </section>
           ))}
       </section>
     </main>
