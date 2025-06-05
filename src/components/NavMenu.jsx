@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
+import { jwtDecode } from 'jwt-decode'
 
 export default function NavMenu() {
   const [homeClass, setHomeClass] = useState('header__nav-item')
@@ -17,10 +18,24 @@ export default function NavMenu() {
   useEffect(() => {
     const checkLogin = () => {
       const cookies = document.cookie.split(';').map((c) => c.trim())
-      const usernameCookie = cookies.find((c) => c.startsWith('Username='))
-      setIsLoggedIn(!!usernameCookie && usernameCookie.split('=')[1])
-      const adminCookie = cookies.find((c) => c.startsWith('Admin='))
-      setAdmin(adminCookie && adminCookie.split('=')[1] === 'true')
+      const jwtCookie = cookies.find((c) => c.startsWith('JWT='))
+      console.log('Checking login status...')
+      console.log('Cookies:', cookies)
+      console.log('JWT Cookie:', jwtCookie)
+      if (jwtCookie) {
+        const token = jwtCookie.split('=')[1]
+        try {
+          const decoded = jwtDecode(token)
+          setIsLoggedIn(!!decoded.username)
+          setAdmin(decoded.admin)
+        } catch (e) {
+          setIsLoggedIn(false)
+          setAdmin(false)
+        }
+      } else {
+        setIsLoggedIn(false)
+        setAdmin(false)
+      }
     }
     checkLogin()
     window.addEventListener('loginStatusChanged', checkLogin)
