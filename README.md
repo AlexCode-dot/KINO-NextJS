@@ -71,7 +71,7 @@ A fullstack Next.js application for movie enthusiasts – featuring dynamic rout
 
 - **Next.js 15.3.1** – Running the latest major version with full App Router support
 - **React 19** – With support for concurrent features and `use()`
-- **SCSS Modules** – Scoped, maintainable styling per component
+- **Sass** – With scss modules- Scoped, maintainable styling per component
 - **fetch API** – Handles data fetching from backend and external APIs
 
 ### Backend
