@@ -1,15 +1,19 @@
 import { NextResponse } from 'next/server'
 import { createUser } from '@/lib/db/userDbService'
+import bcrypt from 'bcrypt'
 
 export async function POST(request) {
   const payload = await request.json()
 
-  // Log the payload for debugging
+  // Hash the password before storing it
   console.log(`Registering user with username: ${payload.Username}`)
+  const salt = await bcrypt.genSalt(15)
+  const hash = await bcrypt.hash(payload.Password, salt)
+  const hashedPassword = hash
 
   // Create a new user in the database
   try {
-    const newUser = await createUser(payload.Username, payload.Password)
+    const newUser = await createUser(payload.Username, hashedPassword)
     console.log(`User created successfully: ${newUser.Username}`)
     return NextResponse.json({ message: 'User registered successfully' }, { status: 201 })
   } catch (error) {
