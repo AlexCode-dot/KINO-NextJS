@@ -1,0 +1,47 @@
+.admin-bookings__list {
+  list-style: none;
+  padding: 0;
+}
+
+.admin-bookings__item {
+  background: #f7f7f7;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 6px;
+  position: relative;
+}
+
+.admin-bookings__delete {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  background: none;
+  border: 1px solid red;
+  color: red;
+  border-radius: 4px;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(255, 0, 0, 0.1);
+  }
+}
+
+.admin-bookings__show-seats {
+  margin-top: 0.5rem;
+  background: #1f4163;
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background 0.2s;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    background: #16324e;
+  }
+}
