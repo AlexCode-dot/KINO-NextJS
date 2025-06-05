@@ -11,6 +11,7 @@ import { useAdminData } from '@/hooks/useAdminData'
 import AdminTabNav from '@/components/admin/AdminTabNav'
 import AdminRoomList from '@/components/admin/AdminRoomList'
 import AdminCreateUser from '@/components/admin/AdminCreateUser'
+import { jwtDecode } from 'jwt-decode'
 
 export default function AdminPanel() {
   const [isAdmin, setIsAdmin] = useState(false)
@@ -19,8 +20,22 @@ export default function AdminPanel() {
 
   useEffect(() => {
     const cookies = document.cookie.split(';').map((c) => c.trim())
-    const adminCookie = cookies.find((c) => c.startsWith('Admin='))
-    setIsAdmin(adminCookie && adminCookie.split('=')[1] === 'true')
+    const jwtCookie = cookies.find((c) => c.startsWith('JWT='))
+    if (jwtCookie) {
+      console.log('JWT cookie found:', jwtCookie)
+      const token = jwtCookie.split('=')[1]
+      try {
+        console.log('JWT token found:', token)
+        const decoded = jwtDecode(token)
+        setIsAdmin(decoded.admin)
+      } catch (e) {
+        console.error('Invalid JWT token:', e)
+        setIsAdmin(false)
+      }
+    } else {
+      console.log('JWT cookie not found')
+      setIsAdmin(false)
+    }
     setChecked(true)
   }, [])
 

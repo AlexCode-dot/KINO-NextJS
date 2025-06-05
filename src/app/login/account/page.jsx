@@ -1,16 +1,29 @@
 import { cookies } from 'next/headers'
 import LogoutButton from '@/components/LogoutButton'
+import { jwtDecode } from 'jwt-decode'
 
 export default async function Secret() {
   const allCookies = await cookies()
-  const username = allCookies.get('Username')?.value ?? null
-
+  const jwtCookie = allCookies.get('JWT')
+  let username = null
+  if (jwtCookie) {
+    try {
+      const decoded = jwtDecode(jwtCookie.value)
+      username = decoded.username
+    } catch (e) {
+      console.error('Invalid JWT token:', e)
+    }
+  }
   if (username) {
     return (
       <main>
-        <div>
-          <h1 className="loginPage__status">Användare {username} har loggat in!</h1>
-          <h2 className="loginPage__hello">Hej {username}!</h2>
+        <div className="loginPage__container">
+          <div className="loginPage__section">
+            <h1 className="loginPage__status">Användare {username} har loggat in!</h1>
+          </div>
+          <div className="loginPage__section">
+            <h2 className="loginPage__hello">Hej {username}!</h2>
+          </div>
           <LogoutButton />
         </div>
       </main>
