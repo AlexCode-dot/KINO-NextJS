@@ -1,7 +1,7 @@
 import { updateUserPassword } from '@/lib/db/userDbService'
 import { NextResponse } from 'next/server'
+
 export async function POST(request) {
-  console.log(request.Username)
   const payload = await request.json()
 
   console.log(`Received request to update password for user: ${payload.Username}`)

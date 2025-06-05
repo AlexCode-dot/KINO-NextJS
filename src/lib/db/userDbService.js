@@ -1,15 +1,16 @@
 import User from './models/User'
 import connectDB from './connectDB'
+import hashPassword from '@/lib/utils/hashPassword'
 
 // Work in progress: testing.
 export async function getAllUsers() {
   await connectDB()
+  console.log('Fetching all users from the database...')
   return await User.find().select('Username Admin')
 }
 
 // Work in progress: testing.
 export async function findUserByUsername(username) {
-  console.log(`Finding user with username: ${username}`)
   await connectDB()
 
   const findUser = await User.findOne({ Username: username }).select('Username Password Admin')
@@ -24,8 +25,7 @@ export async function findUserByUsername(username) {
 // Creates a new user.
 // Password is in plain text, work in progress to hash it.
 export async function createUser(username, password) {
-  console.log(`Creating user with username: ${username} and password: ${password}`)
-
+  hashPassword(password)
   await connectDB()
 
   const existingUser = await User.findOne({ Username: username })
@@ -35,19 +35,20 @@ export async function createUser(username, password) {
   }
 
   const newUser = await User.create({ Username: username, Password: password, Admin: false })
-  console.log(`User created successfully: ${newUser.Username}`)
   return newUser
 }
 
 // Work in progress: testing.
 export async function deleteUserByUsername(username) {
   await connectDB()
+  console.log(`Attempting to delete user with username: ${username}`)
   return await User.findOneAndDelete({ Username: username })
 }
 
 // Work in progress: testing.
 export async function updateUserPassword(username, newPassword) {
   await connectDB()
+  newPassword = await hashPassword(newPassword)
   return await User.findOneAndUpdate({ Username: username }, { Password: newPassword }, { new: true })
 }
 
