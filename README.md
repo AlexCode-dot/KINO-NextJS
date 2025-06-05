@@ -8,7 +8,7 @@ A fullstack Next.js application for movie enthusiasts – featuring dynamic rout
 
 ## 🚀 Live Demo
 
-👉 [kino-nextjs.vercel.app](https://kino-nextjs.vercel.app)
+👉 (https://kvikkjokk-nextjs.ekedala-services.se/)
 
 ---
 
