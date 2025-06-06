@@ -6,7 +6,9 @@ import { requireAdminAccess } from '@/lib/auth/requireAdminAccess'
 export async function DELETE(req, context) {
   const { id } = await context.params
 
-  if (requireAdminAccess()) {
+  const isAdmin = await requireAdminAccess()
+
+  if (!isAdmin) {
     return NextResponse.json({ error: 'Endast tillgängligt för administratörer' }, { status: 403 })
   }
 

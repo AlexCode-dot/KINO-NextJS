@@ -3,7 +3,6 @@ import connectDB from '@/lib/db/connectDB'
 import { getAllMovies, createMovieFromOmdbTitle, findMovieByTitle, findMoviesByTitle } from '@/lib/db/movieDbService'
 import { requireAdminAccess } from '@/lib/auth/requireAdminAccess'
 
-
 export async function GET(req) {
   await connectDB()
 
@@ -24,7 +23,9 @@ export async function GET(req) {
   }
 }
 export async function POST(req) {
-  if (requireAdminAccess()) {
+  const isAdmin = await requireAdminAccess()
+
+  if (!isAdmin) {
     return NextResponse.json({ error: 'Endast tillgängligt för administratörer' }, { status: 403 })
   }
 

@@ -7,6 +7,7 @@ export async function fetchMovies() {
 export async function addMovie(formData) {
   const res = await fetch('/api/movies', {
     method: 'POST',
+    credentials: 'include',
     body: formData,
   })
 
@@ -25,6 +26,6 @@ export async function addMovie(formData) {
 }
 
 export async function deleteMovie(id) {
-  const res = await fetch(`/api/movies/${id}`, { method: 'DELETE' })
+  const res = await fetch(`/api/movies/${id}`, { method: 'DELETE', credentials: 'include' })
   if (!res.ok) throw new Error('Kunde inte ta bort filmen.')
 }

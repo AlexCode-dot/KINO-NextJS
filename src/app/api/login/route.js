@@ -2,36 +2,45 @@ import connectDB from '@/lib/db/connectDB'
 import { findUserByUsername } from '@/lib/db/userDbService'
 import { NextResponse } from 'next/server'
 import jsonwebtoken from 'jsonwebtoken'
-import hashPassword from '@/lib/utils/hashPassword'
 import bcrypt from 'bcrypt'
 
 export async function POST(request) {
   const payload = await request.json()
-
-  // Log the payload for debugging
-  console.log(`${payload.Username} and ${payload.Password} received in the login API`)
-  console.log(`Login attempt with username: ${payload.Username} and password: ${payload.Password}`)
+  const { Username, Password } = payload
 
   await connectDB()
-  let login = await findUserByUsername(payload.Username)
+  const user = await findUserByUsername(Username)
 
-  const secretpassword = await hashPassword(payload.Password)
-
-  if (login.Username == payload.Username) {
-    console.log(`User ${payload.Username} found in the database`)
-    const isMatch = await bcrypt.compare(payload.Password, login.Password)
-    console.log(`Password match for user ${payload.Username}: ${isMatch}`)
-    if (isMatch) {
-      const response = NextResponse.json({ message: 'Login successful' }, { status: 200 })
-      const jwtToken = jsonwebtoken.sign({ username: payload.Username, admin: login.Admin }, process.env.JWT_SECRET, {
-        expiresIn: '1h',
-      })
-      response.cookies.set('JWT', jwtToken, { httpOnly: false })
-      return response
-    } else login.Password !== secretpassword
-    {
-      console.log(`Password incorrect for user: ${payload.Username}`)
-      return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 })
-    }
+  if (!user || user.Username !== Username) {
+    return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 })
   }
+
+  const isMatch = await bcrypt.compare(Password, user.Password)
+  if (!isMatch) {
+    return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 })
+  }
+
+  const jwtToken = jsonwebtoken.sign({ username: user.Username, admin: user.Admin }, process.env.JWT_SECRET, {
+    expiresIn: '1h',
+  })
+
+  const response = NextResponse.json({ message: 'Login successful' }, { status: 200 })
+
+  response.cookies.set('token', jwtToken, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+    path: '/',
+    maxAge: 60 * 60,
+  })
+
+  response.cookies.set('JWT', jwtToken, {
+    httpOnly: false,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+    path: '/',
+    maxAge: 60 * 60,
+  })
+
+  return response
 }

@@ -12,7 +12,9 @@ export async function GET(req, { params }) {
 }
 
 export async function PATCH(req, context) {
-  if (requireAdminAccess()) {
+  const isAdmin = await requireAdminAccess()
+
+  if (!isAdmin) {
     return NextResponse.json({ error: 'Endast tillgängligt för administratörer' }, { status: 403 })
   }
   try {
@@ -40,7 +42,9 @@ export async function PATCH(req, context) {
 }
 
 export async function DELETE(req, context) {
-  if (requireAdminAccess()) {
+  const isAdmin = await requireAdminAccess()
+
+  if (!isAdmin) {
     return NextResponse.json({ error: 'Endast tillgängligt för administratörer' }, { status: 403 })
   }
 

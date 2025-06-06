@@ -12,7 +12,9 @@ export async function GET() {
 }
 
 export async function POST(req) {
-  if (requireAdminAccess()) {
+  const isAdmin = await requireAdminAccess()
+
+  if (!isAdmin) {
     return NextResponse.json({ error: 'Endast tillgängligt för administratörer' }, { status: 403 })
   }
   try {
