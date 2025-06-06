@@ -1,7 +1,12 @@
 import { FormData } from 'formdata-node'
 import { expect, jest, test, describe, beforeEach, beforeAll } from '@jest/globals'
+import jwt from 'jsonwebtoken'
 
-// Mock database and services
+jest.unstable_mockModule('next/headers', () => ({
+  __esModule: true,
+  cookies: jest.fn(),
+}))
+
 jest.unstable_mockModule('@/lib/db/connectDB', () => ({
   __esModule: true,
   default: jest.fn(),
@@ -17,10 +22,19 @@ jest.unstable_mockModule('@/lib/db/movieDbService', () => ({
   findMoviesByTitle: jest.fn(),
 }))
 
+jest.unstable_mockModule('@/lib/auth/requireAdminAccess', () => ({
+  __esModule: true,
+  requireAdminAccess: jest.fn(() => true),
+}))
+
 let POST, GET, DELETE
 let movieService
+let cookies
 
 beforeAll(async () => {
+  const headers = await import('next/headers')
+  cookies = headers.cookies
+
   movieService = await import('@/lib/db/movieDbService')
   const routeModule = await import('@/app/api/movies/route')
   const deleteModule = await import('@/app/api/movies/[id]/route')
@@ -31,7 +45,8 @@ beforeAll(async () => {
 
 beforeEach(() => {
   jest.clearAllMocks()
-  process.env.NODE_ENV = 'development'
+  const token = jwt.sign({ username: 'admin', admin: true }, process.env.JWT_SECRET || 'test')
+  cookies.mockReturnValue({ get: () => ({ value: token }) })
 })
 
 describe('POST /api/movies (mocked)', () => {
@@ -75,11 +90,18 @@ describe('POST /api/movies (mocked)', () => {
     expect(data.error).toMatch(/titel behövs/i)
   })
 
-  test('blocks in production mode', async () => {
-    process.env.NODE_ENV = 'production'
+  test('blocks non-admin users', async () => {
+    jest.resetModules()
+
+    jest.unstable_mockModule('@/lib/auth/requireAdminAccess', () => ({
+      __esModule: true,
+      requireAdminAccess: jest.fn(() => false),
+    }))
+
+    const { POST: MockedPOST } = await import('@/app/api/movies/route')
 
     const req = { formData: async () => new FormData() }
-    const res = await POST(req)
+    const res = await MockedPOST(req)
     const data = await res.json()
 
     expect(res.status).toBe(403)
@@ -115,10 +137,17 @@ describe('DELETE /api/movies/[id] (mocked)', () => {
     expect(data.deletedMovie).toEqual(deletedMovie)
   })
 
-  test('blocks deletion in production mode', async () => {
-    process.env.NODE_ENV = 'production'
+  test('blocks non-admin users', async () => {
+    jest.resetModules()
 
-    const res = await DELETE({}, { params: { id: '1' } })
+    jest.unstable_mockModule('@/lib/auth/requireAdminAccess', () => ({
+      __esModule: true,
+      requireAdminAccess: jest.fn(() => false),
+    }))
+
+    const { DELETE: MockedDELETE } = await import('@/app/api/movies/[id]/route')
+
+    const res = await MockedDELETE({}, { params: { id: '1' } })
     const data = await res.json()
 
     expect(res.status).toBe(403)

@@ -1,4 +1,10 @@
 import { expect, jest, test, describe, beforeAll, beforeEach } from '@jest/globals'
+import jwt from 'jsonwebtoken'
+
+jest.unstable_mockModule('next/headers', () => ({
+  __esModule: true,
+  cookies: jest.fn(),
+}))
 
 jest.unstable_mockModule('@/lib/db/connectDB', () => ({
   __esModule: true,
@@ -16,13 +22,17 @@ jest.unstable_mockModule('@/lib/db/bookingDbService', () => ({
 
 jest.unstable_mockModule('@/lib/auth/requireAdminAccess', () => ({
   __esModule: true,
-  requireAdminAccess: jest.fn(() => false),
+  requireAdminAccess: jest.fn(() => true),
 }))
 
 let GET, PATCH, DELETE
 let bookingService
+let cookies
 
 beforeAll(async () => {
+  const headers = await import('next/headers')
+  cookies = headers.cookies
+
   bookingService = await import('@/lib/db/bookingDbService')
   const routeModule = await import('@/app/api/bookings/route')
   const detailModule = await import('@/app/api/bookings/[id]/route')
@@ -33,7 +43,8 @@ beforeAll(async () => {
 
 beforeEach(() => {
   jest.clearAllMocks()
-  process.env.NODE_ENV = 'development'
+  const token = jwt.sign({ username: 'admin', admin: true }, process.env.JWT_SECRET || 'test')
+  cookies.mockReturnValue({ get: () => ({ value: token }) })
 })
 
 describe('GET /api/bookings (mocked)', () => {

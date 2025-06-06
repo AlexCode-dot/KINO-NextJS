@@ -1,7 +1,12 @@
 import { FormData } from 'formdata-node'
 import { expect, jest, test, describe, beforeEach, beforeAll } from '@jest/globals'
+import jwt from 'jsonwebtoken'
 
-// Mock database and services
+jest.unstable_mockModule('next/headers', () => ({
+  __esModule: true,
+  cookies: jest.fn(),
+}))
+
 jest.unstable_mockModule('@/lib/db/connectDB', () => ({
   __esModule: true,
   default: jest.fn(),
@@ -16,12 +21,20 @@ jest.unstable_mockModule('@/lib/db/screeningDbService', () => ({
   updateBookedSeats: jest.fn(),
 }))
 
+jest.unstable_mockModule('@/lib/auth/requireAdminAccess', () => ({
+  __esModule: true,
+  requireAdminAccess: jest.fn(() => true),
+}))
+
 let POST, GET, DELETE
 let screeningService
+let cookies
 
 beforeAll(async () => {
-  screeningService = await import('@/lib/db/screeningDbService')
+  const headers = await import('next/headers')
+  cookies = headers.cookies
 
+  screeningService = await import('@/lib/db/screeningDbService')
   const routeModule = await import('@/app/api/screenings/route')
   const deleteModule = await import('@/app/api/screenings/[id]/route')
   POST = routeModule.POST
@@ -31,7 +44,8 @@ beforeAll(async () => {
 
 beforeEach(() => {
   jest.clearAllMocks()
-  process.env.NODE_ENV = 'development'
+  const token = jwt.sign({ username: 'admin', admin: true }, process.env.JWT_SECRET || 'test')
+  cookies.mockReturnValue({ get: () => ({ value: token }) })
 })
 
 describe('POST /api/screenings (mocked)', () => {
@@ -52,10 +66,18 @@ describe('POST /api/screenings (mocked)', () => {
     expect(data).toEqual(mockScreening)
   })
 
-  test('blocks screening creation in production', async () => {
-    process.env.NODE_ENV = 'production'
+  test('blocks non-admin user', async () => {
+    jest.resetModules()
+
+    jest.unstable_mockModule('@/lib/auth/requireAdminAccess', () => ({
+      __esModule: true,
+      requireAdminAccess: jest.fn(() => false),
+    }))
+
+    const { POST: MockedPOST } = await import('@/app/api/screenings/route')
+
     const req = { formData: async () => new FormData() }
-    const res = await POST(req)
+    const res = await MockedPOST(req)
     const data = await res.json()
 
     expect(res.status).toBe(403)
@@ -103,9 +125,17 @@ describe('DELETE /api/screenings/[id] (mocked)', () => {
     expect(data.deletedScreening).toEqual(mockDeleted)
   })
 
-  test('blocks deletion in production mode', async () => {
-    process.env.NODE_ENV = 'production'
-    const res = await DELETE({}, { params: { id: '1' } })
+  test('blocks non-admin user', async () => {
+    jest.resetModules()
+
+    jest.unstable_mockModule('@/lib/auth/requireAdminAccess', () => ({
+      __esModule: true,
+      requireAdminAccess: jest.fn(() => false),
+    }))
+
+    const { DELETE: MockedDELETE } = await import('@/app/api/screenings/[id]/route')
+
+    const res = await MockedDELETE({}, { params: { id: '1' } })
     const data = await res.json()
 
     expect(res.status).toBe(403)
