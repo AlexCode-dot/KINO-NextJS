@@ -7,6 +7,7 @@ export async function fetchScreenings() {
 export async function addScreening(formData) {
   const res = await fetch('/api/screenings', {
     method: 'POST',
+    credentials: 'include',
     body: formData,
   })
 
@@ -25,7 +26,7 @@ export async function addScreening(formData) {
 }
 
 export async function deleteScreening(id) {
-  const res = await fetch(`/api/screenings/${id}`, { method: 'DELETE' })
+  const res = await fetch(`/api/screenings/${id}`, { method: 'DELETE', credentials: 'include' })
   if (!res.ok) throw new Error('Kunde inte ta bort visningen.')
 }
 

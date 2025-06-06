@@ -75,7 +75,9 @@ export function useAdminBookings() {
       message: `Vill du ta bort bokningen för ${booking.name}?`,
       onConfirm: async () => {
         await deleteBookingById(booking._id)
-        setBookings((prev) => prev.filter((booking) => booking._id !== booking._id))
+
+        setBookings((prev) => prev.filter((b) => b._id !== booking._id))
+        setFiltered((prev) => prev.filter((b) => b._id !== booking._id))
         setSuccessMessage('Bokningen har tagits bort!')
         setModal(null)
       },

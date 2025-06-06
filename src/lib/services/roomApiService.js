@@ -1,6 +1,7 @@
 export async function addRoom(roomData) {
   const res = await fetch('/api/rooms', {
     method: 'POST',
+    credentials: 'include',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(roomData),
   })
@@ -22,6 +23,7 @@ export async function fetchRooms() {
 export async function deleteRoom(id) {
   const res = await fetch(`/api/rooms/${id}`, {
     method: 'DELETE',
+    credentials: 'include',
   })
 
   if (!res.ok) {

@@ -1,4 +1,10 @@
 import { expect, jest, test, describe, beforeAll, beforeEach } from '@jest/globals'
+import jwt from 'jsonwebtoken'
+
+jest.unstable_mockModule('next/headers', () => ({
+  __esModule: true,
+  cookies: jest.fn(),
+}))
 
 jest.unstable_mockModule('@/lib/db/connectDB', () => ({
   __esModule: true,
@@ -13,10 +19,19 @@ jest.unstable_mockModule('@/lib/db/roomDbService', () => ({
   getRoomById: jest.fn(),
 }))
 
+jest.unstable_mockModule('@/lib/auth/requireAdminAccess', () => ({
+  __esModule: true,
+  requireAdminAccess: jest.fn(() => true),
+}))
+
 let GET, POST, DELETE
 let roomService
+let cookies
 
 beforeAll(async () => {
+  const headers = await import('next/headers')
+  cookies = headers.cookies
+
   roomService = await import('@/lib/db/roomDbService')
   const routeModule = await import('@/app/api/rooms/route')
   const deleteModule = await import('@/app/api/rooms/[id]/route')
@@ -27,7 +42,8 @@ beforeAll(async () => {
 
 beforeEach(() => {
   jest.clearAllMocks()
-  process.env.NODE_ENV = 'development'
+  const token = jwt.sign({ username: 'admin', admin: true }, process.env.JWT_SECRET || 'test')
+  cookies.mockReturnValue({ get: () => ({ value: token }) })
 })
 
 describe('GET /api/rooms', () => {
@@ -60,10 +76,7 @@ describe('POST /api/rooms', () => {
     const mockRoom = { ...input, _id: '1' }
     roomService.createRoom.mockResolvedValue(mockRoom)
 
-    const req = {
-      json: async () => input,
-    }
-
+    const req = { json: async () => input }
     const res = await POST(req)
     const data = await res.json()
 
@@ -80,10 +93,7 @@ describe('POST /api/rooms', () => {
 
     roomService.createRoom.mockRejectedValue(new Error('En salong med detta namn finns redan, testa ett nytt namn!'))
 
-    const req = {
-      json: async () => input,
-    }
-
+    const req = { json: async () => input }
     const res = await POST(req)
     const data = await res.json()
 
@@ -92,9 +102,7 @@ describe('POST /api/rooms', () => {
   })
 
   test('returns 400 if input invalid', async () => {
-    const req = {
-      json: async () => ({ name: 'Missing rows' }),
-    }
+    const req = { json: async () => ({ name: 'Missing rows' }) }
 
     const res = await POST(req)
     const data = await res.json()
@@ -103,8 +111,15 @@ describe('POST /api/rooms', () => {
     expect(data.error).toMatch(/invalid/i)
   })
 
-  test('blocks in production mode', async () => {
-    process.env.NODE_ENV = 'production'
+  test('blocks non-admin users', async () => {
+    jest.resetModules()
+
+    jest.unstable_mockModule('@/lib/auth/requireAdminAccess', () => ({
+      __esModule: true,
+      requireAdminAccess: jest.fn(() => false),
+    }))
+
+    const { POST: MockedPOST } = await import('@/app/api/rooms/route')
 
     const req = {
       json: async () => ({
@@ -114,7 +129,7 @@ describe('POST /api/rooms', () => {
       }),
     }
 
-    const res = await POST(req)
+    const res = await MockedPOST(req)
     const data = await res.json()
 
     expect(res.status).toBe(403)
@@ -143,10 +158,17 @@ describe('DELETE /api/rooms/[id]', () => {
     expect(data.error).toMatch(/kunde inte hittas/i)
   })
 
-  test('blocks in production mode', async () => {
-    process.env.NODE_ENV = 'production'
+  test('blocks non-admin users', async () => {
+    jest.resetModules()
 
-    const res = await DELETE({}, { params: { id: '1' } })
+    jest.unstable_mockModule('@/lib/auth/requireAdminAccess', () => ({
+      __esModule: true,
+      requireAdminAccess: jest.fn(() => false),
+    }))
+
+    const { DELETE: MockedDELETE } = await import('@/app/api/rooms/[id]/route')
+
+    const res = await MockedDELETE({}, { params: { id: '1' } })
     const data = await res.json()
 
     expect(res.status).toBe(403)
