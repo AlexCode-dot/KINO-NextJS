@@ -9,6 +9,7 @@ export async function GET(req, { params }) {
   await connectDB()
   const booking = await getBookingById(id)
   return NextResponse.json(booking)
+}
 
 export async function PATCH(req, context) {
   if (requireAdminAccess()) {

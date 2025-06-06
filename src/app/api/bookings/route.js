@@ -1,8 +1,6 @@
 import connectDB from '@/lib/db/connectDB'
 import { NextResponse } from 'next/server'
-import { createBooking } from '@/lib/db/bookingDbService'
-import { NextResponse } from 'next/server'
-import { getAllBookings } from '@/lib/db/bookingDbService'
+import { getAllBookings, createBooking } from '@/lib/db/bookingDbService'
 import { requireAdminAccess } from '@/lib/auth/requireAdminAccess'
 
 export async function POST(request) {
