@@ -6,12 +6,29 @@ export async function deleteBookingsByScreeningId(screeningId) {
   return await Booking.deleteMany({ screening: screeningId })
 }
 
+export async function createBooking({ screening, movieTitle, roomName, screeningTime, seats, name }) {
+  const newBooking = new Booking({
+    screening,
+    movieTitle,
+    roomName,
+    screeningTime,
+    seats,
+    name,
+  })
+
+  return await newBooking.save()
+}
+
+export async function getBookingById(id) {
+  return await Booking.findById(id)
+}
+
 export async function getAllBookings() {
   await connectDB()
   return await Booking.find().sort({ bookedAt: -1 }).lean()
 }
 
-export async function deleteBookingById(id) {
+export async function deleteBookingById(id) { 
   await connectDB()
 
   const booking = await Booking.findById(id)

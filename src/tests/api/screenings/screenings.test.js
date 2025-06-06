@@ -13,6 +13,7 @@ jest.unstable_mockModule('@/lib/db/screeningDbService', () => ({
   createScreening: jest.fn(),
   deleteScreeningById: jest.fn(),
   getScreeningById: jest.fn(),
+  updateBookedSeats: jest.fn(),
 }))
 
 let POST, GET, DELETE

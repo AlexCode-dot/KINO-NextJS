@@ -10,6 +10,8 @@ jest.unstable_mockModule('@/lib/db/bookingDbService', () => ({
   getAllBookings: jest.fn(),
   updateBookingSeats: jest.fn(),
   deleteBookingById: jest.fn(),
+  createBooking: jest.fn(),
+  getBookingById: jest.fn(),
 }))
 
 jest.unstable_mockModule('@/lib/auth/requireAdminAccess', () => ({

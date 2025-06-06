@@ -4,3 +4,37 @@
   align-items: center;
   width: 100%;
 }
+
+.booking__bookBtn {
+  font-size: x-large;
+  padding: 30px;
+  padding-left: 130px;
+  padding-right: 130px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  background-color: #03658c;
+  border: 3px solid;
+  color: white;
+
+  &:hover {
+    background-color: #52b3d9;
+    color: black;
+    border-color: #03658c;
+  }
+}
+
+.booking_invalid {
+  color: red;
+  opacity: 0;
+  user-select: none;
+  transition: opacity 0.3s ease;
+  &.active {
+    opacity: 100;
+  }
+}
+
+.seat-map-scroll-wrapper {
+  max-width: 100%;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
