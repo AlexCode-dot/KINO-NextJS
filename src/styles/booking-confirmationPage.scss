@@ -1,0 +1,95 @@
+.booking-confirmation__ticket-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.booking-confirmation__ticket {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  background-color: #03658c;
+  padding: 30px;
+  border-radius: 10px;
+  margin-top: 0px;
+}
+
+.booking-confirmation__title {
+  margin-top: 20px;
+}
+.confirmationDetails__seat-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.confirmationDetails__seats {
+  background-color: white;
+  padding: 5px;
+  border-radius: 10px;
+  height: fit-content;
+
+  p {
+    margin: 2px;
+  }
+}
+
+.booking-confirmation__actions {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+
+  button {
+    padding: 15px;
+    background-color: #03658c;
+    border: none;
+    color: white;
+    font-size: large;
+    min-width: 111px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgb(126, 126, 126);
+
+    &:hover {
+      background-color: #52b3d9;
+      color: black;
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .actions-print {
+    display: none;
+  }
+}
+
+@media print {
+  .pdf-export-content {
+    width: 210mm;
+    min-height: 297mm;
+    padding: 20mm;
+    background: white;
+    color: black;
+  }
+
+  button {
+    display: none;
+  }
+
+  .header__nav {
+    display: none;
+  }
+
+  .footer {
+    display: none;
+  }
+
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    height: auto;
+    overflow: visible;
+  }
+}

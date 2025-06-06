@@ -1,7 +1,16 @@
-export default function BookingMovieInfo({ movie }) {
+export default function BookingMovieInfo({ movie, screening }) {
   if (!movie || typeof movie !== 'object') {
     return <div className="booking__movieInfoWrapper">Filminformation saknas</div>
   }
+  const date = new Date(screening.date)
+  const formatedDate = date.toLocaleString('sv-SE', {
+    day: 'numeric',
+    month: 'short',
+  })
+  const formatedTime = date.toLocaleString('sv-Se', {
+    hour: '2-digit',
+    minute: '2-digit',
+  })
   return (
     <div className="booking__movieInfoWrapper">
       <div className="movieInfoWrapper__posterWrapper">
@@ -25,6 +34,10 @@ export default function BookingMovieInfo({ movie }) {
         </a>
         <p>
           <strong>Handling:</strong> {movie.plot}
+        </p>
+        <p>
+          <strong>Tid för visning:</strong> {formatedDate} kl: {formatedTime} <strong>Salong: </strong>
+          {screening.room.name}
         </p>
       </div>
     </div>

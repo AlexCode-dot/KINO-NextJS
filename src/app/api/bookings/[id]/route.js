@@ -1,6 +1,15 @@
+import connectDB from '@/lib/db/connectDB'
 import { NextResponse } from 'next/server'
+import { getBookingById } from '@/lib/db/bookingDbService'
 import { updateBookingSeats, deleteBookingById } from '@/lib/db/bookingDbService'
 import { requireAdminAccess } from '@/lib/auth/requireAdminAccess'
+
+export async function GET(req, { params }) {
+  const { id } = await params
+  await connectDB()
+  const booking = await getBookingById(id)
+  return NextResponse.json(booking)
+}
 
 export async function PATCH(req, context) {
   if (requireAdminAccess()) {

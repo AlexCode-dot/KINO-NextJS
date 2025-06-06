@@ -5,6 +5,8 @@ export default function TicketDeliveryInfo({
   setCustomerName,
   customerEmail,
   setCustomerEmail,
+  emailCorrectFormat,
+  setEmailCorrectFormat,
 }) {
   return (
     <div className="TicketDeliveryInfo__mainContainer">
@@ -15,9 +17,14 @@ export default function TicketDeliveryInfo({
         <a>Ange din e-postadress:</a>
         <input
           placeholder="exempel@mail.com"
+          type="email"
+          required
           value={customerEmail}
           onChange={(e) => {
-            setCustomerEmail(e.target.value)
+            const email = e.target.value
+            setCustomerEmail(email)
+            const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+            setEmailCorrectFormat(isValid)
           }}
         ></input>
         <a>Ange ditt fullständiga namn:</a>
@@ -53,9 +60,8 @@ export default function TicketDeliveryInfo({
         <a>
           <strong>Pris: 149kr/st</strong>
         </a>
-        <a>
-          Summa: {nrOfTickets}st x 149kr = {nrOfTickets * 149}kr
-        </a>
+        <a>Totalt: {nrOfTickets * 149}kr</a>
+        <a>Betalning sker på plats</a>
       </div>
     </div>
   )

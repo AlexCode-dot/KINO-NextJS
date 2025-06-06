@@ -1,9 +1,10 @@
 'use client'
 
 import { use, useState, useEffect } from 'react'
-import BookingMovieInfo from '../../../components/BookingMovieInfo'
-import TicketDeliveryInfo from '../../../components/TicketDeliveryInfo'
-import SeatMap from '../../../components/booking/SeatMap'
+import BookingMovieInfo from '@/components/BookingMovieInfo'
+import TicketDeliveryInfo from '@/components/TicketDeliveryInfo'
+import SeatMap from '@/components/booking/SeatMap'
+import BookingBookBtn from '@/components/BookingBookBtn'
 
 export default function bookingPageId({ params }) {
   const unwrappedParams = use(params)
@@ -12,22 +13,24 @@ export default function bookingPageId({ params }) {
   const [nrOfTickets, setNrOfTickets] = useState(0)
   const [customerName, setCustomerName] = useState('')
   const [customerEmail, setCustomerEmail] = useState('')
+  const [emailCorrectFormat, setEmailCorrectFormat] = useState(null)
   const [selectedSeats, setSelectedSeats] = useState([])
+  const [bookingInvalidClass, setBookingInvalidClass] = useState('booking_invalid')
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const screeningRes = await fetch(`../api/screenings/${unwrappedParams.id}`)
+        const screeningRes = await fetch(`/api/screenings/${unwrappedParams.id}`)
         const screeningData = await screeningRes.json()
 
-        const roomRes = await fetch(`../api/rooms/${screeningData.room}`)
+        const roomRes = await fetch(`/api/rooms/${screeningData.room}`)
         const roomData = await roomRes.json()
 
         screeningData.room = roomData
 
         setScreening(screeningData)
 
-        const movieRes = await fetch(`../api/movies/${screeningData.movie}`)
+        const movieRes = await fetch(`/api/movies/${screeningData.movie}`)
         const movieData = await movieRes.json()
         setMovie(movieData)
       } catch (error) {
@@ -43,7 +46,7 @@ export default function bookingPageId({ params }) {
   return (
     <div className="booking__pageContainer">
       <h1>Biljettbokning</h1>
-      <BookingMovieInfo movie={movie} />
+      <BookingMovieInfo movie={movie} screening={screening} />
       <TicketDeliveryInfo
         nrOfTickets={nrOfTickets}
         setNrOfTickets={setNrOfTickets}
@@ -51,12 +54,26 @@ export default function bookingPageId({ params }) {
         setCustomerName={setCustomerName}
         customerEmail={customerEmail}
         setCustomerEmail={setCustomerEmail}
+        emailCorrectFormat={emailCorrectFormat}
+        setEmailCorrectFormat={setEmailCorrectFormat}
       />
-      <SeatMap
+      <div className="seat-map-scroll-wrapper">
+        <SeatMap
+          screening={screening}
+          selectedSeats={selectedSeats}
+          onSelect={setSelectedSeats}
+          nrOfTickets={nrOfTickets}
+        />
+      </div>
+      <h4 className={bookingInvalidClass}>Du måste välja lika många platser som valda biljetter</h4>
+      <BookingBookBtn
+        movie={movie}
         screening={screening}
-        selectedSeats={selectedSeats}
-        onSelect={setSelectedSeats}
+        customerName={customerName}
         nrOfTickets={nrOfTickets}
+        selectedSeats={selectedSeats}
+        emailCorrectFormat={emailCorrectFormat}
+        setBookingInvalidClass={setBookingInvalidClass}
       />
     </div>
   )

@@ -1,0 +1,14 @@
+.confirmationDetails__booking-info {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  span {
+    background-color: white;
+    flex-direction: row;
+    gap: 5px;
+    padding: 5px;
+    padding-right: 10px;
+    border-radius: 10px;
+  }
+}
