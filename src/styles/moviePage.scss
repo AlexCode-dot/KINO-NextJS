@@ -36,6 +36,22 @@
   }
 }
 
+.search-button {
+  background-color: #03658c;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  margin-left: 0.2rem;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.search-button:hover {
+  background-color: #02496a;
+}
+
 .moviecard__list {
   list-style: none;
 

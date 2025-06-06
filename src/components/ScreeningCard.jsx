@@ -30,9 +30,11 @@ export default function ScreeningCards() {
             <a href={`/booking/${item._id}`}>
               <div className="screeningcard__container">
                 <p className="screeningcard__title">{item.movie?.title}</p>
-                <p>{`Salong ${item.room.name}`}</p>
-                <p>{new Date(item.date).toLocaleDateString('sv-SE')}</p>
-                <p>{new Date(item.date).toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' })}</p>
+                <p className="screeningcard__room">{`Salong ${item.room.name}`}</p>
+                <p className="screeningcard__date">{new Date(item.date).toLocaleDateString('sv-SE')}</p>
+                <p className="screeningcard__time">
+                  {new Date(item.date).toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' })}
+                </p>
               </div>
             </a>
           </li>

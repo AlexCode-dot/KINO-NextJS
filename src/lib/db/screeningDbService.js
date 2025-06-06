@@ -9,6 +9,12 @@ export async function getAllScreeningsWithMovieInfo() {
   return await Screening.find().populate('movie', 'title runtime').populate('room', 'name').lean()
 }
 
+export async function getActiveScreeningsWithMovieInfo() {
+  await markExpiredScreenings()
+
+  return await Screening.find({ status: 'active' }).populate('movie', 'title runtime').populate('room', 'name').lean()
+}
+
 export async function getUpcomingScreenings() {
   const today = new Date()
   const fiveDaysFromNow = new Date(today)
@@ -79,6 +85,22 @@ export async function updateBookedSeats(id, bookedSeats) {
   if (!Array.isArray(bookedSeats)) {
     throw new Error('bookedSeats must be an array')
   }
-
   return await Screening.findByIdAndUpdate(id, { $push: { bookedSeats: { $each: bookedSeats } } }, { new: true })
+}
+
+export async function getScreeningWithDetails(id) {
+  const screening = await Screening.findById(id)
+    .populate('room', 'name rows wheelchairSeats')
+    .populate('movie', 'title runtime')
+    .lean()
+
+  if (!screening) return null
+
+  if (Array.isArray(screening.bookedSeats)) {
+    screening.bookedSeats.sort((a, b) => {
+      if (a.row !== b.row) return a.row - b.row
+      return a.seat - b.seat
+    })
+  }
+  return screening
 }

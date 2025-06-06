@@ -1,14 +1,28 @@
 import { NextResponse } from 'next/server'
 import connectDB from '@/lib/db/connectDB'
-import { getAllMovies, createMovieFromOmdbTitle, findMovieByTitle } from '@/lib/db/movieDbService'
+import { getAllMovies, createMovieFromOmdbTitle, findMovieByTitle, findMoviesByTitle } from '@/lib/db/movieDbService'
 import { requireAdminAccess } from '@/lib/auth/requireAdminAccess'
 
-export async function GET() {
-  await connectDB()
-  const movies = await getAllMovies()
-  return NextResponse.json(movies)
-}
 
+export async function GET(req) {
+  await connectDB()
+
+  //Backend search logic
+  const { searchParams } = new URL(req.url)
+  const query = searchParams.get('q')
+
+  try {
+    if (query) {
+      const result = await findMoviesByTitle(query)
+      return NextResponse.json(result)
+    }
+
+    const movies = await getAllMovies()
+    return NextResponse.json(movies)
+  } catch (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 })
+  }
+}
 export async function POST(req) {
   if (requireAdminAccess()) {
     return NextResponse.json({ error: 'Endast tillgängligt för administratörer' }, { status: 403 })

@@ -28,3 +28,9 @@ export async function deleteScreening(id) {
   const res = await fetch(`/api/screenings/${id}`, { method: 'DELETE' })
   if (!res.ok) throw new Error('Kunde inte ta bort visningen.')
 }
+
+export async function fetchScreeningDetails(id) {
+  const res = await fetch(`/api/screenings/${id}/details`)
+  if (!res.ok) throw new Error('Kunde inte hämta screening info.')
+  return res.json()
+}

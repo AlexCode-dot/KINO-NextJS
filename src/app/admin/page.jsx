@@ -11,6 +11,7 @@ import SuccessModal from '@/components/SuccessModal'
 import { useAdminData } from '@/hooks/useAdminData'
 import AdminTabNav from '@/components/admin/AdminTabNav'
 import AdminRoomList from '@/components/admin/AdminRoomList'
+import AdminBookingPanel from '@/components/admin/AdminBookingPanel'
 
 export default function AdminPanel() {
   const [activeTab, setActiveTab] = useState('list')
@@ -38,6 +39,7 @@ export default function AdminPanel() {
     roomError,
     setRoomError,
     confirmDeleteRoom,
+    loading,
   } = useAdminData()
 
   return (
@@ -56,16 +58,25 @@ export default function AdminPanel() {
                 screenings={screenings}
                 onDeleteMovie={confirmDeleteMovie}
                 onDeleteScreening={confirmDeleteScreening}
+                loading={loading}
               />
               <ErrorMessage message={deleteError} onClose={() => setDeleteError(null)} />
             </section>
 
             <section className="admin-page__section">
-              <AdminRoomList rooms={rooms} onDeleteRoom={confirmDeleteRoom} />
+              <h3 className="admin-room__list-title">Alla salonger</h3>
+              <AdminRoomList rooms={rooms} onDeleteRoom={confirmDeleteRoom} loading={loading} />
               <ErrorMessage message={roomError} onClose={() => setRoomError(null)} />
             </section>
           </>
         )}
+
+        {activeTab === 'bookings' && (
+          <section className="admin-page__section">
+            <AdminBookingPanel />
+          </section>
+        )}
+
         {activeTab === 'import' && (
           <>
             <AdminMovieForm onSubmitMovie={handleAddMovie} movieError={movieError} setMovieError={setMovieError} />
@@ -111,6 +122,7 @@ export default function AdminPanel() {
             </section>
 
             <section className="admin-page__section">
+              <h3 className="admin-room__list-title">Alla salonger</h3>
               <AdminRoomList rooms={rooms} onDeleteRoom={confirmDeleteRoom} />
               <ErrorMessage message={roomError} onClose={() => setRoomError(null)} />
             </section>

@@ -1,0 +1,26 @@
+@use './AdminBookingsFilters';
+@use './AdminBookingsList';
+@use './AdminBookingsModal';
+
+.admin-bookings {
+  &__search {
+    padding: 0.5rem;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  &__created {
+    font-size: 0.85rem;
+    color: #666;
+    margin-top: 0.3rem;
+  }
+
+  &__no-results {
+    text-align: center;
+    display: block;
+    margin: 3rem auto 2rem;
+    color: #1f4163;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+}

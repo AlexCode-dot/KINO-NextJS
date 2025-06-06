@@ -1,4 +1,3 @@
-// src/tests/screenings/screenings.test.js
 import { FormData } from 'formdata-node'
 import { expect, jest, test, describe, beforeEach, beforeAll } from '@jest/globals'
 

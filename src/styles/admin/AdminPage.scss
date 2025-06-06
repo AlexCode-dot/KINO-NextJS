@@ -57,4 +57,18 @@
       cursor: pointer;
     }
   }
+
+  &__loading {
+    text-align: center;
+    color: #1b3a57;
+    font-weight: bold;
+    font-size: 1.3rem;
+  }
+
+  &__empty {
+    text-align: center;
+    color: #1b3a57;
+    font-weight: bold;
+    font-size: 1.3rem;
+  }
 }

@@ -1,0 +1,64 @@
+.admin-bookings__edit {
+  display: block;
+  background-color: #f0ad4e;
+  color: white;
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  margin: 0 auto 0.5rem;
+  font-weight: bold;
+
+  &:hover {
+    background-color: #ec971f;
+  }
+}
+
+.admin-bookings__save {
+  display: block;
+  background-color: #2c6;
+  color: white;
+  padding: 0.6rem 1.3rem;
+  margin: 0 auto 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.9rem;
+
+  &:hover {
+    background-color: #279b55;
+  }
+}
+
+.admin-room__main-modal-title {
+  color: #1f4163;
+  text-align: center;
+  margin: 0 auto 0.5rem;
+}
+
+.admin-room__modal-selected-seats {
+  text-align: center;
+  font-weight: bold;
+  padding: 0.5rem;
+  border-radius: 6px;
+  background: #dceeff;
+  color: #1f4163;
+  border: 1px solid #a8c4e3;
+  width: 50%;
+  margin: 0 auto 1rem;
+}
+
+.admin-room__modal-body {
+  max-height: calc(100vh - 6rem);
+  overflow-x: auto;
+}
+
+.admin-room__movie-modal-title {
+  color: #1f4163;
+  margin: 0 auto 1rem;
+  text-align: center;
+  font-size: 1.5rem;
+}

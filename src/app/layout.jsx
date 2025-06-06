@@ -58,7 +58,7 @@ export default function RootLayout({ children }) {
               <h6 className="footer__find-Us-country">Sverige</h6>
             </div>
             <div className="footer__partners">
-              <h3 className="footer__partners-title">Våra sammarbetspartners</h3>
+              <h3 className="footer__partners-title">Våra samarbetspartners</h3>
             </div>
           </footer>
         </div>
