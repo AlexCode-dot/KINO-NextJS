@@ -20,7 +20,7 @@ This document outlines the deployment of the `kvikkjokk-nextjs` application and 
 
 ### **Overview**
 
-The `kvikkjokk-nextjs` (Next.js) application is deployed via a Jenkins pipeline, exposed through an NGINX Ingress Controller with a NodePort service and an external proxy (NGINX). `https://kvikkjokk-nextjs.ekedala-services.se`
+The `kvikkjokk-nextjs` (Next.js) application is deployed via a Jenkins pipeline, exposed through an NGINX Ingress Controller with a NodePort service and an external proxy (NGINX). https://kvikkjokk-nextjs.ekedala-services.se
 
 ### **Jenkins Pipeline**
 
